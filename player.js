@@ -109,6 +109,47 @@ export class Player {
       this.velocity.x = 0;
     }
   }
+  checkCollision(){
+    this.game.enemies.forEach(enemy => {
+      // if the player is colliding with the enemies and not attacking or he doesn't have any energy
+      if (enemy.position.x < this.position.x + this.width &&
+        enemy.position.x + enemy.width > this.position.x &&
+        enemy.position.y < this.position.y + this.height &&
+        enemy.position.y + enemy.height > this.position.y && (!this.game.keys.attack.pressed || this.game.energy === 0)){
+          this.currentSprite = this.sprites.hit.image
+          this.currentCropWidth = 16;
+          this.width = 100;
+          this.game.lives--
+          this.game.score--
+          enemy.deletion = true
+          //playerHitSound.play()
+          //enemy.playHitSound()
+          if (this.game.lives < 0) {
+            this.game.gameOver = true
+          }
+          // stop the player during collision?
+        } 
+        // if the player is colliding with the enemies and attacking
+        else if (enemy.position.x < this.position.x + this.width &&
+          enemy.position.x + enemy.width > this.position.x &&
+          enemy.position.y < this.position.y + this.height &&
+          enemy.position.y + enemy.height > this.position.y && this.game.keys.attack.pressed){
+            enemy.deletion = true
+            //enemy.playHitSound()
+            this.game.score++
+            console.log(this.game.victory)
+            if (this.game.score === 200){
+              this.game.victory = true
+            }
+          }
+    });
+  }
+  useEnergy(){
+    if (this.game.keys.attack.pressed && this.game.energy <= 100 && this.game.energy > 0){
+      this.game.energy--
+    }
+    else if (!this.game.keys.attack.pressed && this.game.energy >= 0 && this.game.energy < 100){
+      this.game.energy++
+    }
+  }
 }
-
-//

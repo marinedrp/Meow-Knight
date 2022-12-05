@@ -20,12 +20,21 @@ export class UserInterface {
         ctx.font = this.fontWeight + this.fontSize + 'px ' + this.fontFamily;
         ctx.textAlign = 'left'
         ctx.fillStyle = this.fontColor
+
         // score
         ctx.fillText('Score: ' + this.game.score, 30, 60)
+
         // lives
         for (let i = 0; i < this.game.lives; i++){
             ctx.drawImage(this.livesImage, 40 * i + 30, 80, 30, 30)
         }
+
+        // energy bar
+        let energyBarColor = ctx.createLinearGradient(0, 0, 0, 700);
+        energyBarColor.addColorStop(0, "orange");
+        energyBarColor.addColorStop(1, "black");
+        ctx.fillStyle = energyBarColor
+        ctx.fillRect(30, 130, this.game.energy, 30)
         ctx.restore()
         
     }
@@ -54,3 +63,4 @@ export class UserInterface {
         victorySound.play()
     }
 }
+

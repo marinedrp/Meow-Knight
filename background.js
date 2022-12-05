@@ -12,7 +12,7 @@ class Layer {
       // scrolls the background to the right
       if (this.x < -this.width) {
         this.x = 0
-      // scrolls the background to the left - bug fixed
+      // scrolls the background to the left
       } else if (this.x > this.width){
         this.x = 0
       }
@@ -66,46 +66,3 @@ export class Background {
 }
 
 
-/*
-class GenericObject {
-    constructor({x, y, image}){
-      this.position = {
-        x,
-        y
-      }
-      this.image = image
-      this.width = image.width
-      this.height = image.height
-    }
-    draw(ctx) {
-      ctx.drawImage(this.image, this.position.x, this.position.y)
-    }
-  }
-
-  const genericObjects = [
-    new GenericObject({
-      x: -1,
-      y: -1,
-      image: createImage('./assets/layer01.png')
-    }),
-    new GenericObject({
-      x: -1,
-      y: -1,
-      image: createImage('./assets/layer02.png')
-    })
-  ]
-
-
-  genericObjects.forEach(genericObject => {
-    genericObject.draw()
-  })
-
-  genericObjects.forEach(genericObject => {
-    genericObject.position.x -= 3
-  })
-
-  genericObjects.forEach(genericObject => {
-    genericObject.position.x += 3
-  }) 
-
-  */
