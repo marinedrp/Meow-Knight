@@ -16,8 +16,8 @@ export class Player {
       x: 0,
       y: 0,
     };
-    this.cropWidth = 16;
-    this.cropHeight = 16;
+    this.currentCropWidth = 16
+    this.currentCropHeight = 16
     this.width = 100;
     this.height = 100;
     this.ground = 130;
@@ -39,22 +39,15 @@ export class Player {
       hit: {
         image: hitImg,
       },
+      attack: {
+        image: attackImg
+      }
     };
     this.currentSprite = this.sprites.idle.image;
   }
   draw(ctx) {
     ctx.strokeRect(this.position.x, this.position.y, this.width, this.height);
-    ctx.drawImage(
-      this.currentSprite,
-      this.cropWidth * this.frames,
-      0,
-      this.cropWidth,
-      this.cropHeight,
-      this.position.x,
-      this.position.y,
-      this.width,
-      this.height
-    );
+    ctx.drawImage(this.currentSprite, this.currentCropWidth * this.frames, 0, this.currentCropWidth, this.currentCropHeight, this.position.x, this.position.y, this.width, this.height);
   }
   update() {
     if (this.counter > 0) {

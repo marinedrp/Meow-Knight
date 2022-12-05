@@ -53,9 +53,9 @@ export class Background {
       this.backgroundLayers = [this.layer1, this.layer2, this.layer3, this.layer4, this.layer5, this.layer6, this.layer7, this.layer8];
       
   }
-  update(player){
+  update(){
       this.backgroundLayers.forEach(layer => {
-          layer.update(player);
+          layer.update();
       })
   }
   draw(ctx){

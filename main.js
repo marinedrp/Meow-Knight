@@ -65,11 +65,11 @@ window.addEventListener('load', function() {
       this.enemies = []
       this.score = 0;
       this.lives = 3;
-      this.gameOver = true
+      this.gameOver = false
       this.victory = false
     }
     update(){
-      this.background.update(this.player)
+      this.background.update()
       this.npcs.forEach(npc => {
         npc.update()
       })
@@ -91,21 +91,29 @@ window.addEventListener('load', function() {
           case 'ArrowUp':
             if (this.player.velocity.y === 0) this.player.velocity.y = -25
             this.player.currentSprite = this.player.sprites.jump.image
+            this.player.currentCropWidth = 16
+            this.player.width = 100
             event.preventDefault()
             break
           case 'ArrowLeft':
             this.keys.left.pressed = true
             this.player.currentSprite = this.player.sprites.run.left
+            this.player.currentCropWidth = 16
+            this.player.width = 100
             event.preventDefault()
             break
           case 'ArrowRight':
             this.keys.right.pressed = true
             this.player.currentSprite = this.player.sprites.run.right
+            this.player.currentCropWidth = 16
+            this.player.width = 100
             event.preventDefault()
             break
           case 'a':
-            //keys.attack.pressed = true
-            //console.log(keys.attack)
+            this.keys.attack.pressed = true
+            this.player.currentSprite = this.player.sprites.attack.image
+            this.player.currentCropWidth = 30
+            this.player.width = 160
             break
           case ' ':
             break
@@ -120,16 +128,19 @@ window.addEventListener('load', function() {
             break
           case 'ArrowLeft':
             this.keys.left.pressed = false
-            this.player.velocity.x = 0
             this.player.currentSprite = this.player.sprites.idle.image
             break
           case 'ArrowRight':
             this.keys.right.pressed = false
-            this.player.velocity.x = 0
             this.player.currentSprite = this.player.sprites.idle.image
             break
           case 'a':
-            //console.log(keys.attack)
+            this.keys.attack.pressed = false
+            if (this.keys.right.pressed) this.player.currentSprite = this.player.sprites.run.right
+            else if (this.keys.left.pressed) this.player.currentSprite = this.player.sprites.run.left
+            else this.player.currentSprite = this.player.sprites.idle.image
+            this.player.currentCropWidth = 16
+            this.player.width = 100
             break
           case ' ':
             break
@@ -148,17 +159,17 @@ function animate() {
   game.draw(ctx);
   game.attachEventListeners()
 
-  if (!game.gameOver && !game.victory) {
+  if (!game.gameOver) {
     restartButton.hidden = true
     requestAnimationFrame(animate)
   } 
-  else if (game.gameOver && !game.victory){
+  else if (game.gameOver){
     //stopMusic()
     //ctx.clearRect(0, 0, canvas.width, canvas.height)
     game.userInterface.drawGameOver(ctx)
     restartButton.hidden = false
   }
-  else if (game.victory && !game.gameOver){
+  else if (game.victory){
     //stopMusic()
     //ctx.clearRect(0, 0, canvas.width, canvas.height)
     game.userInterface.drawVictory(ctx)
