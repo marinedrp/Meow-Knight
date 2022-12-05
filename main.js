@@ -1,7 +1,7 @@
 import { Background } from "./background.js";
+import { UserInterface } from "./interface.js";
 import { Player } from "./player.js";
 import { Npc } from "./npc.js";
-import { UserInterface } from "./interface.js";
 import { Goblin } from './enemies.js';
 
 const witch = document.getElementById("witch");
@@ -30,9 +30,7 @@ window.addEventListener("load", function () {
 
   const canvas = document.getElementById("canvas1");
   const ctx = canvas.getContext("2d");
-  const overlay = {
-    opacity: 0,
-  };
+  let opacity = 0
   
   canvas.width = 1350;
   canvas.height = 880;
@@ -42,8 +40,6 @@ window.addEventListener("load", function () {
       this.width = width;
       this.height = height;
       this.ground = 130;
-      this.level = 1;
-      // this.levels =
       this.keys = {
         left: {
           pressed: false,
@@ -58,38 +54,68 @@ window.addEventListener("load", function () {
           pressed: false,
         },
       };
-      this.background = new Background(this, layer1_lvl1, layer1_lvl1, layer2_lvl1, layer3_lvl1, layer4_lvl1, layer5_lvl1, layer6_lvl1, layer7_lvl1);
+      this.background;
+      this.npcs;
       this.userInterface = new UserInterface(this);
-      this.player = new Player(this);
       this.energy = 100;
-      this.npcs = [
-        new Npc(this, 400, 500, 64, 64, witch, 180, 180, 11),
-        new Npc(this, 900, 440, 64, 64, ruby, 250, 250, 8),
-      ];
+      this.player = new Player(this);
       this.enemies = [];
       this.score = 0;
       this.lives = 3;
+      this.level = 1;
       this.gameOver = false;
       this.victory = false;
     }
+    startLevel(level){
+      if (level === 1){
+        this.background = new Background(this, layer1_lvl1, layer1_lvl1, layer2_lvl1, layer3_lvl1, layer4_lvl1, layer5_lvl1, layer6_lvl1, layer7_lvl1);
+        this.npcs = [
+          new Npc(this, 400, 500, 64, 64, witch, 180, 180, 11),
+          new Npc(this, 900, 440, 64, 64, ruby, 250, 250, 8),
+         ];
+      } else if (level === 2){
+        this.background = new Background(this, layer1_lvl2, layer2_lvl2, layer3_lvl2, layer4_lvl2, layer5_lvl2, layer6_lvl2, layer7_lvl2, layer8_lvl2)
+        this.npcs.splice(0, 2)
+      }
+    }
+    // startLevel(level){
+    //   switch(level){
+    //     case 1:
+    //       this.background = new Background(this, layer1_lvl1, layer1_lvl1, layer2_lvl1, layer3_lvl1, layer4_lvl1, layer5_lvl1, layer6_lvl1, layer7_lvl1);
+    //       this.npcs = [
+    //       new Npc(this, 400, 500, 64, 64, witch, 180, 180, 11),
+    //       new Npc(this, 900, 440, 64, 64, ruby, 250, 250, 8),
+    //     ];
+    //       break;
+    //     case 2:
+    //       this.background = new Background(this, layer1_lvl2, layer2_lvl2, layer3_lvl2, layer4_lvl2, layer5_lvl2, layer6_lvl2, layer7_lvl2, layer8_lvl2)
+    //       this.npcs.splice(0, 2)
+    //       break;
+    //   }
+    // }
     update() {
       this.background.update();
-      this.npcs.forEach((npc) => {
-        npc.update();
-      });
+      // The NPCs are drawn before the player 
+      if (this.level === 1){
+        this.npcs.forEach((npc) => {
+          npc.update();
+        });
+      }
       this.player.update();
       this.attachEventListeners();
       this.player.movement(this.keys);
       this.player.checkCollision()
       this.player.useEnergy()
-      
     }
     draw(ctx) {
       this.background.draw(ctx);
       this.userInterface.draw(ctx);
-      this.npcs.forEach((npc) => {
-        npc.draw(ctx);
-      });
+      // The NPCs are drawn before the player 
+      if (this.level === 1){
+        this.npcs.forEach((npc) => {
+          npc.draw(ctx);
+        });
+      }
       this.player.draw(ctx);
     }
     attachEventListeners() {
@@ -165,14 +191,14 @@ window.addEventListener("load", function () {
       });
     }
     addEnemies(){
-      // creating enemies
+      // creating enemies and pushing them into the array
       if (this.player.velocity.x >= 0 && Math.random() < 0.005) this.enemies.push(new Goblin(this))
       // drawing, animating and moving the enemies
       this.enemies.forEach(enemy => {
         enemy.draw(ctx)
         enemy.update()
         enemy.movement()
-      // removing the enemies of the array
+      // removing the enemies from the array
         if (enemy.position.x + enemy.width < -canvas.width || enemy.deletion){
           this.enemies.shift(enemy)
         }
@@ -182,17 +208,22 @@ window.addEventListener("load", function () {
 
   const game = new Game(canvas.width, canvas.height);
 
+
   // main game loop
   function animate() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    game.update();
+    
+    
     game.draw(ctx);
+    game.update();
     game.attachEventListeners();
     game.addEnemies()
+    
+    console.log(game.background)
+    console.log(game.npcs)
 
     ctx.save();
-    ctx.globalAlpha = overlay.opacity;
+    ctx.globalAlpha = opacity;
     ctx.fillStyle = "black";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     ctx.restore();
@@ -218,12 +249,15 @@ window.addEventListener("load", function () {
     game.lives = 3;
     game.score = 0;
     game.energy = 100;
+    game.player.position.x = 100
     game.gameOver = false;
     game.victory = false;
+    game.startLevel(game.level)
     animate();
   });
+
+  game.startLevel(game.level)
   animate();
   
+  
 });
-
-/**/

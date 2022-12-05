@@ -71,14 +71,13 @@ export class Player {
       this.counter = 25;
     }
     
-    // Movement settings
+    // Movement settings and bottom boudary
     this.position.x += this.velocity.x;
     this.position.y += this.velocity.y;
     this.bottom = this.position.y + this.height + this.ground;
 
     // Vertical boudary and jump
-    if (this.bottom + this.velocity.y < this.game.height)
-      this.velocity.y += this.gravity;
+    if (this.bottom + this.velocity.y < this.game.height) this.velocity.y += this.gravity;
     else this.velocity.y = 0;
 
     // Horizontal boudaries
@@ -89,22 +88,24 @@ export class Player {
   movement(keys) {
     // Scrolling the npcs and enemies with the horizontal movement of the player
     this.velocity.x = 0;
+    // NPCs and enemies are scrolling to the left if player goes to the right
     if (keys.right.pressed) {
       this.velocity.x += 5;
-      this.game.npcs.forEach(npc => {
-        npc.position.x -= 5
-      })
-      this.game.enemies.forEach(enemy => {
-        enemy.position.x -= 5
-      })
+        this.game.npcs.forEach(npc => {
+          npc.position.x -= 5
+        })
+        this.game.enemies.forEach(enemy => {
+          enemy.position.x -= 5
+        })
+    // NPCs and enemies are scrolling to the right if player goes to the left
     } else if (keys.left.pressed) {
       this.velocity.x = -5;
-      this.game.npcs.forEach(npc => {
-        npc.position.x += 5
-      })
-      this.game.enemies.forEach(enemy => {
-        enemy.position.x += 5
-      })
+        this.game.npcs.forEach(npc => {
+          npc.position.x += 5
+        })
+        this.game.enemies.forEach(enemy => {
+          enemy.position.x += 5
+        })
     } else {
       this.velocity.x = 0;
     }
@@ -137,9 +138,9 @@ export class Player {
             enemy.deletion = true
             //enemy.playHitSound()
             this.game.score++
-            console.log(this.game.victory)
-            if (this.game.score === 200){
-              this.game.victory = true
+            
+            if (this.game.score === 2){
+              this.game.level++
             }
           }
     });
