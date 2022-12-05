@@ -31,6 +31,9 @@ const restartButton = document.getElementById('restart-button')
 window.addEventListener('load', function() {
   const canvas = document.getElementById('canvas1');
   const ctx = canvas.getContext('2d');
+  const overlay = {
+    opacity: 0
+  }
   
   canvas.width = 1350;
   canvas.height = 880;
@@ -159,6 +162,12 @@ function animate() {
   game.draw(ctx);
   game.attachEventListeners()
 
+  ctx.save()
+  ctx.globalAlpha = overlay.opacity;
+  ctx.fillStyle = 'black'
+  ctx.fillRect(0, 0, canvas.width, canvas.height)
+  ctx.restore()
+
   if (!game.gameOver) {
     restartButton.hidden = true
     requestAnimationFrame(animate)
@@ -175,6 +184,7 @@ function animate() {
     game.userInterface.drawVictory(ctx)
     restartButton.hidden = false
   }
+
 
 
   }
