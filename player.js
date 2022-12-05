@@ -50,6 +50,7 @@ export class Player {
     ctx.drawImage(this.currentSprite, this.currentCropWidth * this.frames, 0, this.currentCropWidth, this.currentCropHeight, this.position.x, this.position.y, this.width, this.height);
   }
   update() {
+    // Animate sprites
     if (this.counter > 0) {
       this.counter -= 1;
     } else {
@@ -69,6 +70,8 @@ export class Player {
       }
       this.counter = 25;
     }
+    
+    // Movement settings
     this.position.x += this.velocity.x;
     this.position.y += this.velocity.y;
     this.bottom = this.position.y + this.height + this.ground;
@@ -84,6 +87,7 @@ export class Player {
       this.position.x = this.game.width / 3 - this.width;
   }
   movement(keys) {
+    // Scrolling the npcs and enemies with the horizontal movement of the player
     this.velocity.x = 0;
     if (keys.right.pressed) {
       this.velocity.x += 5;
