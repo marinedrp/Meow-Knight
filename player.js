@@ -90,10 +90,16 @@ export class Player {
       this.game.npcs.forEach(npc => {
         npc.position.x -= 5
       })
+      this.game.enemies.forEach(enemy => {
+        enemy.position.x -= 5
+      })
     } else if (keys.left.pressed) {
       this.velocity.x = -5;
       this.game.npcs.forEach(npc => {
         npc.position.x += 5
+      })
+      this.game.enemies.forEach(enemy => {
+        enemy.position.x += 5
       })
     } else {
       this.velocity.x = 0;

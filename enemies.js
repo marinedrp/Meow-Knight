@@ -1,4 +1,3 @@
-// platforms
 class Enemy {
     constructor(){
       this.frames = 0
@@ -23,18 +22,18 @@ class Enemy {
   }
 
 
-
 export class Goblin extends Enemy {
-constructor(){
+constructor(game){
     super();
+    this.game = game;
     this.cropWidth = 40;
     this.cropHeight = 40;
     this.width = 180
     this.height = 180
     this.position = {
-        x: 1350, // canvas.width = 
-        y: 880 - this.height - 130
-    } // canvas.height - this.height - this.ground 
+        x: this.game.width,
+        y: this.game.height - this.height - this.game.player.ground
+    } 
     this.image = document.getElementById('goblin');
     this.velocity = {
         x: 0,
