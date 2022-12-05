@@ -1,0 +1,254 @@
+*, ::before, ::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'MedievalSharp';
+}
+
+/*Main page*/
+html{
+    scroll-behavior: smooth;
+}
+
+header{
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    background-image: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.5),
+        rgba(0, 0, 0, 0.9)
+    ),url(./assets/background/website/bricks.jpg);
+    
+    
+}
+
+h1{
+    font-weight: 500;
+    font-size: 35px;
+    color: white;
+    font-family: 'Calligraffitti';
+}
+
+
+section{
+    height: 100vh;
+}
+
+.section-1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.5),
+        rgba(0, 0, 0, 0.9)
+    ),
+    url(./assets/background/website/wood-image.jpg);
+}
+
+.instructions-wrapper{
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    align-items: center;
+    /*background-color: green;*/
+    width: 65vw;
+    height: 75vh;
+}
+
+.presentation-wrapper{
+    /*background-color: red;*/
+    display: flex;
+    justify-content: center;
+}
+
+
+
+.portrait{
+    height: 550px;
+    width: 350px;
+    background-image: url(./assets/background/website/portrait.png);
+    background-size:cover;
+    background-repeat: no-repeat;
+    background-position: center;
+
+    border-image: url(./assets/background/website/frame.png) 30 fill / 30px / 37px;
+    /*border-image-slice: calc(50 / 184 * 100%) calc(80 / 284 * 100%) fill;
+    border-image-width: 30px 48px;*/
+
+}
+
+.scroll{
+    display: flex;
+    flex-direction: column;
+    /*background-color: burlywood;*/
+    height: 550px;
+    width: 700px;
+    margin-left: 100px;
+    padding: 40px;
+    background-image: url(./assets/background/website/scroll.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+
+}
+
+.scroll h2{
+    /*background-color: blueviolet;*/
+    margin-top: 40px;
+    margin-left: 40px;
+    margin-right: 40px;
+    font-size: 40px;
+}
+
+.scroll article{
+    /*background-color: chartreuse;*/
+    margin-top: 40px;
+    margin-left: 40px;
+    margin-right: 40px;
+    font-size: 20px;
+}
+
+.scroll a{
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    flex-wrap: nowrap;
+    /*background-color: aqua;*/
+    padding: 10px;
+    margin-top: 50px;
+    margin-left: 360px;
+    margin-right: 40px;
+    font-size: 25px;
+    text-decoration: none;
+    
+}
+
+.scroll a:link {
+    font-weight: bold;
+    color: #9c0808;
+    border: 3px solid #020500;
+    border-style: ridge;
+}
+  
+.scroll a:visited {
+    color: #9c0808;
+}
+  
+.scroll a:hover {
+    background: #ff000021;
+}
+  
+.scroll a:active {
+    background: #9c0808;
+    color: #ff9886;
+}
+
+.music-button{
+    margin-top: 80px;
+    display: flex;
+    align-items: center;
+    justify-content:center;
+
+}
+
+.music-button a{
+    padding: 10px;
+    font-size: 25px;
+    text-decoration: none;
+}
+
+.music-button a:link{
+    font-weight: bold;
+    color: #cc875f;
+    border: 3px solid #cc875f;
+    border-style: ridge;
+}
+
+.music-button a:visited {
+    color: #cc875f;
+}
+  
+.music-button a:hover {
+    background: #9c3e083a;
+}
+  
+.music-button a:active {
+    background: #cc875f;
+    color: #9c3e08;
+}
+
+.section-2{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.9),
+        rgba(0, 0, 0, 0.5)
+    ),
+    url(./assets/background/website/wood-image.jpg);
+}
+
+/*Game*/
+#idle, #run-left, #run-right, #jump, #hit, #attack, #witch, #goblin, #ruby, #lives, #game-over, #victory{
+    display: none;
+}
+
+.layers{
+    display: none;
+}
+
+#canvas1{
+    border-style: double;
+    border-color: #362418;
+    height: 70%;
+}
+
+#container{
+    width: 50vw;
+    height: 25vh;
+    position: absolute;
+    transform: translateY(70%);
+    background-color: rgba(0, 0, 0, 0.700);
+    padding: 30px;
+    font-family: 'Lora';
+    color: rgb(230, 230, 230);
+    font-size: 25px;
+    text-align: left;
+    opacity: 0;
+}
+
+#container.revealed{
+    opacity: 1;
+}
+
+#container span{
+    opacity: 1;
+}
+
+#container span.revealed{
+    opacity: 1;
+}
+
+#restart-button{
+    position: absolute;
+    transform: translateY(300%);
+    background-color: rgba(0, 0, 0, 0.700);
+    padding: 10px;
+    font-family: 'Lora';
+    color: #cc875f;
+    font-size: 25px;
+    font-weight: bold;
+    border: 3px solid #cc875f;
+    border-style: ridge;
+}
+
+#restart-button:hover{
+    background: #9c3e083a;
+}
+

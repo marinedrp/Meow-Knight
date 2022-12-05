@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meow-Knight's Tale</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Lora&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Calligraffitti&display=swap');
+    </style>
+    
+    
+    
+</head>
+<body>
+    <header>
+        <h1>Title</h1>
+    </header>
+
+    <section class="section-1">
+        
+        <div class="instructions-wrapper">
+            <div class="presentation-wrapper">
+                <div class="portrait">
+                </div>
+                
+                <div class="scroll">
+                    <h2>Instructions</h2>
+                    <article>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Et totam suscipit temporibus alias voluptates? Voluptas vitae quibusdam adipisci quisquam nemo, magni, ratione unde eos at molestiae in illum assumenda iusto. <br>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus illum quo aliquam enim beatae, nobis neque ipsa blanditiis exercitationem voluptates voluptatem quibusdam ab doloribus at laudantium eos reprehenderit in cumque.
+                    </article>
+                    <a href="#game">Start the game</a>
+                </div>
+            </div>
+    
+            <div class="music-button">
+                <a href="opening">Tell the bard to stop the music</a>
+            </div>
+        </div>
+
+            
+    </section>
+    
+    <section class="section-2" id="game">
+        <canvas id="canvas1"></canvas>
+        <div id="container"><!--Dialogues--></div>
+        <button id="restart-button">Restart</button>
+    </section>
+
+    
+    
+    <img src="./assets/idle.png" id="idle">
+    <img src="./assets/run-left.png" id="run-left">
+    <img src="./assets/run-right.png" id="run-right">
+    <img src="./assets/jump.png" id="jump">
+    <img src="./assets/hit.png" id="hit">
+    <img src="./assets/goblin.png" id="goblin">
+    <img src="./assets/witch-idle.png" id="witch">
+    <img src="./assets/ruby.png" id="ruby">
+    <img src="./assets/attack1.png" id="attack">
+    <img src="./assets/lives.png" id="lives">
+    <img src="./assets/gameover-screen.jpg" id="game-over">
+    <img src="./assets/victory-screen.jpg" id="victory">
+    <audio src="./assets/sounds/game-over.mp3" id="game-over-sound"></audio>
+    <audio src="./assets/sounds/victory.mp3" id="victory-sound"></audio>
+
+    <!--Level1-->
+    <img src="./assets/background/level1/layer01.png" id="layer1-lvl1" class="layers">
+    <img src="./assets/background/level1/layer02.png" id="layer2-lvl1" class="layers">
+    <img src="./assets/background/level1/layer03.png" id="layer3-lvl1" class="layers">
+    <img src="./assets/background/level1/layer04.png" id="layer4-lvl1" class="layers">
+    <img src="./assets/background/level1/layer05.png" id="layer5-lvl1" class="layers">
+    <img src="./assets/background/level1/layer06.png" id="layer6-lvl1" class="layers">
+    <img src="./assets/background/level1/layer07.png" id="layer7-lvl1" class="layers">
+    <!--Level2-->
+    <img src="./assets/background/level2/layer01.png" id="layer1-lvl2" class="layers">
+    <img src="./assets/background/level2/layer02.png" id="layer2-lvl2" class="layers">
+    <img src="./assets/background/level2/layer03.png" id="layer3-lvl2" class="layers">
+    <img src="./assets/background/level2/layer04.png" id="layer4-lvl2" class="layers">
+    <img src="./assets/background/level2/layer05.png" id="layer5-lvl2" class="layers">
+    <img src="./assets/background/level2/layer06.png" id="layer6-lvl2" class="layers">
+    <img src="./assets/background/level2/layer07.png" id="layer7-lvl2" class="layers">
+    <img src="./assets/background/level2/layer08.png" id="layer8-lvl2" class="layers">
+
+    <script src="main.js" type="module"></script>
+
+</body>
+</html>
