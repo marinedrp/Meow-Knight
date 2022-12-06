@@ -273,8 +273,6 @@ window.addEventListener("load", function () {
     game.attachEventListeners();
     game.addEnemies()
     
-    console.log(game.player.checkWitchCollision())
-    console.log(game.keys.space)
 
     ctx.save();
     ctx.globalAlpha = game.opacity;
