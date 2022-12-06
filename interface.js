@@ -74,10 +74,8 @@ export class UserInterface {
         this.victorySound.play()
     }
     drawDialogues(){
-        console.log(this.i)
-        //console.log(this.counterWitch)
         // display the first text box
-        if (this.game.keys.space.pressed && (this.game.player.checkWitchCollision() || this.game.player.checkRubyCollision())){
+        if (this.game.keys.space.pressed && (this.game.player.checkWitchCollision() || this.game.player.checkRubyCollision()) ){
             this.container.classList.add("revealed")
             this.typeText()
         // cleaning the text box after the first dialogue and resetting the parameters
@@ -102,7 +100,7 @@ export class UserInterface {
             this.randomWitchText = this.text.witch[Math.floor(Math.random() * this.text.witch.length) + 1]
             this.randomRubyText = this.text.ruby[Math.floor(Math.random() * this.text.ruby.length) + 1]
             this.game.keys.space.pressed = false
-          }
+          } 
     }
     typeText(){
         // dialogues with the witch

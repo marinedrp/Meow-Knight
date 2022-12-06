@@ -55,6 +55,7 @@ window.addEventListener("load", function () {
       };
       this.witch = document.getElementById("witch");
       this.ruby = document.getElementById("ruby");
+      this.portal = document.getElementById('portal');
       this.background;
       this.npcs;
       this.userInterface = new UserInterface(this);
@@ -63,6 +64,7 @@ window.addEventListener("load", function () {
       this.transition1;
       this.transition2;
       this.player = new Player(this);
+      this.nextLevel = false;
       this.enemies = [];
       this.score = 0;
       this.lives = 3;
@@ -77,41 +79,22 @@ window.addEventListener("load", function () {
         case 1:
           this.background = new Background(this, layer1_lvl1, layer1_lvl1, layer2_lvl1, layer3_lvl1, layer4_lvl1, layer5_lvl1, layer6_lvl1, layer7_lvl1);
           this.npcs = [
-          new Npc(this, 400, 500, 64, 64, this.witch, 180, 180, 11),
+          new Npc(this, 450, 500, 64, 64, this.witch, 180, 180, 11),
           new Npc(this, 900, 440, 64, 64, this.ruby, 250, 250, 8),
+          new Npc(this, 1400, 500, 64, 64, this.portal, 250, 250, 8),
         ];
           break;
         case 2:
           this.background = new Background(this, layer1_lvl2, layer2_lvl2, layer3_lvl2, layer4_lvl2, layer5_lvl2, layer6_lvl2, layer7_lvl2, layer8_lvl2)
-         this.npcs.splice(0, 2)
+          this.npcs.splice(0, 3)
           break;
       }
     }
     startLevel(){
-      // if (this.score === 1){
-      //    this.transition1 = setInterval(function () {
-      //     game.opacity += 0.1;
-      //     if (game.opacity >= 1) {
-      //       clearInterval(game.transition1);
-      //       game.opacity = 1
-      //       }
-      //     }, 70);
-
-
-      //   }
-
-      //   if (this.opacity === 1){
-      //     setTimeout(this.transition2 = setInterval(function () {
-      //       game.opacity -= 0.1;
-      //       if (game.opacity <= 0) {
-      //         clearInterval(this.transition2);
-      //         game.opacity = 0
-      //         }
-      //       }, 70), 20)
-          
-      //   }
-      //   console.log(typeof this.transition1)
-      //   console.log(this.opacity)
+      if (this.nextLevel && this.player.checkPortalCollision()){
+        this.level += 1
+        this.loadLevel(this.level)
+      } 
         
     }
     update() {
@@ -126,6 +109,7 @@ window.addEventListener("load", function () {
       this.attachEventListeners();
       this.player.movement(this.keys);
       this.player.useEnergy()
+      this.player.checkPortalCollision()
       this.player.checkWitchCollision()
       this.player.checkRubyCollision()
       this.player.checkEnemyCollision()
@@ -138,14 +122,14 @@ window.addEventListener("load", function () {
         this.npcs.forEach((npc) => {
           npc.draw(ctx);
         });
+        this.userInterface.drawDialogues()
       }
       this.player.draw(ctx);
-      this.userInterface.drawDialogues()
+      
     }
     attachEventListeners() {
       // switching sprites with the movement of the player and preventing the page from moving
       window.addEventListener("keydown", (event) => {
-        //console.log(event.key)
         switch (event.key) {
           case "ArrowUp":
             if (this.player.velocity.y === 0) this.player.velocity.y = -25;
@@ -194,13 +178,14 @@ window.addEventListener("load", function () {
             break;
           case " ":
             this.keys.space.pressed = true
-            //console.log(this.keys.space.pressed)
-            //event.preventDefault()
+            if (this.player.checkPortalCollision()){
+              this.nextLevel = true
+            } 
+            event.preventDefault()
             break;
         }
       });
       window.addEventListener("keyup", (event) => {
-        
         switch (event.key) {
           case "ArrowUp":
             // if the player is pressing the right or left key, then ArrowUp, then releases ArrowUp: 
@@ -221,6 +206,7 @@ window.addEventListener("load", function () {
             this.player.currentSprite = this.player.sprites.idle.image;
             break;
           case "a":
+            // same with the ArrowUp key
             this.keys.attack.pressed = false;
             if (this.keys.right.pressed)
             this.player.currentSprite = this.player.sprites.run.right;
@@ -239,7 +225,7 @@ window.addEventListener("load", function () {
     }
     addEnemies(){
       // creating enemies and pushing them into the array
-      if (this.level === 2){
+      if (this.level > 1){
         if (this.player.velocity.x >= 0 && Math.random() < 0.005){
           this.enemies.push(new Goblin(this))
         }
@@ -265,14 +251,11 @@ window.addEventListener("load", function () {
   function animate() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    
-    
     game.draw(ctx);
     game.update();
     game.startLevel()
     game.attachEventListeners();
     game.addEnemies()
-    
 
     ctx.save();
     ctx.globalAlpha = game.opacity;

@@ -195,7 +195,7 @@ section{
 }
 
 /*Game*/
-#idle, #run-left, #run-right, #jump, #hit, #attack, #witch, #goblin, #ruby, #lives, #game-over, #victory{
+#idle, #run-left, #run-right, #jump, #hit, #attack, #witch, #goblin, #ruby, #lives, #game-over, #victory, #portal{
     display: none;
 }
 

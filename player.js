@@ -46,6 +46,7 @@ export class Player {
     this.currentSprite = this.sprites.idle.image;
     this.witchCollision;
     this.rubyCollision;
+    this.portalCollision;
   }
   draw(ctx) {
     ctx.strokeRect(this.position.x, this.position.y, this.width, this.height);
@@ -160,9 +161,18 @@ export class Player {
     });
   }
   checkWitchCollision(){
-     return this.witchCollision = this.position.x + this.width >= this.game.npcs[0].position.x && this.position.x <= this.game.npcs[0].position.x + this.game.npcs[0].width
+    if (this.game.level === 1){
+      return this.witchCollision = this.position.x + this.width >= this.game.npcs[0].position.x && this.position.x <= this.game.npcs[0].position.x + this.game.npcs[0].width
+    } 
   }
   checkRubyCollision(){
+    if (this.game.level === 1){
     return this.rubyCollision = this.position.x + this.width >= this.game.npcs[1].position.x && this.position.x <= this.game.npcs[1].position.x + this.game.npcs[1].width
+    } 
+ }
+ checkPortalCollision(){
+  if (this.game.level === 1){
+    return this.portalCollision = this.position.x + this.width >= this.game.npcs[2].position.x && this.position.x <= this.game.npcs[2].position.x + this.game.npcs[2].width
+  } 
  }
 }
