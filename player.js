@@ -94,11 +94,12 @@ export class Player {
     // NPCs and enemies are scrolling to the left if player goes to the right
     if (keys.right.pressed) {
       this.velocity.x += 5;
-      if (this.game.level === 1){
+      //if (this.game.level === 1){
         this.game.npcs.forEach(npc => {
           npc.position.x -= 5
         })
-      } else if (this.game.level === 2){
+      //} else if
+      if (this.game.level === 2){
         this.game.enemies.forEach(enemy => {
           enemy.position.x -= 5
         })
@@ -106,11 +107,12 @@ export class Player {
     // NPCs and enemies are scrolling to the right if player goes to the left
     } else if (keys.left.pressed) {
       this.velocity.x = -5;
-      if (this.game.level === 1){
+      //if (this.game.level === 1){
         this.game.npcs.forEach(npc => {
           npc.position.x += 5
         })
-      } else if (this.game.level === 2){
+      //} else if 
+      if (this.game.level === 2){
         this.game.enemies.forEach(enemy => {
           enemy.position.x += 5
         })
@@ -162,17 +164,17 @@ export class Player {
   }
   checkWitchCollision(){
     if (this.game.level === 1){
-      return this.witchCollision = this.position.x + this.width >= this.game.npcs[0].position.x && this.position.x <= this.game.npcs[0].position.x + this.game.npcs[0].width
+      return this.witchCollision = this.position.x + this.width >= this.game.npcs[1].position.x && this.position.x <= this.game.npcs[1].position.x + this.game.npcs[1].width
     } 
   }
   checkRubyCollision(){
     if (this.game.level === 1){
-    return this.rubyCollision = this.position.x + this.width >= this.game.npcs[1].position.x && this.position.x <= this.game.npcs[1].position.x + this.game.npcs[1].width
+    return this.rubyCollision = this.position.x + this.width >= this.game.npcs[2].position.x && this.position.x <= this.game.npcs[2].position.x + this.game.npcs[2].width
     } 
  }
  checkPortalCollision(){
-  if (this.game.level === 1){
-    return this.portalCollision = this.position.x + this.width >= this.game.npcs[2].position.x && this.position.x <= this.game.npcs[2].position.x + this.game.npcs[2].width
+  if (this.game.level >= 1){
+    return this.portalCollision = this.position.x + this.width >= this.game.npcs[0].position.x && this.position.x <= this.game.npcs[0].position.x + this.game.npcs[0].width
   } 
  }
 }

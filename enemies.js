@@ -47,8 +47,34 @@ constructor(game){
     }
 }
 
+export class FastEnemy extends Enemy {
+  constructor(game, image){
+      super();
+      this.game = game;
+      this.cropWidth = 25;
+      this.cropHeight = 38;
+      this.width = 125
+      this.height = 190
+      this.position = {
+          x: this.game.width,
+          y: this.game.height - this.height - this.game.player.ground
+      } 
+      this.image = image
+      this.velocity = {
+          x: 5,
+          y: 0
+      }
+      this.maxFrames = 5;
+      }
+      movement(){
+          this.position.x -= this.velocity.x
+          if (this.x + this.width < -this.game.width) this.deletion = true;
+      }
+  }
+
+
 export class Particles extends Enemy {
-  constructor(game){
+  constructor(game, image){
     super();
     this.game = game;
     this.cropWidth = 16;
@@ -59,7 +85,7 @@ export class Particles extends Enemy {
         x: Math.floor(Math.random() * this.game.width),
         y: 0
     } 
-    this.image = document.getElementById('dark-particles');
+    this.image = image
     this.velocity = {
         x: 0,
         y: 2

@@ -2,7 +2,7 @@ import { Background } from "./background.js";
 import { UserInterface } from "./interface.js";
 import { Player } from "./player.js";
 import { Npc } from "./npc.js";
-import { Goblin, Particles } from './enemies.js';
+import { Goblin, FastEnemy, Particles } from './enemies.js';
 
 
 //level1
@@ -56,13 +56,12 @@ window.addEventListener("load", function () {
       this.witch = document.getElementById("witch");
       this.ruby = document.getElementById("ruby");
       this.portal = document.getElementById('portal');
+      this.mushroom = document.getElementById('mushroom');
+      this.darkParticles = document.getElementById('dark-particles');
       this.background;
       this.npcs;
       this.userInterface = new UserInterface(this);
       this.energy = 100;
-      this.opacity = 0;
-      this.transition1;
-      this.transition2;
       this.player = new Player(this);
       this.nextLevel = false;
       this.enemies = [];
@@ -79,14 +78,17 @@ window.addEventListener("load", function () {
         case 1:
           this.background = new Background(this, layer1_lvl1, layer1_lvl1, layer2_lvl1, layer3_lvl1, layer4_lvl1, layer5_lvl1, layer6_lvl1, layer7_lvl1);
           this.npcs = [
+          new Npc(this, 1400, 500, 64, 64, this.portal, 250, 250, 8),
           new Npc(this, 450, 500, 64, 64, this.witch, 180, 180, 11),
           new Npc(this, 900, 440, 64, 64, this.ruby, 250, 250, 8),
-          new Npc(this, 1400, 500, 64, 64, this.portal, 250, 250, 8),
+          
         ];
           break;
         case 2:
           this.background = new Background(this, layer1_lvl2, layer2_lvl2, layer3_lvl2, layer4_lvl2, layer5_lvl2, layer6_lvl2, layer7_lvl2, layer8_lvl2)
-          this.npcs.splice(0, 3)
+          this.npcs.splice(1, 2)
+          this.player.position.x = 100
+          this.npcs[0].position.x = 4000;
           break;
       }
     }
@@ -100,11 +102,11 @@ window.addEventListener("load", function () {
     update() {
       this.background.update();
       // The NPCs are drawn before the player 
-      if (this.level === 1){
+      //if (this.level === 1){
         this.npcs.forEach((npc) => {
           npc.update();
         });
-      }
+      //}
       this.player.update();
       this.attachEventListeners();
       this.player.movement(this.keys);
@@ -120,13 +122,14 @@ window.addEventListener("load", function () {
       this.background.draw(ctx);
       this.userInterface.draw(ctx);
       // The NPCs are drawn before the player 
-      if (this.level === 1){
+      //if (this.level === 1){
         this.npcs.forEach((npc) => {
           npc.draw(ctx);
         });
         this.userInterface.drawDialogues()
-      }
+      //}
       this.player.draw(ctx);
+      
       
     }
     attachEventListeners() {
@@ -180,9 +183,10 @@ window.addEventListener("load", function () {
             break;
           case " ":
             this.keys.space.pressed = true
-            if (this.level === 1 && this.player.checkPortalCollision()){
+            if (this.level >= 1 && this.player.checkPortalCollision() && !this.nextLevel){
               this.nextLevel = true
-            } else this.nextLevel = false
+            } 
+
             event.preventDefault()
             break;
         }
@@ -219,24 +223,27 @@ window.addEventListener("load", function () {
             this.player.width = 100;
             break;
           case " ":
+            this.nextLevel = false
             break;
         }
       });
     }
     addEnemies(){
-      // adding enemies after level 1 and pushing them into the array
-      if (this.level > 1){
+      
+      // drawing, animating and moving the enemies
+      this.enemies.forEach(enemy => {
+        enemy.draw(ctx)
+        enemy.update()
+        enemy.movement()
+      })
+
+      //adding enemies after level 1 and pushing them into the array
+      if (this.level === 2){
         if (this.player.velocity.x >= 0 && Math.random() < 0.01){
-          this.enemies.push(new Goblin(this), new Particles(this))
-        } 
-        // drawing, animating and moving the enemies
-        this.enemies.forEach(enemy => {
-          enemy.draw(ctx)
-          enemy.update()
-          enemy.movement()
-        // removing the enemies from the array if they collide with the player
-          
-        })
+          this.enemies.push(new Goblin(this), new Particles(this, this.darkParticles))
+        } else if (this.player.velocity.x >= 0 && Math.random() < 0.004){
+          this.enemies.push(new FastEnemy(this, this.mushroom))
+        }
       }
       
     }
@@ -255,12 +262,10 @@ window.addEventListener("load", function () {
     game.attachEventListeners();
     game.addEnemies()
 
-
-    ctx.save();
-    ctx.globalAlpha = game.opacity;
-    ctx.fillStyle = "black";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-    ctx.restore();
+    console.log(game.enemies)
+    //console.log(game.npcs)
+    //console.log(game.level)
+    //console.log(game.nextLevel)
 
     if (!game.gameOver && !game.victory) {
       restartButton.hidden = true;
@@ -289,6 +294,7 @@ window.addEventListener("load", function () {
     game.userInterface.counterWitch = 0
     game.userInterface.counterRuby = 0
     game.nextLevel = false
+    game.enemies = []
     game.gameOver = false;
     game.victory = false;
     game.loadLevel(game.level)
