@@ -29,7 +29,7 @@ window.addEventListener("load", function () {
 
   const canvas = document.getElementById("canvas1");
   const ctx = canvas.getContext("2d");
-  let opacity = 0
+  
   
   canvas.width = 1350;
   canvas.height = 880;
@@ -59,11 +59,16 @@ window.addEventListener("load", function () {
       this.npcs;
       this.userInterface = new UserInterface(this);
       this.energy = 100;
+      this.opacity = 0;
+      this.transition1;
+      this.transition2;
       this.player = new Player(this);
       this.enemies = [];
       this.score = 0;
       this.lives = 3;
       this.level = 1;
+      this.music;
+      this.sfx;
       this.gameOver = false;
       this.victory = false;
     }
@@ -78,9 +83,36 @@ window.addEventListener("load", function () {
           break;
         case 2:
           this.background = new Background(this, layer1_lvl2, layer2_lvl2, layer3_lvl2, layer4_lvl2, layer5_lvl2, layer6_lvl2, layer7_lvl2, layer8_lvl2)
-          this.npcs.splice(0, 2)
+         this.npcs.splice(0, 2)
           break;
       }
+    }
+    startLevel(){
+      // if (this.score === 1){
+      //    this.transition1 = setInterval(function () {
+      //     game.opacity += 0.1;
+      //     if (game.opacity >= 1) {
+      //       clearInterval(game.transition1);
+      //       game.opacity = 1
+      //       }
+      //     }, 70);
+
+
+      //   }
+
+      //   if (this.opacity === 1){
+      //     setTimeout(this.transition2 = setInterval(function () {
+      //       game.opacity -= 0.1;
+      //       if (game.opacity <= 0) {
+      //         clearInterval(this.transition2);
+      //         game.opacity = 0
+      //         }
+      //       }, 70), 20)
+          
+      //   }
+      //   console.log(typeof this.transition1)
+      //   console.log(this.opacity)
+        
     }
     update() {
       this.background.update();
@@ -93,8 +125,10 @@ window.addEventListener("load", function () {
       this.player.update();
       this.attachEventListeners();
       this.player.movement(this.keys);
-      this.player.checkCollision()
       this.player.useEnergy()
+      this.player.checkWitchCollision()
+      this.player.checkRubyCollision()
+      this.player.checkEnemyCollision()
     }
     draw(ctx) {
       this.background.draw(ctx);
@@ -106,10 +140,12 @@ window.addEventListener("load", function () {
         });
       }
       this.player.draw(ctx);
+      this.userInterface.drawDialogues()
     }
     attachEventListeners() {
       // switching sprites with the movement of the player and preventing the page from moving
       window.addEventListener("keydown", (event) => {
+        //console.log(event.key)
         switch (event.key) {
           case "ArrowUp":
             if (this.player.velocity.y === 0) this.player.velocity.y = -25;
@@ -157,10 +193,14 @@ window.addEventListener("load", function () {
             }
             break;
           case " ":
+            this.keys.space.pressed = true
+            //console.log(this.keys.space.pressed)
+            //event.preventDefault()
             break;
         }
       });
       window.addEventListener("keyup", (event) => {
+        
         switch (event.key) {
           case "ArrowUp":
             // if the player is pressing the right or left key, then ArrowUp, then releases ArrowUp: 
@@ -191,30 +231,30 @@ window.addEventListener("load", function () {
             this.player.width = 100;
             break;
           case " ":
+            //this.keys.space.pressed = false
+            //console.log(this.keys.space.pressed)
             break;
         }
       });
     }
     addEnemies(){
       // creating enemies and pushing them into the array
-      if (this.player.velocity.x >= 0 && Math.random() < 0.005){
-        this.enemies.push(new Goblin(this))
-      }
-      // drawing, animating and moving the enemies
-      this.enemies.forEach(enemy => {
-        enemy.draw(ctx)
-        enemy.update()
-        enemy.movement()
-      // removing the enemies from the array if they go off screen or if they collide with the player
-        if (enemy.position.x + enemy.width < -canvas.width || enemy.deletion){
-          this.enemies.shift(enemy)
+      if (this.level === 2){
+        if (this.player.velocity.x >= 0 && Math.random() < 0.005){
+          this.enemies.push(new Goblin(this))
         }
-      })
-    }
-    startLevel(){
-      if (this.score === 2){
-        this.loadLevel(this.level++)
+        // drawing, animating and moving the enemies
+        this.enemies.forEach(enemy => {
+          enemy.draw(ctx)
+          enemy.update()
+          enemy.movement()
+        // removing the enemies from the array if they go off screen on the left or if they collide with the player
+          if (enemy.position.x + enemy.width < -canvas.width || enemy.deletion){
+            this.enemies.shift(enemy)
+          }
+        })
       }
+      
     }
   }
 
@@ -233,12 +273,11 @@ window.addEventListener("load", function () {
     game.attachEventListeners();
     game.addEnemies()
     
-    
-    console.log(game.background)
-    console.log(game.npcs)
+    console.log(game.player.checkWitchCollision())
+    console.log(game.keys.space)
 
     ctx.save();
-    ctx.globalAlpha = opacity;
+    ctx.globalAlpha = game.opacity;
     ctx.fillStyle = "black";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     ctx.restore();

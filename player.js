@@ -44,6 +44,8 @@ export class Player {
       }
     };
     this.currentSprite = this.sprites.idle.image;
+    this.witchCollision;
+    this.rubyCollision;
   }
   draw(ctx) {
     ctx.strokeRect(this.position.x, this.position.y, this.width, this.height);
@@ -91,26 +93,42 @@ export class Player {
     // NPCs and enemies are scrolling to the left if player goes to the right
     if (keys.right.pressed) {
       this.velocity.x += 5;
+      if (this.game.level === 1){
         this.game.npcs.forEach(npc => {
           npc.position.x -= 5
         })
+      } else if (this.game.level === 2){
         this.game.enemies.forEach(enemy => {
           enemy.position.x -= 5
         })
+      }        
     // NPCs and enemies are scrolling to the right if player goes to the left
     } else if (keys.left.pressed) {
       this.velocity.x = -5;
+      if (this.game.level === 1){
         this.game.npcs.forEach(npc => {
           npc.position.x += 5
         })
+      } else if (this.game.level === 2){
         this.game.enemies.forEach(enemy => {
           enemy.position.x += 5
         })
+      }
     } else {
       this.velocity.x = 0;
     }
   }
-  checkCollision(){
+  useEnergy(){
+    // reduces the energy while the player is pressing A
+    if (this.game.keys.attack.pressed && this.game.energy <= 100 && this.game.energy > 0){
+      this.game.energy--
+    }
+    // increases the energy while the player is not attacking
+    else if (!this.game.keys.attack.pressed && this.game.energy >= 0 && this.game.energy < 100){
+      this.game.energy++
+    }
+  }
+  checkEnemyCollision(){
     this.game.enemies.forEach(enemy => {
       // if the player is colliding with the enemies and not attacking or he doesn't have any energy
       if (enemy.position.x < this.position.x + this.width &&
@@ -141,14 +159,10 @@ export class Player {
           }
     });
   }
-  useEnergy(){
-    // reduces the energy while the player is pressing A
-    if (this.game.keys.attack.pressed && this.game.energy <= 100 && this.game.energy > 0){
-      this.game.energy--
-    }
-    // increases the energy while the player is not attacking
-    else if (!this.game.keys.attack.pressed && this.game.energy >= 0 && this.game.energy < 100){
-      this.game.energy++
-    }
+  checkWitchCollision(){
+     return this.witchCollision = this.position.x + this.width >= this.game.npcs[0].position.x && this.position.x <= this.game.npcs[0].position.x + this.game.npcs[0].width
   }
+  checkRubyCollision(){
+    return this.rubyCollision = this.position.x + this.width >= this.game.npcs[1].position.x && this.position.x <= this.game.npcs[1].position.x + this.game.npcs[1].width
+ }
 }
