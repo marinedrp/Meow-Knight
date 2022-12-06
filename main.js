@@ -4,8 +4,7 @@ import { Player } from "./player.js";
 import { Npc } from "./npc.js";
 import { Goblin } from './enemies.js';
 
-const witch = document.getElementById("witch");
-const ruby = document.getElementById("ruby");
+
 //level1
 const layer1_lvl1 = document.getElementById("layer1-lvl1");
 const layer2_lvl1 = document.getElementById("layer2-lvl1");
@@ -54,6 +53,8 @@ window.addEventListener("load", function () {
           pressed: false,
         },
       };
+      this.witch = document.getElementById("witch");
+      this.ruby = document.getElementById("ruby");
       this.background;
       this.npcs;
       this.userInterface = new UserInterface(this);
@@ -67,32 +68,20 @@ window.addEventListener("load", function () {
       this.victory = false;
     }
     startLevel(level){
-      if (level === 1){
-        this.background = new Background(this, layer1_lvl1, layer1_lvl1, layer2_lvl1, layer3_lvl1, layer4_lvl1, layer5_lvl1, layer6_lvl1, layer7_lvl1);
-        this.npcs = [
-          new Npc(this, 400, 500, 64, 64, witch, 180, 180, 11),
-          new Npc(this, 900, 440, 64, 64, ruby, 250, 250, 8),
-         ];
-      } else if (level === 2){
-        this.background = new Background(this, layer1_lvl2, layer2_lvl2, layer3_lvl2, layer4_lvl2, layer5_lvl2, layer6_lvl2, layer7_lvl2, layer8_lvl2)
-        this.npcs.splice(0, 2)
+      switch(level){
+        case 1:
+          this.background = new Background(this, layer1_lvl1, layer1_lvl1, layer2_lvl1, layer3_lvl1, layer4_lvl1, layer5_lvl1, layer6_lvl1, layer7_lvl1);
+          this.npcs = [
+          new Npc(this, 400, 500, 64, 64, this.witch, 180, 180, 11),
+          new Npc(this, 900, 440, 64, 64, this.ruby, 250, 250, 8),
+        ];
+          break;
+        case 2:
+          this.background = new Background(this, layer1_lvl2, layer2_lvl2, layer3_lvl2, layer4_lvl2, layer5_lvl2, layer6_lvl2, layer7_lvl2, layer8_lvl2)
+          this.npcs.splice(0, 2)
+          break;
       }
     }
-    // startLevel(level){
-    //   switch(level){
-    //     case 1:
-    //       this.background = new Background(this, layer1_lvl1, layer1_lvl1, layer2_lvl1, layer3_lvl1, layer4_lvl1, layer5_lvl1, layer6_lvl1, layer7_lvl1);
-    //       this.npcs = [
-    //       new Npc(this, 400, 500, 64, 64, witch, 180, 180, 11),
-    //       new Npc(this, 900, 440, 64, 64, ruby, 250, 250, 8),
-    //     ];
-    //       break;
-    //     case 2:
-    //       this.background = new Background(this, layer1_lvl2, layer2_lvl2, layer3_lvl2, layer4_lvl2, layer5_lvl2, layer6_lvl2, layer7_lvl2, layer8_lvl2)
-    //       this.npcs.splice(0, 2)
-    //       break;
-    //   }
-    // }
     update() {
       this.background.update();
       // The NPCs are drawn before the player 
@@ -119,6 +108,7 @@ window.addEventListener("load", function () {
       this.player.draw(ctx);
     }
     attachEventListeners() {
+      // switching sprites with the movement of the player and preventing the page from moving
       window.addEventListener("keydown", (event) => {
         switch (event.key) {
           case "ArrowUp":
@@ -143,11 +133,23 @@ window.addEventListener("load", function () {
             event.preventDefault();
             break;
           case "a":
+            // if A is pressed and the player has energy
             if (this.energy > 0) {
               this.keys.attack.pressed = true;
               this.player.currentSprite = this.player.sprites.attack.image;
               this.player.currentCropWidth = 30;
               this.player.width = 160;
+            } // if A and the left key are pressed but the player has no energy
+            else if (this.keys.left.pressed) {
+              this.player.currentSprite = this.player.sprites.run.left;
+              this.player.currentCropWidth = 16;
+              this.player.width = 100;
+              // if A and the right key are pressed but the player has no energy
+            } else if (this.keys.right.pressed){
+              this.player.currentSprite = this.player.sprites.run.right;
+              this.player.currentCropWidth = 16;
+              this.player.width = 100;
+              // if only A is pressed but the player has no energy
             } else {
               this.player.currentSprite = this.player.sprites.idle.image;
               this.player.currentCropWidth = 16;
@@ -161,6 +163,9 @@ window.addEventListener("load", function () {
       window.addEventListener("keyup", (event) => {
         switch (event.key) {
           case "ArrowUp":
+            // if the player is pressing the right or left key, then ArrowUp, then releases ArrowUp: 
+            // the idle animation was displayed while the player was moving.
+            // To fix this we are switching sprites if ArrowUp is released but other keys are pressed.
             if (this.keys.right.pressed)
             this.player.currentSprite = this.player.sprites.run.right;
             else if (this.keys.left.pressed)
@@ -198,7 +203,7 @@ window.addEventListener("load", function () {
         enemy.draw(ctx)
         enemy.update()
         enemy.movement()
-      // removing the enemies from the array
+      // removing the enemies from the array if they go off screen or if they collide with the player
         if (enemy.position.x + enemy.width < -canvas.width || enemy.deletion){
           this.enemies.shift(enemy)
         }

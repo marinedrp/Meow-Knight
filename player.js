@@ -138,17 +138,15 @@ export class Player {
             enemy.deletion = true
             //enemy.playHitSound()
             this.game.score++
-            
-            if (this.game.score === 2){
-              this.game.level++
-            }
           }
     });
   }
   useEnergy(){
+    // reduces the energy while the player is pressing A
     if (this.game.keys.attack.pressed && this.game.energy <= 100 && this.game.energy > 0){
       this.game.energy--
     }
+    // increases the energy while the player is not attacking
     else if (!this.game.keys.attack.pressed && this.game.energy >= 0 && this.game.energy < 100){
       this.game.energy++
     }

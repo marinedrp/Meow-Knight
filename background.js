@@ -9,14 +9,14 @@ class Layer {
       this.y = 0;
   }
   update(){
-      // scrolls the background to the right
+      // scrolls the background endlessly to the right
       if (this.x < -this.width) {
         this.x = 0
-      // scrolls the background to the left
+      // scrolls the background endlessly to the left
       } else if (this.x > this.width){
         this.x = 0
       }
-      // scrolls the background with the movement of the player
+      // scrolls the layers with the movement of the player
       else {
         this.x -= this.game.player.velocity.x * this.speedModifier 
       }
