@@ -67,7 +67,7 @@ window.addEventListener("load", function () {
       this.gameOver = false;
       this.victory = false;
     }
-    startLevel(level){
+    loadLevel(level){
       switch(level){
         case 1:
           this.background = new Background(this, layer1_lvl1, layer1_lvl1, layer2_lvl1, layer3_lvl1, layer4_lvl1, layer5_lvl1, layer6_lvl1, layer7_lvl1);
@@ -197,7 +197,9 @@ window.addEventListener("load", function () {
     }
     addEnemies(){
       // creating enemies and pushing them into the array
-      if (this.player.velocity.x >= 0 && Math.random() < 0.005) this.enemies.push(new Goblin(this))
+      if (this.player.velocity.x >= 0 && Math.random() < 0.005){
+        this.enemies.push(new Goblin(this))
+      }
       // drawing, animating and moving the enemies
       this.enemies.forEach(enemy => {
         enemy.draw(ctx)
@@ -209,6 +211,11 @@ window.addEventListener("load", function () {
         }
       })
     }
+    startLevel(){
+      if (this.score === 2){
+        this.loadLevel(this.level++)
+      }
+    }
   }
 
   const game = new Game(canvas.width, canvas.height);
@@ -217,12 +224,15 @@ window.addEventListener("load", function () {
   // main game loop
   function animate() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+
     
     
     game.draw(ctx);
     game.update();
+    game.startLevel()
     game.attachEventListeners();
     game.addEnemies()
+    
     
     console.log(game.background)
     console.log(game.npcs)
@@ -257,11 +267,11 @@ window.addEventListener("load", function () {
     game.player.position.x = 100
     game.gameOver = false;
     game.victory = false;
-    game.startLevel(game.level)
+    game.loadLevel(game.level)
     animate();
   });
 
-  game.startLevel(game.level)
+  game.loadLevel(game.level)
   animate();
   
   
