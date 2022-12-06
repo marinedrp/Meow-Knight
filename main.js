@@ -2,7 +2,7 @@ import { Background } from "./background.js";
 import { UserInterface } from "./interface.js";
 import { Player } from "./player.js";
 import { Npc } from "./npc.js";
-import { Goblin } from './enemies.js';
+import { Goblin, Particles } from './enemies.js';
 
 
 //level1
@@ -113,6 +113,8 @@ window.addEventListener("load", function () {
       this.player.checkWitchCollision()
       this.player.checkRubyCollision()
       this.player.checkEnemyCollision()
+      this.enemies = this.enemies.filter(enemy => !enemy.deletion)
+      
     }
     draw(ctx) {
       this.background.draw(ctx);
@@ -178,9 +180,9 @@ window.addEventListener("load", function () {
             break;
           case " ":
             this.keys.space.pressed = true
-            if (this.player.checkPortalCollision()){
+            if (this.level === 1 && this.player.checkPortalCollision()){
               this.nextLevel = true
-            } 
+            } else this.nextLevel = false
             event.preventDefault()
             break;
         }
@@ -217,27 +219,23 @@ window.addEventListener("load", function () {
             this.player.width = 100;
             break;
           case " ":
-            //this.keys.space.pressed = false
-            //console.log(this.keys.space.pressed)
             break;
         }
       });
     }
     addEnemies(){
-      // creating enemies and pushing them into the array
+      // adding enemies after level 1 and pushing them into the array
       if (this.level > 1){
-        if (this.player.velocity.x >= 0 && Math.random() < 0.005){
-          this.enemies.push(new Goblin(this))
-        }
+        if (this.player.velocity.x >= 0 && Math.random() < 0.01){
+          this.enemies.push(new Goblin(this), new Particles(this))
+        } 
         // drawing, animating and moving the enemies
         this.enemies.forEach(enemy => {
           enemy.draw(ctx)
           enemy.update()
           enemy.movement()
-        // removing the enemies from the array if they go off screen on the left or if they collide with the player
-          if (enemy.position.x + enemy.width < -canvas.width || enemy.deletion){
-            this.enemies.shift(enemy)
-          }
+        // removing the enemies from the array if they collide with the player
+          
         })
       }
       
@@ -256,6 +254,7 @@ window.addEventListener("load", function () {
     game.startLevel()
     game.attachEventListeners();
     game.addEnemies()
+
 
     ctx.save();
     ctx.globalAlpha = game.opacity;
@@ -280,11 +279,16 @@ window.addEventListener("load", function () {
   }
 
   restartButton.addEventListener("click", function () {
+    // resetting the parameters
     game.level = 1;
     game.lives = 3;
     game.score = 0;
     game.energy = 100;
     game.player.position.x = 100
+    game.keys.space.pressed = false
+    game.userInterface.counterWitch = 0
+    game.userInterface.counterRuby = 0
+    game.nextLevel = false
     game.gameOver = false;
     game.victory = false;
     game.loadLevel(game.level)

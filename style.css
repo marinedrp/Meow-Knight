@@ -195,7 +195,7 @@ section{
 }
 
 /*Game*/
-#idle, #run-left, #run-right, #jump, #hit, #attack, #witch, #goblin, #ruby, #lives, #game-over, #victory, #portal{
+#idle, #run-left, #run-right, #jump, #hit, #attack, #witch, #goblin, #ruby, #lives, #game-over, #victory, #portal, #dark-particles{
     display: none;
 }
 
@@ -251,4 +251,3 @@ section{
 #restart-button:hover{
     background: #9c3e083a;
 }
-

@@ -46,3 +46,32 @@ constructor(game){
         this.position.x -= this.velocity.x
     }
 }
+
+export class Particles extends Enemy {
+  constructor(game){
+    super();
+    this.game = game;
+    this.cropWidth = 16;
+    this.cropHeight = 16;
+    this.width = 80;
+    this.height = 80;
+    this.position = {
+        x: Math.floor(Math.random() * this.game.width),
+        y: 0
+    } 
+    this.image = document.getElementById('dark-particles');
+    this.velocity = {
+        x: 0,
+        y: 2
+    }
+    this.maxFrames = 5;
+    }
+    movement(){
+      
+      this.position.y += this.velocity.y
+      if (this.position.y === this.game.height - this.game.ground - this.height){
+        this.deletion = true
+      }
+    }
+      
+}
