@@ -24,7 +24,7 @@ class Enemy {
 
 
 export class RunningEnemy extends Enemy {
-constructor(game, {image, cropWidth, cropHeight, width, height, speedX, maxFrames, scoreBonus}){
+constructor(game, {image, cropWidth, cropHeight, width, height, positionY, speedX, maxFrames, scoreBonus}){
     super();
     this.game = game;
     this.cropWidth = cropWidth;
@@ -33,7 +33,7 @@ constructor(game, {image, cropWidth, cropHeight, width, height, speedX, maxFrame
     this.height = height
     this.position = {
         x: this.game.width,
-        y: this.game.height - this.height - this.game.player.ground
+        y: positionY
     } 
     this.image = image
     this.velocity = {

@@ -97,6 +97,7 @@ window.addEventListener("load", function () {
         cropHeight: 40,
         width: 180,
         height: 180,
+        positionY: 880 - 180 - 130,
         speedX: Math.floor(Math.random() * 3) + 2,
         maxFrames: 7,
         scoreBonus: 1
@@ -107,6 +108,7 @@ window.addEventListener("load", function () {
         cropHeight: 38,
         width: 125,
         height: 190,
+        positionY: 880 - 180 - 130,
         speedX: Math.floor(Math.random() * 4) + 2,
         maxFrames: 5,
         scoreBonus: 2
@@ -121,7 +123,8 @@ window.addEventListener("load", function () {
         cropHeight: 51,
         width: 180,
         height: 204,
-        speedX: Math.floor(Math.random() * 5) + 3,
+        positionY: 880 - 180 - 130,
+        speedX: Math.floor(Math.random() * 4) + 2,
         maxFrames: 3,
         scoreBonus: 3
       }
@@ -129,6 +132,17 @@ window.addEventListener("load", function () {
         image: document.getElementById('green-particles'),
         speedY: 2
       }
+      this.bat = {
+        image: document.getElementById('bat'),
+        cropWidth: 42,
+        cropHeight: 32,
+        width: 168,
+        height: 128,
+        positionY: 500,
+        speedX: Math.floor(Math.random() * 4) + 2,
+        maxFrames: 7,
+        scoreBonus: 4
+      };
       this.background;
       this.npcs;
       this.userInterface = new UserInterface(this);
@@ -271,11 +285,21 @@ window.addEventListener("load", function () {
             // if the player is pressing the right or left key, then ArrowUp, then releases ArrowUp: 
             // the idle animation was displayed while the player was moving.
             // To fix this we are switching sprites if ArrowUp is released but other keys are pressed.
-            if (this.keys.right.pressed)
-            this.player.currentSprite = this.player.sprites.run.right;
-            else if (this.keys.left.pressed)
-            this.player.currentSprite = this.player.sprites.run.left;
-            else this.player.currentSprite = this.player.sprites.idle.image;
+            if (this.keys.right.pressed){
+              this.player.currentSprite = this.player.sprites.run.right;
+              this.player.currentCropWidth = 16;
+              this.player.width = 100;
+            }
+            else if (this.keys.left.pressed){
+              this.player.currentSprite = this.player.sprites.run.left;
+              this.player.currentCropWidth = 16;
+              this.player.width = 100;
+            }
+            else {
+              this.player.currentSprite = this.player.sprites.idle.image;
+              this.player.currentCropWidth = 16;
+              this.player.width = 100;
+            }
             break;
           case "ArrowLeft":
             this.keys.left.pressed = false;
@@ -305,10 +329,10 @@ window.addEventListener("load", function () {
     addEnemies(){
       //adding enemies after level 1 and pushing them into the array
       if (this.level === 2){
-        if (this.player.velocity.x >= 0 && Math.random() < 0.01){
+        if (this.player.velocity.x >= 0 && Math.random() < 0.008){
           this.enemies.push(new RunningEnemy(this, this.goblin))
           this.particles.push(new Particles(this, this.darkParticles))
-        } else if (this.player.velocity.x >= 0 && Math.random() < 0.008){
+        } else if (this.player.velocity.x >= 0 && Math.random() < 0.005){
           this.enemies.push(new RunningEnemy(this, this.mushroom))
         }
       }
@@ -318,6 +342,8 @@ window.addEventListener("load", function () {
         } 
         else if (this.player.velocity.x >= 0 && Math.random() < 0.01){
           this.enemies.push(new RunningEnemy(this, this.skeleton))
+        } else if (this.player.velocity.x >= 0 && Math.random() < 0.004){
+          this.enemies.push(new RunningEnemy(this, this.bat))
         }
       }
 
@@ -360,7 +386,7 @@ window.addEventListener("load", function () {
     game.addEnemies()
     game.checkIfGameOver()
 
-    console.log(game.userInterface.index)
+    //console.log(game.userInterface.randomWitchText)
     //console.log(game.npcs)
     //console.log(game.particles)
     //console.log(game.nextLevel)
