@@ -2,7 +2,7 @@ import { Background } from "./background.js";
 import { UserInterface } from "./interface.js";
 import { Player } from "./player.js";
 import { Npc } from "./npc.js";
-import { Goblin, FastEnemy, Particles } from './enemies.js';
+import { RunningEnemy, Particles } from './enemies.js';
 
 
 //level1
@@ -61,13 +61,74 @@ window.addEventListener("load", function () {
           pressed: false,
         },
       };
-      this.witch = document.getElementById("witch");
-      this.ruby = document.getElementById("ruby");
-      this.portal = document.getElementById('portal');
-      this.mushroom = document.getElementById('mushroom');
-      this.darkParticles = document.getElementById('dark-particles');
-      this.skeleton;
-      this.greenParticles;
+      this.witch = {
+        x: 450,
+        y: 500,
+        image: document.getElementById("witch"),
+        cropWidth: 64,
+        cropHeight: 64,
+        width: 180,
+        height: 180,
+        maxFrames: 11
+      } 
+      this.ruby = {
+        x: 900,
+        y: 440,
+        image: document.getElementById("ruby"),
+        cropWidth: 64,
+        cropHeight: 64,
+        width: 250,
+        height: 250,
+        maxFrames: 8
+      } 
+      this.portal = {
+        x: 1400,
+        y: 500,
+        image: document.getElementById('portal'),
+        cropWidth: 64,
+        cropHeight: 64,
+        width: 250,
+        height: 250,
+        maxFrames: 8
+      } 
+      this.goblin = {
+        image: document.getElementById('goblin'),
+        cropWidth: 40,
+        cropHeight: 40,
+        width: 180,
+        height: 180,
+        speedX: Math.floor(Math.random() * 3) + 2,
+        maxFrames: 7,
+        scoreBonus: 1
+      }
+      this.mushroom = {
+        image: document.getElementById('mushroom'),
+        cropWidth: 25,
+        cropHeight: 38,
+        width: 125,
+        height: 190,
+        speedX: Math.floor(Math.random() * 4) + 2,
+        maxFrames: 5,
+        scoreBonus: 2
+      }
+      this.darkParticles = {
+        image: document.getElementById('dark-particles'),
+        speedY: 2
+      }
+      this.skeleton = {
+        image: document.getElementById('skeleton'),
+        cropWidth: 45,
+        cropHeight: 51,
+        width: 180,
+        height: 204,
+        speedX: Math.floor(Math.random() * 5) + 3,
+        maxFrames: 3,
+        scoreBonus: 3
+      }
+      this.greenParticles = {
+        image: document.getElementById('green-particles'),
+        speedY: 2
+      }
       this.background;
       this.npcs;
       this.userInterface = new UserInterface(this);
@@ -77,7 +138,7 @@ window.addEventListener("load", function () {
       this.enemies = [];
       this.particles = [];
       this.score = 0;
-      this.lives = 3;
+      this.lives = 15;
       this.level = 1;
       this.music;
       this.sfx;
@@ -89,9 +150,9 @@ window.addEventListener("load", function () {
         case 1:
           this.background = new Background(this, layer1_lvl1, layer1_lvl1, layer2_lvl1, layer3_lvl1, layer4_lvl1, layer5_lvl1, layer6_lvl1, layer7_lvl1);
           this.npcs = [
-          new Npc(this, 1400, 500, 64, 64, this.portal, 250, 250, 8),
-          new Npc(this, 450, 500, 64, 64, this.witch, 180, 180, 11),
-          new Npc(this, 900, 440, 64, 64, this.ruby, 250, 250, 8),
+          new Npc(this, this.portal),
+          new Npc(this, this.witch),
+          new Npc(this, this.ruby),
         ];
           break;
         case 2:
@@ -118,11 +179,9 @@ window.addEventListener("load", function () {
     update() {
       this.background.update();
       // The NPCs are drawn before the player 
-      //if (this.level === 1){
-        this.npcs.forEach((npc) => {
-          npc.update();
-        });
-      //}
+      this.npcs.forEach((npc) => {
+        npc.update();
+      });
       this.player.update();
       this.attachEventListeners();
       this.player.movement(this.keys);
@@ -139,15 +198,11 @@ window.addEventListener("load", function () {
       this.background.draw(ctx);
       this.userInterface.draw(ctx);
       // The NPCs are drawn before the player 
-      //if (this.level === 1){
-        this.npcs.forEach((npc) => {
+      this.npcs.forEach((npc) => {
           npc.draw(ctx);
         });
-        this.userInterface.drawDialogues()
-      //}
+      this.userInterface.drawDialogues()
       this.player.draw(ctx);
-      
-      
     }
     attachEventListeners() {
       // switching sprites with the movement of the player and preventing the page from moving
@@ -248,7 +303,26 @@ window.addEventListener("load", function () {
       });
     }
     addEnemies(){
-      // drawing, animating and moving the enemies
+      //adding enemies after level 1 and pushing them into the array
+      if (this.level === 2){
+        if (this.player.velocity.x >= 0 && Math.random() < 0.01){
+          this.enemies.push(new RunningEnemy(this, this.goblin))
+          this.particles.push(new Particles(this, this.darkParticles))
+        } else if (this.player.velocity.x >= 0 && Math.random() < 0.008){
+          this.enemies.push(new RunningEnemy(this, this.mushroom))
+        }
+      }
+      if (this.level === 3){
+        if (this.player.velocity.x >= 0 && Math.random() < 0.02){
+          this.particles.push(new Particles(this, this.greenParticles))
+        } 
+        else if (this.player.velocity.x >= 0 && Math.random() < 0.01){
+          this.enemies.push(new RunningEnemy(this, this.skeleton))
+        }
+      }
+
+      if (this.level > 1){
+        // drawing, animating and moving the enemies
       this.enemies.forEach(enemy => {
         enemy.draw(ctx)
         enemy.update()
@@ -260,17 +334,10 @@ window.addEventListener("load", function () {
         particle.draw(ctx)
         particle.update()
         particle.movement()
-      })
-
-      //adding enemies after level 1 and pushing them into the array
-      if (this.level === 2){
-        if (this.player.velocity.x >= 0 && Math.random() < 0.01){
-          this.enemies.push(new Goblin(this))
-          this.particles.push(new Particles(this, this.darkParticles))
-        } else if (this.player.velocity.x >= 0 && Math.random() < 0.002){
-          this.enemies.push(new FastEnemy(this, this.mushroom))
-        }
+        })
       }
+      
+
     }
     checkIfGameOver(){
       if (this.lives < 0) {
@@ -295,7 +362,7 @@ window.addEventListener("load", function () {
 
     //console.log(game.enemies)
     //console.log(game.npcs)
-    console.log(game.level)
+    console.log(game.particles)
     //console.log(game.nextLevel)
 
     if (!game.gameOver && !game.victory) {

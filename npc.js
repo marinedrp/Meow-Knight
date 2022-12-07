@@ -1,5 +1,5 @@
 export class Npc {
-    constructor(game, x, y, cropWidth, cropHeight, image, width, height, maxFrames){
+    constructor(game, {x, y, cropWidth, cropHeight, image, width, height, maxFrames}){
       this.game = game
       this.position = {
         x: x,

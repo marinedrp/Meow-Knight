@@ -94,11 +94,9 @@ export class Player {
     // NPCs and enemies are scrolling to the left if player goes to the right
     if (keys.right.pressed) {
       this.velocity.x += 5;
-      //if (this.game.level === 1){
         this.game.npcs.forEach(npc => {
           npc.position.x -= 5
         })
-      //} else if
       if (this.game.level >= 2){
         this.game.enemies.forEach(enemy => {
           enemy.position.x -= 5
@@ -110,11 +108,9 @@ export class Player {
     // NPCs and enemies are scrolling to the right if player goes to the left
     } else if (keys.left.pressed) {
       this.velocity.x = -5;
-      //if (this.game.level === 1){
         this.game.npcs.forEach(npc => {
           npc.position.x += 5
         })
-      //} else if 
       if (this.game.level >= 2){
         this.game.enemies.forEach(enemy => {
           enemy.position.x += 5
@@ -175,7 +171,7 @@ export class Player {
         enemy.position.y + enemy.height > this.position.y && this.game.keys.attack.pressed){
           enemy.deletion = true
           //enemy.playHitSound()
-          this.game.score++
+          this.game.score += enemy.scoreBonus
         }
     });
   }
@@ -191,7 +187,7 @@ export class Player {
           this.game.lives--
           this.game.score--
           particle.deletion = true
-        }
+        } 
     })
   }
 }

@@ -23,58 +23,34 @@ class Enemy {
   }
 
 
-export class Goblin extends Enemy {
-constructor(game){
+export class RunningEnemy extends Enemy {
+constructor(game, {image, cropWidth, cropHeight, width, height, speedX, maxFrames, scoreBonus}){
     super();
     this.game = game;
-    this.cropWidth = 40;
-    this.cropHeight = 40;
-    this.width = 180
-    this.height = 180
+    this.cropWidth = cropWidth;
+    this.cropHeight = cropHeight;
+    this.width = width
+    this.height = height
     this.position = {
         x: this.game.width,
         y: this.game.height - this.height - this.game.player.ground
     } 
-    this.image = document.getElementById('goblin');
+    this.image = image
     this.velocity = {
-        x: 3,
+        x: speedX,
         y: 0
     }
-    this.maxFrames = 4;
+    this.maxFrames = maxFrames;
+    this.scoreBonus = scoreBonus
     }
     movement(){
         this.position.x -= this.velocity.x
+        if (this.x + this.width < -this.game.width) this.deletion = true;
     }
 }
 
-export class FastEnemy extends Enemy {
-  constructor(game, image){
-      super();
-      this.game = game;
-      this.cropWidth = 25;
-      this.cropHeight = 38;
-      this.width = 125
-      this.height = 190
-      this.position = {
-          x: this.game.width,
-          y: this.game.height - this.height - this.game.player.ground
-      } 
-      this.image = image
-      this.velocity = {
-          x: 5,
-          y: 0
-      }
-      this.maxFrames = 5;
-      }
-      movement(){
-          this.position.x -= this.velocity.x
-          if (this.x + this.width < -this.game.width) this.deletion = true;
-      }
-  }
-
-
 export class Particles extends Enemy {
-  constructor(game, image){
+  constructor(game, {image, speedY}){
     super();
     this.game = game;
     this.cropWidth = 16;
@@ -88,7 +64,7 @@ export class Particles extends Enemy {
     this.image = image
     this.velocity = {
         x: 0,
-        y: 2
+        y: speedY
     }
     this.maxFrames = 5;
     }
