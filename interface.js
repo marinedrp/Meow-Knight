@@ -20,8 +20,14 @@ export class UserInterface {
         this.evilVictorySound;
         this.container = document.getElementById('container')
         this.text = {
-            witch: ["You there, champion. I'm relieved to see you. Master Ruby has an important mission for you.", "Now is not the time for a bath.", "Oh it's you.", "Just because I can talk doesn't mean I don't like getting scratched behind the ears.", "Enthusiasm? On a week day? My word.", "Your request is noted and ignored.", "This world is host by goblins and flying mushrooms and you're surprised by me?", "Don't touch me I'm super important.", "A waste of my talents!", "Need any help?", "I would suggest that you get moving and decide on a plan.", "Everything is in decline in this world. So is my mood.", "Have I missed it? Have I missed the battle?", "Did you talk to Master Ruby?", "What's wrong with you? You seem... Happy."],
-            ruby: ["Hello.", "This is a test.", "This is the third string.", "Adding more strings.", "To see if it works.", "Hello should not be displayed."]
+            witch: {
+                text1 : "You there, cat-legged hero. I'm relieved to see you. Master Ruby has an important mission for you. Please be quick, she is waiting for you.",
+                text2: ["Now is not the time for a bath.", "Oh it's you.", "Just because I can talk doesn't mean I don't like getting scratched behind the ears.", "Enthusiasm? On a week day? My word.", "Your request is noted and ignored.", "This world is host by goblins and flying mushrooms and you're surprised by me?", "Don't touch me I'm super important.", "A waste of my talents!", "Need any help?", "I would suggest that you get moving and decide on a plan.", "Everything is in decline in this world. So is my mood.", "Have I missed it? Have I missed the battle?", "Did you talk to Master Ruby?", "What's wrong with you? You seem... Happy.", "Meow.", "Well, well, well, if it isn't my dear friend, Meow-Knight!", "You are talking again. You will stop.", "Will I just stay here and say random things all day?", "What is my purpose in this world?"]
+            } ,
+            ruby: {
+                text1: "Forgive me, Meow-Knight. Please, lend me your hand. There was once a noble order of druids who lived in the nearby forest. They still live there, but they now use the magic of the Red Tower to perform their rituals. As a result, vile creatures have now crept up in our lands. I cannot join you, but I know you are fully capable to handle those fiends. Please take this portal, destroy this tower and try to take down as many of them as possible, the less of a threat they pose the better. Good luck hero.",
+                text2: ["I'm happy to say I'll be able to reward you handsomely for your troubles.", "You best get going, there's no time to waste. We're counting on you.", "Please succeed Meow-Knight, we believe in you.", "I know you'll succeed, but do be careful.", "For justice and honor!", "I'm looking forward to your return, Meow-Knight. Good luck.", "Now hurry, Meow-Knight, there's no time to waste."]
+            } 
         } 
         this.randomWitchText;
         this.randomRubyText;
@@ -68,13 +74,20 @@ export class UserInterface {
         this.gameOverSound.play()
     }
     drawVictory(ctx){
+        ctx.save()
+        ctx.shadowOffsetX = 3;
+        ctx.shadowOffsetY = 3;
+        ctx.shadowColor = 'black';
+        ctx.shadowBlur = 0;
         ctx.drawImage(this.victoryImage, this.x, this.y, this.game.width, this.game.height);
         ctx.font = this.fontWeight + this.fontSize + 'px ' + 'Calligraffitti';
         ctx.textAlign = 'center'
-        ctx.fillStyle = this.fontColor
-        ctx.fillText(`And this is how Meow-Knight the Brave changed the course of history.`, this.game.width/2, 350)
-        ctx.fillText(`All across the realm he was worshiped and adored.`, this.game.width/2, this.game.height/2)
-        ctx.fillText(`Let me start again...`, this.game.width/2, 530)
+        ctx.fillStyle = 'white'
+        ctx.fillText(`After all you have been through, you finally reached the Red Tower.`, this.game.width/2, 250)
+        ctx.fillText(`You unsleash your weapon and look at the magic around you. `, this.game.width/2, 350)
+        ctx.fillText(`The power is immense... It is now yours to take or to sacrifice.`, this.game.width/2, this.game.height/2)
+        ctx.fillText(`What shall you do with this power?`, this.game.width/2, 530)
+        ctx.restore()
     }
     drawEvilVictory(ctx){
         ctx.drawImage(this.evilVictoryImage, this.x, this.y, this.game.width, this.game.height);
@@ -98,7 +111,7 @@ export class UserInterface {
     }
     drawDialogues(){
         // display the first text box
-        if (this.game.keys.space.pressed && (this.game.player.checkWitchCollision() || this.game.player.checkRubyCollision())){
+        if (this.game.keys.space.pressed && (this.game.player.checkWitchCollision() || this.game.player.checkRubyCollision()) && this.game.level === 1){
             this.container.classList.add("revealed")
             this.typeText()
         // cleaning the text box after the first dialogue and resetting the parameters
@@ -116,8 +129,8 @@ export class UserInterface {
         // cleaning the text box after the other dialogues
          } else if ((this.counterWitch === 2 || this.counterRuby === 2) && (!this.game.player.checkWitchCollision() || !this.game.player.checkRubyCollision()) && this.game.level === 1){
             // We are omitting the first string of the array that should not be displayed after the first dialogue was opened
-            this.randomWitchText = this.text.witch[Math.floor(Math.random() * this.text.witch.length - 1) +1]
-            this.randomRubyText = this.text.ruby[Math.floor(Math.random() * this.text.ruby.length - 1) +1]
+            this.randomWitchText = this.text.witch.text2[Math.floor(Math.random() * this.text.witch.text2.length)]
+            this.randomRubyText = this.text.ruby.text2[Math.floor(Math.random() * this.text.ruby.text2.length)]
             this.index = 0;
             this.container.classList.remove("revealed")
             this.container.innerHTML = ""
@@ -128,10 +141,10 @@ export class UserInterface {
         // dialogues with the witch
         // if the player hasn't talked to her, it will display the first string of the array (quest)
         if (this.game.player.checkWitchCollision() && this.counterWitch === 0){
-            this.container.innerHTML += this.text.witch[0][this.index];
+            this.container.innerHTML += this.text.witch.text1[this.index];
             this.index++;
-            if (this.index >= this.text.witch[0].length) {
-              this.container.innerHTML = this.text.witch[0];
+            if (this.index >= this.text.witch.text1.length) {
+              this.container.innerHTML = this.text.witch.text1;
               this.counterWitch++
             } 
         // if the player has already talked to her, it will display a random string of the array except the one at index 0 
@@ -145,22 +158,20 @@ export class UserInterface {
         // dialogues with Ruby
         // if the player hasn't talked to her, it will display the first string of the array (quest)
         } else if (this.game.player.checkRubyCollision() && this.counterRuby === 0){
-            this.container.innerHTML += this.text.ruby[0][this.index];
+            this.container.innerHTML += this.text.ruby.text1[this.index];
             this.index++;
-            if (this.index >= this.text.ruby[0].length) {
-              this.container.innerHTML = this.text.ruby[0];
+            if (this.index >= this.text.ruby.text1.length) {
+              this.container.innerHTML = this.text.ruby.text1;
               this.counterRuby++
             } 
             // if the player has already talked to her, it will display a random string of the array except the one at index 0 
         } else if (this.game.player.checkRubyCollision() && this.counterRuby === 2){
-            setTimeout(() => {
                 this.container.innerHTML += this.randomRubyText[this.index];
                 this.index++;
                 if (this.index >= this.randomRubyText.length) {
                     this.container.innerHTML = this.randomRubyText;
                     this.index = this.randomRubyText.length
-                  } 
-            }, 25) 
+                  }
         }
         
         

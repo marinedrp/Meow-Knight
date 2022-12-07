@@ -34,6 +34,8 @@ const layer8_lvl3 = document.getElementById("layer8-lvl3");
 
 window.addEventListener("load", function () {
   const restartButton = document.getElementById("restart-button");
+  const goodVictoryButton = document.getElementById('goodVictory-button');
+  const evilVictoryButton = document.getElementById('evilVictory-button');
 
   const canvas = document.getElementById("canvas1");
   const ctx = canvas.getContext("2d");
@@ -162,12 +164,12 @@ window.addEventListener("load", function () {
       this.enemies = [];
       this.particles = [];
       this.score = 0;
-      this.lives = 20;
+      this.lives = 5;
       this.level = 1;
       this.music;
       this.sfx;
       this.gameOver = false;
-      this.victory = false
+      this.victory = false;
       this.goodVictory = false;
       this.evilVictory = false;
     }
@@ -346,42 +348,39 @@ window.addEventListener("load", function () {
     }
     addEnemies(){
       //adding enemies after level 1 and pushing them into the array
-      // if (this.level === 2){
-      //   if (this.player.velocity.x >= 0 && Math.random() < 0.008){
-      //     this.enemies.push(new RunningEnemy(this, this.goblin))
-      //     this.particles.push(new Particles(this, this.darkParticles))
-      //   } else if (this.player.velocity.x >= 0 && Math.random() < 0.005){
-      //     this.enemies.push(new RunningEnemy(this, this.mushroom))
-      //   }
-      // }
-      // if (this.level === 3){
-      //   if (this.player.velocity.x >= 0 && Math.random() < 0.02){
-      //     this.particles.push(new Particles(this, this.greenParticles))
-      //   } 
-      //   else if (this.player.velocity.x >= 0 && Math.random() < 0.01){
-      //     this.enemies.push(new RunningEnemy(this, this.skeleton))
-      //   } else if (this.player.velocity.x >= 0 && Math.random() < 0.004){
-      //     this.enemies.push(new RunningEnemy(this, this.bat))
-      //   }
-      // }
+      if (this.level === 2){
+        if (this.player.velocity.x >= 0 && Math.random() < 0.008){
+          this.enemies.push(new RunningEnemy(this, this.goblin))
+          this.particles.push(new Particles(this, this.darkParticles))
+        } else if (this.player.velocity.x >= 0 && Math.random() < 0.005){
+          this.enemies.push(new RunningEnemy(this, this.mushroom))
+        }
+      }
+      if (this.level === 3){
+        if (this.player.velocity.x >= 0 && Math.random() < 0.02){
+          this.particles.push(new Particles(this, this.greenParticles))
+        } 
+        else if (this.player.velocity.x >= 0 && Math.random() < 0.01){
+          this.enemies.push(new RunningEnemy(this, this.skeleton))
+        } else if (this.player.velocity.x >= 0 && Math.random() < 0.004){
+          this.enemies.push(new RunningEnemy(this, this.bat))
+        }
+      }
 
-      // if (this.level > 1){
-      //   // drawing, animating and moving the enemies
-      // this.enemies.forEach(enemy => {
-      //   enemy.draw(ctx)
-      //   enemy.update()
-      //   enemy.movement()
-      // })
-
-      // // drawing, animating and moving the particles
-      // this.particles.forEach(particle => {
-      //   particle.draw(ctx)
-      //   particle.update()
-      //   particle.movement()
-      //   })
-      // }
-      
-
+      if (this.level > 1){
+        // drawing, animating and moving the enemies
+      this.enemies.forEach(enemy => {
+        enemy.draw(ctx)
+        enemy.update()
+        enemy.movement()
+      })
+      // drawing, animating and moving the particles
+      this.particles.forEach(particle => {
+        particle.draw(ctx)
+        particle.update()
+        particle.movement()
+        })
+      }
     }
     checkIfGameOver(){
       if (this.lives < 0) {
@@ -404,26 +403,25 @@ window.addEventListener("load", function () {
     game.addEnemies()
     game.checkIfGameOver()
 
-    //console.log(game.userInterface.text.witch.length)
-    console.log(game.userInterface.randomWitchText)
-    //console.log(game.npcs)
-    //console.log(game.particles)
-    //console.log(game.nextLevel)
+
+    console.log(game.userInterface.randomRubyText)
 
     if (!game.gameOver && !game.victory) {
       restartButton.hidden = true;
+      goodVictoryButton.hidden = true;
+      evilVictoryButton.hidden = true;
       requestAnimationFrame(animate);
     } else if (game.gameOver) {
       //stopMusic()
-      //ctx.clearRect(0, 0, canvas.width, canvas.height)
       game.userInterface.drawGameOver(ctx);
       restartButton.hidden = false;
     } else if (game.victory) {
       //stopMusic()
-      //ctx.clearRect(0, 0, canvas.width, canvas.height)
-      game.userInterface.drawEvilVictory(ctx);
+      game.userInterface.drawVictory(ctx);
       restartButton.hidden = true;
-    }
+      goodVictoryButton.hidden = false;
+      evilVictoryButton.hidden = false;
+    } 
   }
 
 
@@ -431,7 +429,7 @@ window.addEventListener("load", function () {
   restartButton.addEventListener("click", function () {
     // resetting the parameters
     game.level = 1;
-    game.lives = 3;
+    game.lives = 5;
     game.score = 0;
     game.energy = 100;
     game.player.position.x = 100
@@ -442,11 +440,28 @@ window.addEventListener("load", function () {
     game.enemies = []
     game.particles = []
     game.gameOver = false;
+    game.victory = false; 
     game.goodVictory = false;
     game.evilVictory = false;
     game.loadLevel(game.level)
     animate();
   });
+
+  goodVictoryButton.addEventListener("click", function(){
+    game.goodVictory = true
+    game.userInterface.drawGoodVictory(ctx)
+    restartButton.hidden = false;
+    goodVictoryButton.hidden = true;
+    evilVictoryButton.hidden = true;
+  })
+
+  evilVictoryButton.addEventListener("click", function(){
+    game.evilVictory = true
+    game.userInterface.drawEvilVictory(ctx)
+    restartButton.hidden = false;
+    goodVictoryButton.hidden = true;
+    evilVictoryButton.hidden = true;
+  })
 
   game.loadLevel(game.level)
   animate();

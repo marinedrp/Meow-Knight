@@ -218,7 +218,7 @@ section{
     padding: 30px;
     font-family: 'Lora';
     color: rgb(230, 230, 230);
-    font-size: 25px;
+    font-size: 23px;
     text-align: left;
     opacity: 0;
 }
@@ -236,8 +236,6 @@ section{
 }
 
 #goodVictory-button, #evilVictory-button, #restart-button{
-    position: absolute;
-    transform: translateY(300%);
     background-color: rgba(0, 0, 0, 0.700);
     padding: 10px;
     font-family: 'Lora';
@@ -252,4 +250,20 @@ section{
     background: #9c3e083a;
 }
 
+#restart-button{
+    position: absolute;
+    transform: translateY(300%);
+}
+
+#goodVictory-button{
+    position: absolute;
+    transform: translateY(300%);
+    right: 60%;
+}
+
+#evilVictory-button{
+    position: absolute;
+    transform: translateY(300%);
+    left: 60%;
+}
 
