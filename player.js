@@ -47,6 +47,7 @@ export class Player {
     this.witchCollision;
     this.rubyCollision;
     this.portalCollision;
+    this.towerCollision;
   }
   draw(ctx) {
     ctx.strokeRect(this.position.x, this.position.y, this.width, this.height);
@@ -94,7 +95,7 @@ export class Player {
     // NPCs and enemies are scrolling to the left if player goes to the right
     if (keys.right.pressed) {
       this.velocity.x += 5;
-        this.game.npcs.forEach(npc => {
+      this.game.npcs.forEach(npc => {
           npc.position.x -= 5
         })
       if (this.game.level >= 2){
@@ -104,7 +105,7 @@ export class Player {
         this.game.particles.forEach(particle => {
           particle.position.x -= 5
         })
-      }        
+      } 
     // NPCs and enemies are scrolling to the right if player goes to the left
     } else if (keys.left.pressed) {
       this.velocity.x = -5;
@@ -118,7 +119,7 @@ export class Player {
         this.game.particles.forEach(particle => {
           particle.position.x += 5
         })
-      }
+      } 
     } else {
       this.velocity.x = 0;
     }
@@ -146,6 +147,11 @@ export class Player {
  checkPortalCollision(){
   if (this.game.level >= 1 && this.game.level <= 2){
     return this.portalCollision = this.position.x + this.width >= this.game.npcs[0].position.x && this.position.x <= this.game.npcs[0].position.x + this.game.npcs[0].width
+  } 
+ }
+ checkTowerCollision(){
+  if (this.game.level === 3){
+    return this.towerCollision = this.position.x + this.width >= this.game.npcs[0].position.x && this.position.x <= this.game.npcs[0].position.x + this.game.npcs[0].width
   } 
  }
  checkEnemyCollision(){

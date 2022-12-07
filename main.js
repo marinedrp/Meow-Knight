@@ -143,6 +143,16 @@ window.addEventListener("load", function () {
         maxFrames: 7,
         scoreBonus: 4
       };
+      this.tower = {
+        x: 1000,
+        y: 400,
+        image: document.getElementById("tower"),
+        cropWidth: 100,
+        cropHeight: 100,
+        width: 400,
+        height: 400,
+        maxFrames: 10
+      }
       this.background;
       this.npcs;
       this.userInterface = new UserInterface(this);
@@ -152,12 +162,14 @@ window.addEventListener("load", function () {
       this.enemies = [];
       this.particles = [];
       this.score = 0;
-      this.lives = 15;
+      this.lives = 20;
       this.level = 1;
       this.music;
       this.sfx;
       this.gameOver = false;
-      this.victory = false;
+      this.victory = false
+      this.goodVictory = false;
+      this.evilVictory = false;
     }
     loadLevel(level){
       switch(level){
@@ -173,7 +185,7 @@ window.addEventListener("load", function () {
           this.background = new Background(this, layer1_lvl2, layer2_lvl2, layer3_lvl2, layer4_lvl2, layer5_lvl2, layer6_lvl2, layer7_lvl2, layer8_lvl2)
           this.npcs.splice(1, 2)
           this.player.position.x = 100
-          this.npcs[0].position.x = 4000;
+          this.npcs[0].position.x = 1000;
           break;
         case 3:
           this.background = new Background(this, layer1_lvl3, layer2_lvl3, layer3_lvl3, layer4_lvl3, layer5_lvl3, layer6_lvl3, layer7_lvl3, layer8_lvl3);
@@ -181,6 +193,8 @@ window.addEventListener("load", function () {
           this.enemies.splice(0, this.enemies.length)
           this.particles.splice(0, this.particles.length)
           this.npcs.splice(0, 1)
+          this.npcs = [new Npc(this, this.tower)]
+          
       }
     }
     startLevel(){
@@ -205,6 +219,7 @@ window.addEventListener("load", function () {
       this.player.checkRubyCollision()
       this.player.checkEnemyCollision()
       this.player.checkParticleCollision()
+      this.player.checkPortalCollision()
       this.enemies = this.enemies.filter(enemy => !enemy.deletion)
       this.particles = this.particles.filter(particle => !particle.deletion)
     }
@@ -274,6 +289,9 @@ window.addEventListener("load", function () {
             this.keys.space.pressed = true
             if (this.level >= 1 && this.player.checkPortalCollision() && !this.nextLevel){
               this.nextLevel = true
+            }
+            if (this.level === 3 && this.player.checkTowerCollision()){
+              this.victory = true 
             } 
             event.preventDefault()
             break;
@@ -328,40 +346,40 @@ window.addEventListener("load", function () {
     }
     addEnemies(){
       //adding enemies after level 1 and pushing them into the array
-      if (this.level === 2){
-        if (this.player.velocity.x >= 0 && Math.random() < 0.008){
-          this.enemies.push(new RunningEnemy(this, this.goblin))
-          this.particles.push(new Particles(this, this.darkParticles))
-        } else if (this.player.velocity.x >= 0 && Math.random() < 0.005){
-          this.enemies.push(new RunningEnemy(this, this.mushroom))
-        }
-      }
-      if (this.level === 3){
-        if (this.player.velocity.x >= 0 && Math.random() < 0.02){
-          this.particles.push(new Particles(this, this.greenParticles))
-        } 
-        else if (this.player.velocity.x >= 0 && Math.random() < 0.01){
-          this.enemies.push(new RunningEnemy(this, this.skeleton))
-        } else if (this.player.velocity.x >= 0 && Math.random() < 0.004){
-          this.enemies.push(new RunningEnemy(this, this.bat))
-        }
-      }
+      // if (this.level === 2){
+      //   if (this.player.velocity.x >= 0 && Math.random() < 0.008){
+      //     this.enemies.push(new RunningEnemy(this, this.goblin))
+      //     this.particles.push(new Particles(this, this.darkParticles))
+      //   } else if (this.player.velocity.x >= 0 && Math.random() < 0.005){
+      //     this.enemies.push(new RunningEnemy(this, this.mushroom))
+      //   }
+      // }
+      // if (this.level === 3){
+      //   if (this.player.velocity.x >= 0 && Math.random() < 0.02){
+      //     this.particles.push(new Particles(this, this.greenParticles))
+      //   } 
+      //   else if (this.player.velocity.x >= 0 && Math.random() < 0.01){
+      //     this.enemies.push(new RunningEnemy(this, this.skeleton))
+      //   } else if (this.player.velocity.x >= 0 && Math.random() < 0.004){
+      //     this.enemies.push(new RunningEnemy(this, this.bat))
+      //   }
+      // }
 
-      if (this.level > 1){
-        // drawing, animating and moving the enemies
-      this.enemies.forEach(enemy => {
-        enemy.draw(ctx)
-        enemy.update()
-        enemy.movement()
-      })
+      // if (this.level > 1){
+      //   // drawing, animating and moving the enemies
+      // this.enemies.forEach(enemy => {
+      //   enemy.draw(ctx)
+      //   enemy.update()
+      //   enemy.movement()
+      // })
 
-      // drawing, animating and moving the particles
-      this.particles.forEach(particle => {
-        particle.draw(ctx)
-        particle.update()
-        particle.movement()
-        })
-      }
+      // // drawing, animating and moving the particles
+      // this.particles.forEach(particle => {
+      //   particle.draw(ctx)
+      //   particle.update()
+      //   particle.movement()
+      //   })
+      // }
       
 
     }
@@ -386,7 +404,8 @@ window.addEventListener("load", function () {
     game.addEnemies()
     game.checkIfGameOver()
 
-    //console.log(game.userInterface.randomWitchText)
+    //console.log(game.userInterface.text.witch.length)
+    console.log(game.userInterface.randomWitchText)
     //console.log(game.npcs)
     //console.log(game.particles)
     //console.log(game.nextLevel)
@@ -402,10 +421,12 @@ window.addEventListener("load", function () {
     } else if (game.victory) {
       //stopMusic()
       //ctx.clearRect(0, 0, canvas.width, canvas.height)
-      game.userInterface.drawVictory(ctx);
-      restartButton.hidden = false;
+      game.userInterface.drawEvilVictory(ctx);
+      restartButton.hidden = true;
     }
   }
+
+
 
   restartButton.addEventListener("click", function () {
     // resetting the parameters
@@ -421,7 +442,8 @@ window.addEventListener("load", function () {
     game.enemies = []
     game.particles = []
     game.gameOver = false;
-    game.victory = false;
+    game.goodVictory = false;
+    game.evilVictory = false;
     game.loadLevel(game.level)
     animate();
   });
