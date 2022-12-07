@@ -20,7 +20,7 @@ export class UserInterface {
         } 
         this.randomWitchText = this.text.witch[Math.floor(Math.random() * this.text.witch.length) + 1]
         this.randomRubyText = this.text.ruby[Math.floor(Math.random() * this.text.ruby.length) + 1]
-        this.i = 0;
+        this.index = 0;
         this.counterWitch = 0
         this.counterRuby = 0
     }
@@ -80,9 +80,9 @@ export class UserInterface {
             this.typeText()
         // cleaning the text box after the first dialogue and resetting the parameters
         } else if ((this.counterWitch === 1 || this.counterRuby === 1) && (!this.game.player.checkWitchCollision() || !this.game.player.checkRubyCollision())) {
+            this.index = 0;
             this.container.classList.remove("revealed")
             this.container.innerHTML = ""
-            this.i = 0;
             // Omitting the first string of the array
             this.randomWitchText = this.text.witch[Math.floor(Math.random() * this.text.witch.length) + 1]
             this.randomRubyText = this.text.ruby[Math.floor(Math.random() * this.text.ruby.length) + 1]
@@ -94,9 +94,9 @@ export class UserInterface {
             }
         // cleaning the text box after the other dialogues
          } else if ((this.counterWitch === 2 || this.counterRuby === 2) && (!this.game.player.checkWitchCollision() || !this.game.player.checkRubyCollision())){
+            this.index = 0;
             this.container.classList.remove("revealed")
             this.container.innerHTML = ""
-            this.i = 0;
             this.randomWitchText = this.text.witch[Math.floor(Math.random() * this.text.witch.length) + 1]
             this.randomRubyText = this.text.ruby[Math.floor(Math.random() * this.text.ruby.length) + 1]
             this.game.keys.space.pressed = false
@@ -106,34 +106,36 @@ export class UserInterface {
         // dialogues with the witch
         // if the player hasn't talked to her, it will display the first string of the array (quest)
         if (this.game.player.checkWitchCollision() && this.counterWitch === 0){
-            this.container.innerHTML += this.text.witch[0][this.i];
-            this.i++;
-            if (this.i >= this.text.witch[0].length) {
+            this.container.innerHTML += this.text.witch[0][this.index];
+            this.index++;
+            if (this.index >= this.text.witch[0].length) {
               this.container.innerHTML = this.text.witch[0];
               this.counterWitch++
             } 
         // if the player has already talked to her, it will display a random string of the array except the one at index 0 
         } else if (this.game.player.checkWitchCollision() && this.counterWitch === 2){
-            this.container.innerHTML += this.randomWitchText[this.i];
-            this.i++;
-            if (this.i >= this.randomWitchText.length) {
+            this.container.innerHTML += this.randomWitchText[this.index];
+            this.index++;
+            if (this.index >= this.randomWitchText.length) {
               this.container.innerHTML = this.randomWitchText;
+              this.index = this.randomWitchText.length
             } 
         // dialogues with Ruby
         // if the player hasn't talked to her, it will display the first string of the array (quest)
         } else if (this.game.player.checkRubyCollision() && this.counterRuby === 0){
-            this.container.innerHTML += this.text.ruby[0][this.i];
-            this.i++;
-            if (this.i >= this.text.ruby[0].length) {
+            this.container.innerHTML += this.text.ruby[0][this.index];
+            this.index++;
+            if (this.index >= this.text.ruby[0].length) {
               this.container.innerHTML = this.text.ruby[0];
               this.counterRuby++
             } 
             // if the player has already talked to her, it will display a random string of the array except the one at index 0 
         } else if (this.game.player.checkRubyCollision() && this.counterRuby === 2){
-            this.container.innerHTML += this.randomRubyText[this.i];
-            this.i++;
-            if (this.i >= this.randomRubyText.length) {
+            this.container.innerHTML += this.randomRubyText[this.index];
+            this.index++;
+            if (this.index >= this.randomRubyText.length) {
               this.container.innerHTML = this.randomRubyText;
+              this.index = this.randomRubyText.length
             } 
         }
         

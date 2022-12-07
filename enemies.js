@@ -45,7 +45,7 @@ constructor(game, {image, cropWidth, cropHeight, width, height, speedX, maxFrame
     }
     movement(){
         this.position.x -= this.velocity.x
-        if (this.x + this.width < -this.game.width) this.deletion = true;
+        if (this.position.x + this.width < 0) this.deletion = true;
     }
 }
 

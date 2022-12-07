@@ -360,9 +360,9 @@ window.addEventListener("load", function () {
     game.addEnemies()
     game.checkIfGameOver()
 
-    //console.log(game.enemies)
+    console.log(game.userInterface.index)
     //console.log(game.npcs)
-    console.log(game.particles)
+    //console.log(game.particles)
     //console.log(game.nextLevel)
 
     if (!game.gameOver && !game.victory) {
