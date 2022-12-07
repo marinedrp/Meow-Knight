@@ -13,7 +13,6 @@ export class Npc {
       this.frames = 0
       this.counter = 25
       this.maxFrames = maxFrames
-      //this.d = 0
     }
     draw(ctx) {
       ctx.strokeRect(this.position.x, this.position.y, this.width, this.height)
@@ -30,9 +29,5 @@ export class Npc {
         }
         this.counter = 25
       }
-    }
-    movement(){
-      // this.d += 0.01
-      // this.position.x = this.position.x + Math.cos(this.d) * 2
     }
   }

@@ -22,7 +22,15 @@ const layer5_lvl2 = document.getElementById("layer5-lvl2");
 const layer6_lvl2 = document.getElementById("layer6-lvl2");
 const layer7_lvl2 = document.getElementById("layer7-lvl2");
 const layer8_lvl2 = document.getElementById("layer8-lvl2");
-
+//level3
+const layer1_lvl3 = document.getElementById("layer1-lvl3");
+const layer2_lvl3 = document.getElementById("layer2-lvl3");
+const layer3_lvl3 = document.getElementById("layer3-lvl3");
+const layer4_lvl3 = document.getElementById("layer4-lvl3");
+const layer5_lvl3 = document.getElementById("layer5-lvl3");
+const layer6_lvl3 = document.getElementById("layer6-lvl3");
+const layer7_lvl3 = document.getElementById("layer7-lvl3");
+const layer8_lvl3 = document.getElementById("layer8-lvl3");
 
 window.addEventListener("load", function () {
   const restartButton = document.getElementById("restart-button");
@@ -58,6 +66,8 @@ window.addEventListener("load", function () {
       this.portal = document.getElementById('portal');
       this.mushroom = document.getElementById('mushroom');
       this.darkParticles = document.getElementById('dark-particles');
+      this.skeleton;
+      this.greenParticles;
       this.background;
       this.npcs;
       this.userInterface = new UserInterface(this);
@@ -82,7 +92,6 @@ window.addEventListener("load", function () {
           new Npc(this, 1400, 500, 64, 64, this.portal, 250, 250, 8),
           new Npc(this, 450, 500, 64, 64, this.witch, 180, 180, 11),
           new Npc(this, 900, 440, 64, 64, this.ruby, 250, 250, 8),
-          
         ];
           break;
         case 2:
@@ -91,6 +100,12 @@ window.addEventListener("load", function () {
           this.player.position.x = 100
           this.npcs[0].position.x = 4000;
           break;
+        case 3:
+          this.background = new Background(this, layer1_lvl3, layer2_lvl3, layer3_lvl3, layer4_lvl3, layer5_lvl3, layer6_lvl3, layer7_lvl3, layer8_lvl3);
+          this.player.position.x = 100
+          this.enemies.splice(0, this.enemies.length)
+          this.particles.splice(0, this.particles.length)
+          this.npcs.splice(0, 1)
       }
     }
     startLevel(){
@@ -248,7 +263,7 @@ window.addEventListener("load", function () {
       })
 
       //adding enemies after level 1 and pushing them into the array
-      if (this.level > 1){
+      if (this.level === 2){
         if (this.player.velocity.x >= 0 && Math.random() < 0.01){
           this.enemies.push(new Goblin(this))
           this.particles.push(new Particles(this, this.darkParticles))
@@ -280,7 +295,7 @@ window.addEventListener("load", function () {
 
     //console.log(game.enemies)
     //console.log(game.npcs)
-    //console.log(game.level)
+    console.log(game.level)
     //console.log(game.nextLevel)
 
     if (!game.gameOver && !game.victory) {

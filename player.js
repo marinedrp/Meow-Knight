@@ -99,7 +99,7 @@ export class Player {
           npc.position.x -= 5
         })
       //} else if
-      if (this.game.level === 2){
+      if (this.game.level >= 2){
         this.game.enemies.forEach(enemy => {
           enemy.position.x -= 5
         })
@@ -115,7 +115,7 @@ export class Player {
           npc.position.x += 5
         })
       //} else if 
-      if (this.game.level === 2){
+      if (this.game.level >= 2){
         this.game.enemies.forEach(enemy => {
           enemy.position.x += 5
         })
@@ -148,7 +148,7 @@ export class Player {
     } 
  }
  checkPortalCollision(){
-  if (this.game.level >= 1){
+  if (this.game.level >= 1 && this.game.level <= 2){
     return this.portalCollision = this.position.x + this.width >= this.game.npcs[0].position.x && this.position.x <= this.game.npcs[0].position.x + this.game.npcs[0].width
   } 
  }
