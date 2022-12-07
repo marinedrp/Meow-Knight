@@ -93,7 +93,6 @@ export class Particles extends Enemy {
     this.maxFrames = 5;
     }
     movement(){
-      
       this.position.y += this.velocity.y
       if (this.position.y === this.game.height - this.game.ground - this.height){
         this.deletion = true

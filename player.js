@@ -103,6 +103,9 @@ export class Player {
         this.game.enemies.forEach(enemy => {
           enemy.position.x -= 5
         })
+        this.game.particles.forEach(particle => {
+          particle.position.x -= 5
+        })
       }        
     // NPCs and enemies are scrolling to the right if player goes to the left
     } else if (keys.left.pressed) {
@@ -115,6 +118,9 @@ export class Player {
       if (this.game.level === 2){
         this.game.enemies.forEach(enemy => {
           enemy.position.x += 5
+        })
+        this.game.particles.forEach(particle => {
+          particle.position.x += 5
         })
       }
     } else {
@@ -131,37 +137,6 @@ export class Player {
       this.game.energy++
     }
   }
-  checkEnemyCollision(){
-    this.game.enemies.forEach(enemy => {
-      // if the player is colliding with the enemies and not attacking or he doesn't have any energy
-      if (enemy.position.x < this.position.x + this.width &&
-        enemy.position.x + enemy.width > this.position.x &&
-        enemy.position.y < this.position.y + this.height &&
-        enemy.position.y + enemy.height > this.position.y && (!this.game.keys.attack.pressed || this.game.energy === 0)){
-          this.currentSprite = this.sprites.hit.image
-          this.currentCropWidth = 16;
-          this.width = 100;
-          this.game.lives--
-          this.game.score--
-          enemy.deletion = true
-          //playerHitSound.play()
-          //enemy.playHitSound()
-          if (this.game.lives < 0) {
-            this.game.gameOver = true
-          }
-          // stop the player during collision?
-        } 
-        // if the player is colliding with the enemies and attacking
-        else if (enemy.position.x < this.position.x + this.width &&
-          enemy.position.x + enemy.width > this.position.x &&
-          enemy.position.y < this.position.y + this.height &&
-          enemy.position.y + enemy.height > this.position.y && this.game.keys.attack.pressed){
-            enemy.deletion = true
-            //enemy.playHitSound()
-            this.game.score++
-          }
-    });
-  }
   checkWitchCollision(){
     if (this.game.level === 1){
       return this.witchCollision = this.position.x + this.width >= this.game.npcs[1].position.x && this.position.x <= this.game.npcs[1].position.x + this.game.npcs[1].width
@@ -177,4 +152,46 @@ export class Player {
     return this.portalCollision = this.position.x + this.width >= this.game.npcs[0].position.x && this.position.x <= this.game.npcs[0].position.x + this.game.npcs[0].width
   } 
  }
+ checkEnemyCollision(){
+  this.game.enemies.forEach(enemy => {
+    // if the player is colliding with the enemies and not attacking or he doesn't have any energy
+    if (enemy.position.x < this.position.x + this.width &&
+      enemy.position.x + enemy.width > this.position.x &&
+      enemy.position.y < this.position.y + this.height &&
+      enemy.position.y + enemy.height > this.position.y && (!this.game.keys.attack.pressed || this.game.energy === 0)){
+        this.currentSprite = this.sprites.hit.image
+        this.currentCropWidth = 16;
+        this.width = 100;
+        this.game.lives--
+        this.game.score--
+        enemy.deletion = true
+        //playerHitSound.play()
+        //enemy.playHitSound()
+      } 
+      // if the player is colliding with the enemies and attacking
+      else if (enemy.position.x < this.position.x + this.width &&
+        enemy.position.x + enemy.width > this.position.x &&
+        enemy.position.y < this.position.y + this.height &&
+        enemy.position.y + enemy.height > this.position.y && this.game.keys.attack.pressed){
+          enemy.deletion = true
+          //enemy.playHitSound()
+          this.game.score++
+        }
+    });
+  }
+  checkParticleCollision(){
+    this.game.particles.forEach(particle => {
+      if (particle.position.x < this.position.x + this.width &&
+        particle.position.x + particle.width > this.position.x &&
+        particle.position.y < this.position.y + this.height &&
+        particle.position.y + particle.height > this.position.y){
+          this.currentSprite = this.sprites.hit.image
+          this.currentCropWidth = 16;
+          this.width = 100;
+          this.game.lives--
+          this.game.score--
+          particle.deletion = true
+        }
+    })
+  }
 }

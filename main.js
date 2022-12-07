@@ -65,6 +65,7 @@ window.addEventListener("load", function () {
       this.player = new Player(this);
       this.nextLevel = false;
       this.enemies = [];
+      this.particles = [];
       this.score = 0;
       this.lives = 3;
       this.level = 1;
@@ -115,8 +116,9 @@ window.addEventListener("load", function () {
       this.player.checkWitchCollision()
       this.player.checkRubyCollision()
       this.player.checkEnemyCollision()
+      this.player.checkParticleCollision()
       this.enemies = this.enemies.filter(enemy => !enemy.deletion)
-      
+      this.particles = this.particles.filter(particle => !particle.deletion)
     }
     draw(ctx) {
       this.background.draw(ctx);
@@ -157,6 +159,9 @@ window.addEventListener("load", function () {
             this.player.width = 100;
             event.preventDefault();
             break;
+          case "ArrowDown":
+            event.preventDefault();
+            break;
           case "a":
             // if A is pressed and the player has energy
             if (this.energy > 0) {
@@ -186,7 +191,6 @@ window.addEventListener("load", function () {
             if (this.level >= 1 && this.player.checkPortalCollision() && !this.nextLevel){
               this.nextLevel = true
             } 
-
             event.preventDefault()
             break;
         }
@@ -229,7 +233,6 @@ window.addEventListener("load", function () {
       });
     }
     addEnemies(){
-      
       // drawing, animating and moving the enemies
       this.enemies.forEach(enemy => {
         enemy.draw(ctx)
@@ -237,15 +240,27 @@ window.addEventListener("load", function () {
         enemy.movement()
       })
 
+      // drawing, animating and moving the particles
+      this.particles.forEach(particle => {
+        particle.draw(ctx)
+        particle.update()
+        particle.movement()
+      })
+
       //adding enemies after level 1 and pushing them into the array
-      if (this.level === 2){
+      if (this.level > 1){
         if (this.player.velocity.x >= 0 && Math.random() < 0.01){
-          this.enemies.push(new Goblin(this), new Particles(this, this.darkParticles))
-        } else if (this.player.velocity.x >= 0 && Math.random() < 0.004){
+          this.enemies.push(new Goblin(this))
+          this.particles.push(new Particles(this, this.darkParticles))
+        } else if (this.player.velocity.x >= 0 && Math.random() < 0.002){
           this.enemies.push(new FastEnemy(this, this.mushroom))
         }
       }
-      
+    }
+    checkIfGameOver(){
+      if (this.lives < 0) {
+        this.gameOver = true
+      }
     }
   }
 
@@ -261,8 +276,9 @@ window.addEventListener("load", function () {
     game.startLevel()
     game.attachEventListeners();
     game.addEnemies()
+    game.checkIfGameOver()
 
-    console.log(game.enemies)
+    //console.log(game.enemies)
     //console.log(game.npcs)
     //console.log(game.level)
     //console.log(game.nextLevel)
@@ -295,6 +311,7 @@ window.addEventListener("load", function () {
     game.userInterface.counterRuby = 0
     game.nextLevel = false
     game.enemies = []
+    game.particles = []
     game.gameOver = false;
     game.victory = false;
     game.loadLevel(game.level)
