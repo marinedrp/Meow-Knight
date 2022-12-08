@@ -329,7 +329,7 @@ startButton.addEventListener("click", function () {
               this.player.currentSprite = this.player.sprites.run.left;
               this.player.currentCropWidth = 16;
               this.player.width = 100;
-              this.userInterface.playFootstepSound()
+              //this.userInterface.playFootstepSound()
             }
             else {
               this.player.currentSprite = this.player.sprites.idle.image;
