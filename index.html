@@ -30,15 +30,21 @@
                 <div class="scroll">
                     <h2>Instructions</h2>
                     <article>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Et totam suscipit temporibus alias voluptates? Voluptas vitae quibusdam adipisci quisquam nemo, magni, ratione unde eos at molestiae in illum assumenda iusto. <br>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus illum quo aliquam enim beatae, nobis neque ipsa blanditiis exercitationem voluptates voluptatem quibusdam ab doloribus at laudantium eos reprehenderit in cumque.
+                        <p>Ah a visitor! Stay as long as you wish and I will tell you a story... <br> <br> Once upon a time, in a world were humans and cats lived in peace, there was a valorous warrior named Meow-Knight. One day, Ruby, one of the greatest magicians of the realm, discovered that a guild of druids was using the magic of the Red Tower to summon creatures. As a hero, Meow-Knight was called to put an end at their evil plans.</p> <br>
+                        Press: 
+                        <ul>
+                            <li><b>Arrow Up</b> to <b>jump</b></li>
+                            <li><b>Arrow Left</b> and <b>Arrow Right</b> to <b>move</b><br></li>
+                            <li><b>A</b> to <b>attack</b></li>
+                            <li><b>Space Bar</b> to interact with characters and objects</li>
+                        </ul>
                     </article>
                     <a href="#game" id="start-game">Start the game</a>
                 </div>
             </div>
     
-            <div class="music-button">
-                <a href="#">Tell the bard to stop the music</a>
+            <div class="music-div">
+                <a href="#" id="music-button">Play Music</a>
             </div>
         </div>
 
@@ -48,12 +54,15 @@
     <section class="section-2" id="game">
         <canvas id="canvas1"></canvas>
         <div id="container"><!--Dialogues--></div>
-        <button id="restart-button">Restart</button>
-        <button id="goodVictory-button">Destroy the tower</button>
-        <button id="evilVictory-button">Absorb the power</button>
+        <button id="restart-button" hidden="true">Restart</button>
+        <button id="goodVictory-button" hidden="true">Destroy the tower</button>
+        <button id="evilVictory-button" hidden="true">Absorb the power</button>
     </section>
 
     
+    <!--Website music-->
+    <audio src="./assets/sounds/splash-song.mp3" id="splash-song"></audio>
+
     <!--Player assets-->
     <img src="./assets/idle.png" id="idle" class="assets">
     <img src="./assets/run-left.png" id="run-left" class="assets">

@@ -3,7 +3,6 @@ import { UserInterface } from "./interface.js";
 import { Player } from "./player.js";
 import { Npc } from "./npc.js";
 import { RunningEnemy, Particles } from './enemies.js';
-import { InputHandler } from "./input.js";
 
 
 //level1
@@ -34,12 +33,27 @@ const layer7_lvl3 = document.getElementById("layer7-lvl3");
 const layer8_lvl3 = document.getElementById("layer8-lvl3");
 
 const startButton = document.getElementById("start-game")
+const musicButton = document.getElementById('music-button')
+const splashSong = document.getElementById('splash-song')
+
+
 const restartButton = document.getElementById("restart-button");
 const goodVictoryButton = document.getElementById('goodVictory-button');
 const evilVictoryButton = document.getElementById('evilVictory-button');
 restartButton.hidden = true;
 goodVictoryButton.hidden = true;
 evilVictoryButton.hidden = true;
+
+musicButton.addEventListener("click", () => {
+  if (musicButton.innerHTML === "Play Music") {
+    musicButton.innerHTML = "Stop Music";
+  splashSong.play()
+  splashSong.volume = 0.5
+  } else {
+    musicButton.innerHTML = "Play Music";
+  splashSong.pause()
+  } 
+}); 
 
 
 startButton.addEventListener("click", function () {
@@ -79,7 +93,7 @@ startButton.addEventListener("click", function () {
         maxFrames: 11
       } 
       this.ruby = {
-        x: 5500,
+        x: 7700,
         y: 440,
         image: document.getElementById("ruby"),
         cropWidth: 64,
@@ -89,7 +103,7 @@ startButton.addEventListener("click", function () {
         maxFrames: 8
       } 
       this.portal = {
-        x: 6000,
+        x: 8000,
         y: 500,
         image: document.getElementById('portal'),
         cropWidth: 64,
@@ -151,7 +165,7 @@ startButton.addEventListener("click", function () {
         scoreBonus: 4
       };
       this.tower = {
-        x: 6000,
+        x: 8000,
         y: 400,
         image: document.getElementById("tower"),
         cropWidth: 100,
@@ -171,7 +185,6 @@ startButton.addEventListener("click", function () {
       this.score = 0;
       this.lives = 3;
       this.level = 1;
-      this.footsteps;
       this.music;
       this.gameOver = false;
       this.victory = false;
@@ -187,15 +200,13 @@ startButton.addEventListener("click", function () {
           new Npc(this, this.witch),
           new Npc(this, this.ruby),
         ];
-        this.footsteps;
         this.music = this.userInterface.sounds.level1.music;
           break;
         case 2:
           this.background = new Background(this, layer1_lvl2, layer2_lvl2, layer3_lvl2, layer4_lvl2, layer5_lvl2, layer6_lvl2, layer7_lvl2, layer8_lvl2)
           this.npcs.splice(1, 2)
           this.player.position.x = 100
-          this.npcs[0].position.x = 6000;
-          this.footsteps;
+          this.npcs[0].position.x = 8000;
           this.music = this.userInterface.sounds.level2.music;
           break;
         case 3:
@@ -205,7 +216,6 @@ startButton.addEventListener("click", function () {
           this.particles.splice(0, this.particles.length)
           this.npcs.splice(0, 1)
           this.npcs = [new Npc(this, this.tower)]
-          this.footsteps;
           this.music = this.userInterface.sounds.level3.music;
       }
     }
@@ -263,7 +273,6 @@ startButton.addEventListener("click", function () {
             this.player.currentSprite = this.player.sprites.run.left;
             this.player.currentCropWidth = 16;
             this.player.width = 100;
-            //this.userInterface.playFootstepSound()
             event.preventDefault();
             break;
           case "ArrowRight":
@@ -271,7 +280,6 @@ startButton.addEventListener("click", function () {
             this.player.currentSprite = this.player.sprites.run.right;
             this.player.currentCropWidth = 16;
             this.player.width = 100;
-            //this.userInterface.playFootstepSound()
             event.preventDefault();
             break;
           case "ArrowDown":
@@ -407,13 +415,13 @@ startButton.addEventListener("click", function () {
   }
 
   const game = new Game(canvas.width, canvas.height);
-  let lastTime = 0
+  //let lastTime = 0
 
   // main game loop
-  function animate(timeStamp) {
-    const deltaTime = timeStamp - lastTime
-    console.log(deltaTime)
-    lastTime = timeStamp
+  function animate() {
+    // const deltaTime = timeStamp - lastTime
+    // console.log(deltaTime)
+    // lastTime = timeStamp
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -468,7 +476,7 @@ startButton.addEventListener("click", function () {
     game.goodVictory = false;
     game.evilVictory = false;
     game.loadLevel(game.level)
-    animate(0);
+    animate();
   });
 
   goodVictoryButton.addEventListener("click", function(){
@@ -488,7 +496,7 @@ startButton.addEventListener("click", function () {
   })
 
     game.loadLevel(game.level)
-    animate(0)
+    animate()
     
    
 });

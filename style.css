@@ -86,10 +86,10 @@ section{
     display: flex;
     flex-direction: column;
     /*background-color: burlywood;*/
-    height: 550px;
-    width: 700px;
+    height: 580px;
+    width: 750px;
     margin-left: 100px;
-    padding: 40px;
+    padding: 35px;
     background-image: url(./assets/background/website/scroll.png);
     background-size: cover;
     background-repeat: no-repeat;
@@ -101,16 +101,18 @@ section{
     /*background-color: blueviolet;*/
     margin-top: 40px;
     margin-left: 40px;
-    margin-right: 40px;
     font-size: 40px;
 }
 
 .scroll article{
     /*background-color: chartreuse;*/
-    margin-top: 40px;
+    margin-top: 20px;
     margin-left: 40px;
-    margin-right: 40px;
     font-size: 20px;
+}
+
+.scroll li{
+    margin-left: 20px;
 }
 
 .scroll a{
@@ -120,8 +122,8 @@ section{
     flex-wrap: nowrap;
     /*background-color: aqua;*/
     padding: 10px;
-    margin-top: 50px;
-    margin-left: 360px;
+    margin-top: 30px;
+    margin-left: 440px;
     margin-right: 40px;
     font-size: 25px;
     text-decoration: none;
@@ -148,36 +150,37 @@ section{
     color: #ff9886;
 }
 
-.music-button{
-    margin-top: 80px;
+.music-div{
+    margin-top: 60px;
     display: flex;
     align-items: center;
     justify-content:center;
 
 }
 
-.music-button a{
+#music-button{
+    margin: 30px;
     padding: 10px;
     font-size: 25px;
     text-decoration: none;
 }
 
-.music-button a:link{
+#music-button:link{
     font-weight: bold;
     color: #cc875f;
     border: 3px solid #cc875f;
     border-style: ridge;
 }
 
-.music-button a:visited {
+#music-button:visited {
     color: #cc875f;
 }
   
-.music-button a:hover {
+#music-button:hover {
     background: #9c3e083a;
 }
   
-.music-button a:active {
+#music-button:active {
     background: #cc875f;
     color: #9c3e08;
 }

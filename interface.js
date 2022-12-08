@@ -23,7 +23,7 @@ export class UserInterface {
         this.container = document.getElementById('container')
         this.dialogues = {
             witch: {
-                text1: "You there, Meow-Knight. I'm relieved to see you. Master Ruby has an important mission for you. Please be quick, she is waiting for you.",
+                text1: "You there, Meow-Knight. I'm relieved to see you. Ruby has an important mission for you. Please be quick, she is waiting for you.",
                 text2: ["Now is not the time for a bath.", "Oh it's you.", "Just because I can talk doesn't mean I don't like getting scratched behind the ears.", "Enthusiasm? On a week day? My word.", "Your request is noted and ignored.", "This world is host by goblins and flying mushrooms and you're surprised by me?", "Don't touch me I'm super important.", "A waste of my talents!", "Need any help?", "I would suggest that you get moving and decide on a plan.", "Everything is in decline in this world. So is my mood.", "Have I missed it? Have I missed the battle?", "Did you talk to Master Ruby?", "What's wrong with you? You seem... Happy.", "Meow.", "Well, well, well, if it isn't my dear friend, Meow-Knight!", "You are talking again. You will stop.", "Will I just stay here and say random things all day?", "What is my purpose in this game?"]
             } ,
             ruby: {
@@ -36,7 +36,7 @@ export class UserInterface {
         this.index = 0;
         this.counterWitch = 0
         this.counterRuby = 0
-        // sounds, sfx and music
+        // sounds and music
         this.sounds = {
             player:{
                 jump: document.getElementById('jump-sound'),
@@ -45,15 +45,12 @@ export class UserInterface {
             },
             level1: {
                 music: document.getElementById('music-lvl1'),
-                footsteps: document.getElementById('footsteps-lvl1')
             },
             level2: {
                 music: document.getElementById('music-lvl2'),
-                footsteps: document.getElementById('footsteps-lvl2')
             },
             level3: {
                 music: document.getElementById('music-lvl3'),
-                footsteps: document.getElementById('footsteps-lvl3')
             }
         }
     }
@@ -123,9 +120,9 @@ export class UserInterface {
         ctx.font = this.fontWeight + '38px ' + 'Lora';
         ctx.textAlign = 'center'
         ctx.fillStyle = 'white'
-        ctx.fillText(`And this is how Meow-Knight the Red changed the course of history.`, this.game.width/2, 260)
-        ctx.fillText(`By taking the power of the Red Tower, he became the greatest vilain`, this.game.width/2, 350)
-        ctx.fillText(`the world has ever seen. Alas, harmony was not to last...`, this.game.width/2, this.game.height/2)
+        ctx.fillText(`At last, Meow-Knight the Red changed the course of history.`, this.game.width/2, 260)
+        ctx.fillText(`By taking the power of the Red Tower, he became the most powerful`, this.game.width/2, 350)
+        ctx.fillText(`knight the world has ever seen. Alas, harmony was not to last...`, this.game.width/2, this.game.height/2)
         ctx.fillText(`Your score is: ` + this.game.score, this.game.width/2, 530)
         this.evilVictorySound.volume = 0.5
         this.evilVictorySound.play()
@@ -138,7 +135,7 @@ export class UserInterface {
         ctx.font = this.fontWeight + '38px ' + 'Lora';
         ctx.textAlign = 'center'
         ctx.fillStyle = 'white'
-        ctx.fillText(`And this is how Meow-Knight the Brave changed the course of history.`, this.game.width/2, 260)
+        ctx.fillText(`At last, Meow-Knight the Brave changed the course of history.`, this.game.width/2, 260)
         ctx.fillText(`By destroying the Red Tower, he saved all cats and humans of the realm.`, this.game.width/2, 350)
         ctx.fillText(`He is now remembered as the greatest hero of our time.`, this.game.width/2, this.game.height/2)
         ctx.fillText(`Your score is: ` + this.game.score, this.game.width/2, 530)
@@ -217,11 +214,6 @@ export class UserInterface {
     stopMusic(){
         this.game.music.pause()
     }
-    // playFootstepSound() {
-    //     this.game.footsteps.playbackRate = 1.6
-    //     this.game.footsteps.volume = 0.5
-    //     this.game.footsteps.play();
-    // }
     playSwordSound(){
         this.sounds.player.sword.playbackRate = 1.37
         this.sounds.player.sword.play()
