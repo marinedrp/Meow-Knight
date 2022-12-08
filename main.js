@@ -3,6 +3,7 @@ import { UserInterface } from "./interface.js";
 import { Player } from "./player.js";
 import { Npc } from "./npc.js";
 import { RunningEnemy, Particles } from './enemies.js';
+import { InputHandler } from "./input.js";
 
 
 //level1
@@ -406,10 +407,13 @@ startButton.addEventListener("click", function () {
   }
 
   const game = new Game(canvas.width, canvas.height);
-
+  let lastTime = 0
 
   // main game loop
-  function animate() {
+  function animate(timeStamp) {
+    const deltaTime = timeStamp - lastTime
+    console.log(deltaTime)
+    lastTime = timeStamp
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -420,6 +424,7 @@ startButton.addEventListener("click", function () {
     game.addEnemies()
     game.checkIfGameOver()
 
+
     if (!game.gameOver && !game.victory) {
       restartButton.hidden = true;
       goodVictoryButton.hidden = true;
@@ -427,15 +432,18 @@ startButton.addEventListener("click", function () {
       requestAnimationFrame(animate);
     }
     else if (game.gameOver) {
+      cancelAnimationFrame(animate)
       game.userInterface.drawGameOver(ctx);
       restartButton.hidden = false;
     } 
     else if (game.victory) {
+      cancelAnimationFrame(animate)
       game.userInterface.drawVictory(ctx);
       restartButton.hidden = true;
       goodVictoryButton.hidden = false;
       evilVictoryButton.hidden = false;
     } 
+   
   }
 
 
@@ -460,7 +468,7 @@ startButton.addEventListener("click", function () {
     game.goodVictory = false;
     game.evilVictory = false;
     game.loadLevel(game.level)
-    animate();
+    animate(0);
   });
 
   goodVictoryButton.addEventListener("click", function(){
@@ -480,6 +488,7 @@ startButton.addEventListener("click", function () {
   })
 
     game.loadLevel(game.level)
-    animate();
+    animate(0)
+    
    
 });
