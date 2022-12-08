@@ -32,15 +32,19 @@ const layer6_lvl3 = document.getElementById("layer6-lvl3");
 const layer7_lvl3 = document.getElementById("layer7-lvl3");
 const layer8_lvl3 = document.getElementById("layer8-lvl3");
 
-window.addEventListener("load", function () {
-  const restartButton = document.getElementById("restart-button");
-  const goodVictoryButton = document.getElementById('goodVictory-button');
-  const evilVictoryButton = document.getElementById('evilVictory-button');
+const startButton = document.getElementById("start-game")
+const restartButton = document.getElementById("restart-button");
+const goodVictoryButton = document.getElementById('goodVictory-button');
+const evilVictoryButton = document.getElementById('evilVictory-button');
+restartButton.hidden = true;
+goodVictoryButton.hidden = true;
+evilVictoryButton.hidden = true;
 
+
+startButton.addEventListener("click", function () {
   const canvas = document.getElementById("canvas1");
   const ctx = canvas.getContext("2d");
-  
-  
+
   canvas.width = 1350;
   canvas.height = 880;
   
@@ -169,7 +173,7 @@ window.addEventListener("load", function () {
       this.footsteps;
       this.music;
       this.gameOver = false;
-      this.victory = true;
+      this.victory = false;
       this.goodVictory = false;
       this.evilVictory = false;
     }
@@ -319,11 +323,13 @@ window.addEventListener("load", function () {
               this.player.currentSprite = this.player.sprites.run.right;
               this.player.currentCropWidth = 16;
               this.player.width = 100;
+              this.userInterface.playFootstepSound()
             }
             else if (this.keys.left.pressed){
               this.player.currentSprite = this.player.sprites.run.left;
               this.player.currentCropWidth = 16;
               this.player.width = 100;
+              this.userInterface.playFootstepSound()
             }
             else {
               this.player.currentSprite = this.player.sprites.idle.image;
@@ -404,6 +410,7 @@ window.addEventListener("load", function () {
 
   // main game loop
   function animate() {
+
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     game.draw(ctx);
@@ -413,18 +420,17 @@ window.addEventListener("load", function () {
     game.addEnemies()
     game.checkIfGameOver()
 
-
-    console.log(game.userInterface.randomRubyText)
-
     if (!game.gameOver && !game.victory) {
       restartButton.hidden = true;
       goodVictoryButton.hidden = true;
       evilVictoryButton.hidden = true;
       requestAnimationFrame(animate);
-    } else if (game.gameOver) {
+    }
+    else if (game.gameOver) {
       game.userInterface.drawGameOver(ctx);
       restartButton.hidden = false;
-    } else if (game.victory) {
+    } 
+    else if (game.victory) {
       game.userInterface.drawVictory(ctx);
       restartButton.hidden = true;
       goodVictoryButton.hidden = false;
@@ -473,8 +479,7 @@ window.addEventListener("load", function () {
     evilVictoryButton.hidden = true;
   })
 
-  game.loadLevel(game.level)
-  animate();
-  
-  
+    game.loadLevel(game.level)
+    animate();
+   
 });

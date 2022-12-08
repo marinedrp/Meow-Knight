@@ -204,8 +204,6 @@ section{
 }
 
 #canvas1{
-    border-style: double;
-    border-color: #362418;
     height: 70%;
 }
 
@@ -224,14 +222,6 @@ section{
 }
 
 #container.revealed{
-    opacity: 1;
-}
-
-#container span{
-    opacity: 1;
-}
-
-#container span.revealed{
     opacity: 1;
 }
 
