@@ -217,11 +217,11 @@ export class UserInterface {
     stopMusic(){
         this.game.music.pause()
     }
-    playFootstepSound() {
-        this.game.footsteps.playbackRate = 1.6
-        this.game.footsteps.volume = 0.5
-        this.game.footsteps.play();
-    }
+    // playFootstepSound() {
+    //     this.game.footsteps.playbackRate = 1.6
+    //     this.game.footsteps.volume = 0.5
+    //     this.game.footsteps.play();
+    // }
     playSwordSound(){
         this.sounds.player.sword.playbackRate = 1.37
         this.sounds.player.sword.play()

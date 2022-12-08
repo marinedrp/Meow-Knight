@@ -186,7 +186,7 @@ startButton.addEventListener("click", function () {
           new Npc(this, this.witch),
           new Npc(this, this.ruby),
         ];
-        this.footsteps = this.userInterface.sounds.level1.footsteps
+        this.footsteps;
         this.music = this.userInterface.sounds.level1.music;
           break;
         case 2:
@@ -194,7 +194,7 @@ startButton.addEventListener("click", function () {
           this.npcs.splice(1, 2)
           this.player.position.x = 100
           this.npcs[0].position.x = 6000;
-          this.footsteps = this.userInterface.sounds.level2.footsteps;
+          this.footsteps;
           this.music = this.userInterface.sounds.level2.music;
           break;
         case 3:
@@ -204,7 +204,7 @@ startButton.addEventListener("click", function () {
           this.particles.splice(0, this.particles.length)
           this.npcs.splice(0, 1)
           this.npcs = [new Npc(this, this.tower)]
-          this.footsteps = this.userInterface.sounds.level3.footsteps;
+          this.footsteps;
           this.music = this.userInterface.sounds.level3.music;
       }
     }
@@ -262,7 +262,7 @@ startButton.addEventListener("click", function () {
             this.player.currentSprite = this.player.sprites.run.left;
             this.player.currentCropWidth = 16;
             this.player.width = 100;
-            this.userInterface.playFootstepSound()
+            //this.userInterface.playFootstepSound()
             event.preventDefault();
             break;
           case "ArrowRight":
@@ -270,7 +270,7 @@ startButton.addEventListener("click", function () {
             this.player.currentSprite = this.player.sprites.run.right;
             this.player.currentCropWidth = 16;
             this.player.width = 100;
-            this.userInterface.playFootstepSound()
+            //this.userInterface.playFootstepSound()
             event.preventDefault();
             break;
           case "ArrowDown":
@@ -323,7 +323,7 @@ startButton.addEventListener("click", function () {
               this.player.currentSprite = this.player.sprites.run.right;
               this.player.currentCropWidth = 16;
               this.player.width = 100;
-              this.userInterface.playFootstepSound()
+              //this.userInterface.playFootstepSound()
             }
             else if (this.keys.left.pressed){
               this.player.currentSprite = this.player.sprites.run.left;
