@@ -15,7 +15,6 @@ export class Npc {
       this.maxFrames = maxFrames
     }
     draw(ctx) {
-      ctx.strokeRect(this.position.x, this.position.y, this.width, this.height)
       ctx.drawImage(this.image, this.cropWidth * this.frames, 0, this.cropWidth, this.cropHeight, this.position.x, this.position.y, this.width, this.height)
     }
     update(){

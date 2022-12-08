@@ -50,7 +50,6 @@ export class Player {
     this.towerCollision;
   }
   draw(ctx) {
-    ctx.strokeRect(this.position.x, this.position.y, this.width, this.height);
     ctx.drawImage(this.currentSprite, this.currentCropWidth * this.frames, 0, this.currentCropWidth, this.currentCropHeight, this.position.x, this.position.y, this.width, this.height);
   }
   update() {

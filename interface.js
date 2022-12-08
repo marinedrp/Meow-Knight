@@ -19,13 +19,13 @@ export class UserInterface {
         this.evilVictoryImage = document.getElementById('evil-victory')
         this.evilVictorySound;
         this.container = document.getElementById('container')
-        this.text = {
+        this.dialogues = {
             witch: {
-                text1 : "You there, cat-legged hero. I'm relieved to see you. Master Ruby has an important mission for you. Please be quick, she is waiting for you.",
-                text2: ["Now is not the time for a bath.", "Oh it's you.", "Just because I can talk doesn't mean I don't like getting scratched behind the ears.", "Enthusiasm? On a week day? My word.", "Your request is noted and ignored.", "This world is host by goblins and flying mushrooms and you're surprised by me?", "Don't touch me I'm super important.", "A waste of my talents!", "Need any help?", "I would suggest that you get moving and decide on a plan.", "Everything is in decline in this world. So is my mood.", "Have I missed it? Have I missed the battle?", "Did you talk to Master Ruby?", "What's wrong with you? You seem... Happy.", "Meow.", "Well, well, well, if it isn't my dear friend, Meow-Knight!", "You are talking again. You will stop.", "Will I just stay here and say random things all day?", "What is my purpose in this world?"]
+                text1 : "You there, Meow-Knight. I'm relieved to see you. Master Ruby has an important mission for you. Please be quick, she is waiting for you.",
+                text2: ["Now is not the time for a bath.", "Oh it's you.", "Just because I can talk doesn't mean I don't like getting scratched behind the ears.", "Enthusiasm? On a week day? My word.", "Your request is noted and ignored.", "This world is host by goblins and flying mushrooms and you're surprised by me?", "Don't touch me I'm super important.", "A waste of my talents!", "Need any help?", "I would suggest that you get moving and decide on a plan.", "Everything is in decline in this world. So is my mood.", "Have I missed it? Have I missed the battle?", "Did you talk to Master Ruby?", "What's wrong with you? You seem... Happy.", "Meow.", "Well, well, well, if it isn't my dear friend, Meow-Knight!", "You are talking again. You will stop.", "Will I just stay here and say random things all day?", "What is my purpose in this game?"]
             } ,
             ruby: {
-                text1: "Forgive me, Meow-Knight. Please, lend me your hand. There was once a noble order of druids who lived in the nearby forest. They still live there, but they now use the magic of the Red Tower to perform their rituals. As a result, vile creatures have now crept up in our lands. I cannot join you, but I know you are fully capable to handle those fiends. Please take this portal, destroy this tower and try to take down as many of them as possible, the less of a threat they pose the better. Good luck hero.",
+                text1: "Please, Meow-Knight, lend me your hand. There was once a noble order of druids who lived in the nearby forest. They still live there, but they now use the magic of the Red Tower to perform their rituals. As a result, vile creatures have now crept up in our lands. I cannot join you, but I know you are fully capable to handle those fiends. Please take this portal, destroy this tower and try to take down as many of them as possible. Good luck hero.",
                 text2: ["I'm happy to say I'll be able to reward you handsomely for your troubles.", "You best get going, there's no time to waste. We're counting on you.", "Please succeed Meow-Knight, we believe in you.", "I know you'll succeed, but do be careful.", "For justice and honor!", "I'm looking forward to your return, Meow-Knight. Good luck.", "Now hurry, Meow-Knight, there's no time to waste."]
             } 
         } 
@@ -64,7 +64,9 @@ export class UserInterface {
     }
     drawGameOver(ctx){
         ctx.drawImage(this.gameOverImage, this.x, this.y, this.game.width, this.game.height);
-        ctx.font = '50px ' + 'Calligraffitti';
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.500)'
+        ctx.fillRect(this.x, this.y, this.game.width, this.game.height)
+        ctx.font = this.fontWeight + '38px ' + 'Lora';
         ctx.textAlign = 'center'
         ctx.fillStyle = 'white'
         ctx.fillText(`And then you jumped off a cliff and died?`, this.game.width/2, 350)
@@ -74,38 +76,40 @@ export class UserInterface {
         this.gameOverSound.play()
     }
     drawVictory(ctx){
-        ctx.save()
-        ctx.shadowOffsetX = 3;
-        ctx.shadowOffsetY = 3;
-        ctx.shadowColor = 'black';
-        ctx.shadowBlur = 0;
         ctx.drawImage(this.victoryImage, this.x, this.y, this.game.width, this.game.height);
-        ctx.font = this.fontWeight + this.fontSize + 'px ' + 'Calligraffitti';
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.500)'
+        ctx.fillRect(this.x, this.y, this.game.width, this.game.height)
+        ctx.font = this.fontWeight + this.fontSize + 'px ' + 'Lora';
         ctx.textAlign = 'center'
         ctx.fillStyle = 'white'
-        ctx.fillText(`After all you have been through, you finally reached the Red Tower.`, this.game.width/2, 250)
+        ctx.fillText(`After all you have been through, you finally reached the Red Tower.`, this.game.width/2, 260)
         ctx.fillText(`You unsleash your weapon and look at the magic around you. `, this.game.width/2, 350)
         ctx.fillText(`The power is immense... It is now yours to take or to sacrifice.`, this.game.width/2, this.game.height/2)
         ctx.fillText(`What shall you do with this power?`, this.game.width/2, 530)
-        ctx.restore()
     }
     drawEvilVictory(ctx){
         ctx.drawImage(this.evilVictoryImage, this.x, this.y, this.game.width, this.game.height);
-        ctx.font = this.fontWeight + this.fontSize + 'px ' + 'Calligraffitti';
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.500)'
+        ctx.fillRect(this.x, this.y, this.game.width, this.game.height)
+        ctx.font = this.fontWeight + '38px ' + 'Lora';
         ctx.textAlign = 'center'
-        ctx.fillStyle = this.fontColor
-        ctx.fillText(`And this is how Meow-Knight the Brave changed the course of history.`, this.game.width/2, 350)
-        ctx.fillText(`All across the realm he was worshiped and adored.`, this.game.width/2, this.game.height/2)
-        ctx.fillText(`Let me start again...`, this.game.width/2, 530)
+        ctx.fillStyle = 'white'
+        ctx.fillText(`And this is how Meow-Knight the Red changed the course of history.`, this.game.width/2, 260)
+        ctx.fillText(`By taking the power of the Red Tower, he became the greatest vilain`, this.game.width/2, 350)
+        ctx.fillText(`the world has ever seen. Alas, harmony was not to last...`, this.game.width/2, this.game.height/2)
+        ctx.fillText(`Your score is: ` + this.game.score, this.game.width/2, 530)
     }
     drawGoodVictory(ctx){
         ctx.drawImage(this.goodVictoryImage, this.x, this.y, this.game.width, this.game.height);
-        ctx.font = this.fontWeight + this.fontSize + 'px ' + 'Calligraffitti';
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.500)'
+        ctx.fillRect(this.x, this.y, this.game.width, this.game.height)
+        ctx.font = this.fontWeight + '38px ' + 'Lora';
         ctx.textAlign = 'center'
-        ctx.fillStyle = this.fontColor
-        ctx.fillText(`And this is how Meow-Knight the Brave changed the course of history.`, this.game.width/2, 350)
-        ctx.fillText(`All across the realm he was worshiped and adored.`, this.game.width/2, this.game.height/2)
-        ctx.fillText(`Let me start again...`, this.game.width/2, 530)
+        ctx.fillStyle = 'white'
+        ctx.fillText(`And this is how Meow-Knight the Brave changed the course of history.`, this.game.width/2, 260)
+        ctx.fillText(`By destroying the Red Tower, he saved all cats and humans of the realm.`, this.game.width/2, 350)
+        ctx.fillText(`He is now remembered as the greatest hero of our time.`, this.game.width/2, this.game.height/2)
+        ctx.fillText(`Your score is: ` + this.game.score, this.game.width/2, 530)
         this.goodVictorySound.volume = 0.5
         this.goodVictorySound.play()
     }
@@ -129,8 +133,8 @@ export class UserInterface {
         // cleaning the text box after the other dialogues
          } else if ((this.counterWitch === 2 || this.counterRuby === 2) && (!this.game.player.checkWitchCollision() || !this.game.player.checkRubyCollision()) && this.game.level === 1){
             // We are omitting the first string of the array that should not be displayed after the first dialogue was opened
-            this.randomWitchText = this.text.witch.text2[Math.floor(Math.random() * this.text.witch.text2.length)]
-            this.randomRubyText = this.text.ruby.text2[Math.floor(Math.random() * this.text.ruby.text2.length)]
+            this.randomWitchText = this.dialogues.witch.text2[Math.floor(Math.random() * this.dialogues.witch.text2.length)]
+            this.randomRubyText = this.dialogues.ruby.text2[Math.floor(Math.random() * this.dialogues.ruby.text2.length)]
             this.index = 0;
             this.container.classList.remove("revealed")
             this.container.innerHTML = ""
@@ -141,10 +145,10 @@ export class UserInterface {
         // dialogues with the witch
         // if the player hasn't talked to her, it will display the first string of the array (quest)
         if (this.game.player.checkWitchCollision() && this.counterWitch === 0){
-            this.container.innerHTML += this.text.witch.text1[this.index];
+            this.container.innerHTML += this.dialogues.witch.text1[this.index];
             this.index++;
-            if (this.index >= this.text.witch.text1.length) {
-              this.container.innerHTML = this.text.witch.text1;
+            if (this.index >= this.dialogues.witch.text1.length) {
+              this.container.innerHTML = this.dialogues.witch.text1;
               this.counterWitch++
             } 
         // if the player has already talked to her, it will display a random string of the array except the one at index 0 
@@ -158,10 +162,10 @@ export class UserInterface {
         // dialogues with Ruby
         // if the player hasn't talked to her, it will display the first string of the array (quest)
         } else if (this.game.player.checkRubyCollision() && this.counterRuby === 0){
-            this.container.innerHTML += this.text.ruby.text1[this.index];
+            this.container.innerHTML += this.dialogues.ruby.text1[this.index];
             this.index++;
-            if (this.index >= this.text.ruby.text1.length) {
-              this.container.innerHTML = this.text.ruby.text1;
+            if (this.index >= this.dialogues.ruby.text1.length) {
+              this.container.innerHTML = this.dialogues.ruby.text1;
               this.counterRuby++
             } 
             // if the player has already talked to her, it will display a random string of the array except the one at index 0 

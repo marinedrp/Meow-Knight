@@ -64,7 +64,7 @@ window.addEventListener("load", function () {
         },
       };
       this.witch = {
-        x: 450,
+        x: 800,
         y: 500,
         image: document.getElementById("witch"),
         cropWidth: 64,
@@ -74,7 +74,7 @@ window.addEventListener("load", function () {
         maxFrames: 11
       } 
       this.ruby = {
-        x: 900,
+        x: 5500,
         y: 440,
         image: document.getElementById("ruby"),
         cropWidth: 64,
@@ -84,7 +84,7 @@ window.addEventListener("load", function () {
         maxFrames: 8
       } 
       this.portal = {
-        x: 1400,
+        x: 6000,
         y: 500,
         image: document.getElementById('portal'),
         cropWidth: 64,
@@ -146,7 +146,7 @@ window.addEventListener("load", function () {
         scoreBonus: 4
       };
       this.tower = {
-        x: 1000,
+        x: 6000,
         y: 400,
         image: document.getElementById("tower"),
         cropWidth: 100,
@@ -164,7 +164,7 @@ window.addEventListener("load", function () {
       this.enemies = [];
       this.particles = [];
       this.score = 0;
-      this.lives = 5;
+      this.lives = 3;
       this.level = 1;
       this.music;
       this.sfx;
@@ -187,7 +187,7 @@ window.addEventListener("load", function () {
           this.background = new Background(this, layer1_lvl2, layer2_lvl2, layer3_lvl2, layer4_lvl2, layer5_lvl2, layer6_lvl2, layer7_lvl2, layer8_lvl2)
           this.npcs.splice(1, 2)
           this.player.position.x = 100
-          this.npcs[0].position.x = 1000;
+          this.npcs[0].position.x = 6000;
           break;
         case 3:
           this.background = new Background(this, layer1_lvl3, layer2_lvl3, layer3_lvl3, layer4_lvl3, layer5_lvl3, layer6_lvl3, layer7_lvl3, layer8_lvl3);
@@ -429,7 +429,7 @@ window.addEventListener("load", function () {
   restartButton.addEventListener("click", function () {
     // resetting the parameters
     game.level = 1;
-    game.lives = 5;
+    game.lives = 3;
     game.score = 0;
     game.energy = 100;
     game.player.position.x = 100
