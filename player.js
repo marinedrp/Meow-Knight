@@ -163,6 +163,7 @@ export class Player {
         this.currentSprite = this.sprites.hit.image
         this.currentCropWidth = 16;
         this.width = 100;
+        this.game.userInterface.playHitSound()
         this.game.lives--
         this.game.score--
         enemy.deletion = true

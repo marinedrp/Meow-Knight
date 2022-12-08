@@ -166,10 +166,10 @@ window.addEventListener("load", function () {
       this.score = 0;
       this.lives = 3;
       this.level = 1;
+      this.footsteps;
       this.music;
-      this.sfx;
       this.gameOver = false;
-      this.victory = false;
+      this.victory = true;
       this.goodVictory = false;
       this.evilVictory = false;
     }
@@ -182,12 +182,16 @@ window.addEventListener("load", function () {
           new Npc(this, this.witch),
           new Npc(this, this.ruby),
         ];
+        this.footsteps = this.userInterface.sounds.level1.footsteps
+        this.music = this.userInterface.sounds.level1.music;
           break;
         case 2:
           this.background = new Background(this, layer1_lvl2, layer2_lvl2, layer3_lvl2, layer4_lvl2, layer5_lvl2, layer6_lvl2, layer7_lvl2, layer8_lvl2)
           this.npcs.splice(1, 2)
           this.player.position.x = 100
           this.npcs[0].position.x = 6000;
+          this.footsteps = this.userInterface.sounds.level2.footsteps;
+          this.music = this.userInterface.sounds.level2.music;
           break;
         case 3:
           this.background = new Background(this, layer1_lvl3, layer2_lvl3, layer3_lvl3, layer4_lvl3, layer5_lvl3, layer6_lvl3, layer7_lvl3, layer8_lvl3);
@@ -196,15 +200,16 @@ window.addEventListener("load", function () {
           this.particles.splice(0, this.particles.length)
           this.npcs.splice(0, 1)
           this.npcs = [new Npc(this, this.tower)]
-          
+          this.footsteps = this.userInterface.sounds.level3.footsteps;
+          this.music = this.userInterface.sounds.level3.music;
       }
     }
     startLevel(){
       if (this.nextLevel && this.player.checkPortalCollision()){
+        this.userInterface.stopMusic()
         this.level += 1
         this.loadLevel(this.level)
-      } 
-        
+      }
     }
     update() {
       this.background.update();
@@ -228,6 +233,7 @@ window.addEventListener("load", function () {
     draw(ctx) {
       this.background.draw(ctx);
       this.userInterface.draw(ctx);
+      this.userInterface.playMusic()
       // The NPCs are drawn before the player 
       this.npcs.forEach((npc) => {
           npc.draw(ctx);
@@ -244,6 +250,7 @@ window.addEventListener("load", function () {
             this.player.currentSprite = this.player.sprites.jump.image;
             this.player.currentCropWidth = 16;
             this.player.width = 100;
+            this.userInterface.playJumpSound()
             event.preventDefault();
             break;
           case "ArrowLeft":
@@ -251,6 +258,7 @@ window.addEventListener("load", function () {
             this.player.currentSprite = this.player.sprites.run.left;
             this.player.currentCropWidth = 16;
             this.player.width = 100;
+            this.userInterface.playFootstepSound()
             event.preventDefault();
             break;
           case "ArrowRight":
@@ -258,6 +266,7 @@ window.addEventListener("load", function () {
             this.player.currentSprite = this.player.sprites.run.right;
             this.player.currentCropWidth = 16;
             this.player.width = 100;
+            this.userInterface.playFootstepSound()
             event.preventDefault();
             break;
           case "ArrowDown":
@@ -270,6 +279,7 @@ window.addEventListener("load", function () {
               this.player.currentSprite = this.player.sprites.attack.image;
               this.player.currentCropWidth = 30;
               this.player.width = 160;
+              this.userInterface.playSwordSound()
             } // if A and the left key are pressed but the player has no energy
             else if (this.keys.left.pressed) {
               this.player.currentSprite = this.player.sprites.run.left;
@@ -412,11 +422,9 @@ window.addEventListener("load", function () {
       evilVictoryButton.hidden = true;
       requestAnimationFrame(animate);
     } else if (game.gameOver) {
-      //stopMusic()
       game.userInterface.drawGameOver(ctx);
       restartButton.hidden = false;
     } else if (game.victory) {
-      //stopMusic()
       game.userInterface.drawVictory(ctx);
       restartButton.hidden = true;
       goodVictoryButton.hidden = false;
@@ -428,6 +436,8 @@ window.addEventListener("load", function () {
 
   restartButton.addEventListener("click", function () {
     // resetting the parameters
+    game.userInterface.gameOverSound.pause()
+    game.userInterface.stopWinningMusic()
     game.level = 1;
     game.lives = 3;
     game.score = 0;

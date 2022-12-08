@@ -14,14 +14,16 @@ export class UserInterface {
         this.gameOverSound = document.getElementById('game-over-sound')
         // victory assets
         this.victoryImage = document.getElementById('victory')
+        this.victorySound = document.getElementById('victory-sound')
         this.goodVictoryImage = document.getElementById('good-victory')
-        this.goodVictorySound = document.getElementById('victory-sound')
+        this.goodVictorySound = document.getElementById('goodVictory-sound')
         this.evilVictoryImage = document.getElementById('evil-victory')
-        this.evilVictorySound;
+        this.evilVictorySound = document.getElementById('evilVictory-sound')
+        // dialogues
         this.container = document.getElementById('container')
         this.dialogues = {
             witch: {
-                text1 : "You there, Meow-Knight. I'm relieved to see you. Master Ruby has an important mission for you. Please be quick, she is waiting for you.",
+                text1: "You there, Meow-Knight. I'm relieved to see you. Master Ruby has an important mission for you. Please be quick, she is waiting for you.",
                 text2: ["Now is not the time for a bath.", "Oh it's you.", "Just because I can talk doesn't mean I don't like getting scratched behind the ears.", "Enthusiasm? On a week day? My word.", "Your request is noted and ignored.", "This world is host by goblins and flying mushrooms and you're surprised by me?", "Don't touch me I'm super important.", "A waste of my talents!", "Need any help?", "I would suggest that you get moving and decide on a plan.", "Everything is in decline in this world. So is my mood.", "Have I missed it? Have I missed the battle?", "Did you talk to Master Ruby?", "What's wrong with you? You seem... Happy.", "Meow.", "Well, well, well, if it isn't my dear friend, Meow-Knight!", "You are talking again. You will stop.", "Will I just stay here and say random things all day?", "What is my purpose in this game?"]
             } ,
             ruby: {
@@ -34,6 +36,26 @@ export class UserInterface {
         this.index = 0;
         this.counterWitch = 0
         this.counterRuby = 0
+        // sounds, sfx and music
+        this.sounds = {
+            player:{
+                jump: document.getElementById('jump-sound'),
+                sword: document.getElementById('sword-sound'),
+                hit: document.getElementById('hit-sound')
+            },
+            level1: {
+                music: document.getElementById('music-lvl1'),
+                footsteps: document.getElementById('footsteps-lvl1')
+            },
+            level2: {
+                music: document.getElementById('music-lvl2'),
+                footsteps: document.getElementById('footsteps-lvl2')
+            },
+            level3: {
+                music: document.getElementById('music-lvl3'),
+                footsteps: document.getElementById('footsteps-lvl3')
+            }
+        }
     }
     draw(ctx){
         ctx.save()
@@ -63,6 +85,8 @@ export class UserInterface {
         
     }
     drawGameOver(ctx){
+        this.stopMusic()
+        this.stopPlayerSounds()
         ctx.drawImage(this.gameOverImage, this.x, this.y, this.game.width, this.game.height);
         ctx.fillStyle = 'rgba(0, 0, 0, 0.500)'
         ctx.fillRect(this.x, this.y, this.game.width, this.game.height)
@@ -76,6 +100,8 @@ export class UserInterface {
         this.gameOverSound.play()
     }
     drawVictory(ctx){
+        this.stopMusic()
+        this.stopPlayerSounds()
         ctx.drawImage(this.victoryImage, this.x, this.y, this.game.width, this.game.height);
         ctx.fillStyle = 'rgba(0, 0, 0, 0.500)'
         ctx.fillRect(this.x, this.y, this.game.width, this.game.height)
@@ -86,8 +112,11 @@ export class UserInterface {
         ctx.fillText(`You unsleash your weapon and look at the magic around you. `, this.game.width/2, 350)
         ctx.fillText(`The power is immense... It is now yours to take or to sacrifice.`, this.game.width/2, this.game.height/2)
         ctx.fillText(`What shall you do with this power?`, this.game.width/2, 530)
+        this.victorySound.volume = 0.5
+        this.victorySound.play()
     }
     drawEvilVictory(ctx){
+        this.victorySound.pause()
         ctx.drawImage(this.evilVictoryImage, this.x, this.y, this.game.width, this.game.height);
         ctx.fillStyle = 'rgba(0, 0, 0, 0.500)'
         ctx.fillRect(this.x, this.y, this.game.width, this.game.height)
@@ -98,8 +127,11 @@ export class UserInterface {
         ctx.fillText(`By taking the power of the Red Tower, he became the greatest vilain`, this.game.width/2, 350)
         ctx.fillText(`the world has ever seen. Alas, harmony was not to last...`, this.game.width/2, this.game.height/2)
         ctx.fillText(`Your score is: ` + this.game.score, this.game.width/2, 530)
+        this.evilVictorySound.volume = 0.5
+        this.evilVictorySound.play()
     }
     drawGoodVictory(ctx){
+        this.victorySound.pause()
         ctx.drawImage(this.goodVictoryImage, this.x, this.y, this.game.width, this.game.height);
         ctx.fillStyle = 'rgba(0, 0, 0, 0.500)'
         ctx.fillRect(this.x, this.y, this.game.width, this.game.height)
@@ -177,8 +209,42 @@ export class UserInterface {
                     this.index = this.randomRubyText.length
                   }
         }
-        
-        
     }
+    playMusic(){
+        this.game.music.volume = 0.3
+        this.game.music.play()
+    }
+    stopMusic(){
+        this.game.music.pause()
+    }
+    playFootstepSound() {
+        this.game.footsteps.playbackRate = 1.6
+        this.game.footsteps.volume = 0.5
+        this.game.footsteps.play();
+    }
+    playSwordSound(){
+        this.sounds.player.sword.playbackRate = 1.37
+        this.sounds.player.sword.play()
+    }
+    playJumpSound(){
+        this.sounds.player.jump.playbackRate = 5
+        this.sounds.player.jump.play()
+    }
+    playHitSound(){
+        this.sounds.player.hit.play()
+    }
+    stopPlayerSounds(){
+        this.sounds.player.sword.pause()
+        this.sounds.player.jump.pause()
+        this.sounds.player.hit.pause()
+    }
+    stopWinningMusic(){
+        if (this.game.goodVictory){
+            this.goodVictorySound.pause()
+        } else if (this.game.evilVictory){
+            this.evilVictorySound.pause()
+        }
+    }
+
 }
 
