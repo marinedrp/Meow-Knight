@@ -123,7 +123,7 @@ section{
     /*background-color: aqua;*/
     padding: 10px;
     margin-top: 30px;
-    margin-left: 440px;
+    margin-left: 420px;
     margin-right: 40px;
     font-size: 25px;
     text-decoration: none;
@@ -133,7 +133,7 @@ section{
 .scroll a:link {
     font-weight: bold;
     color: #9c0808;
-    border: 3px solid #020500;
+    border: 3px solid #9c0808;
     border-style: ridge;
 }
   
