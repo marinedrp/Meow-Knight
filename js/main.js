@@ -32,17 +32,11 @@ const layer6_lvl3 = document.getElementById("layer6-lvl3");
 const layer7_lvl3 = document.getElementById("layer7-lvl3");
 const layer8_lvl3 = document.getElementById("layer8-lvl3");
 
+//Start the game and music on the website
 const startButton = document.getElementById("start-game")
 const musicButton = document.getElementById('music-button')
 const splashSong = document.getElementById('splash-song')
 
-
-const restartButton = document.getElementById("restart-button");
-const goodVictoryButton = document.getElementById('goodVictory-button');
-const evilVictoryButton = document.getElementById('evilVictory-button');
-restartButton.hidden = true;
-goodVictoryButton.hidden = true;
-evilVictoryButton.hidden = true;
 
 musicButton.addEventListener("click", () => {
   if (musicButton.innerHTML === "Play Music") {
@@ -54,6 +48,14 @@ musicButton.addEventListener("click", () => {
   splashSong.pause()
   } 
 }); 
+
+
+
+//Restart button and victory buttons
+const restartButton = document.getElementById("restart-button");
+const goodVictoryButton = document.getElementById('goodVictory-button');
+const evilVictoryButton = document.getElementById('evilVictory-button');
+
 
 
 startButton.addEventListener("click", function () {
@@ -332,13 +334,11 @@ startButton.addEventListener("click", function () {
               this.player.currentSprite = this.player.sprites.run.right;
               this.player.currentCropWidth = 16;
               this.player.width = 100;
-              //this.userInterface.playFootstepSound()
             }
             else if (this.keys.left.pressed){
               this.player.currentSprite = this.player.sprites.run.left;
               this.player.currentCropWidth = 16;
               this.player.width = 100;
-              //this.userInterface.playFootstepSound()
             }
             else {
               this.player.currentSprite = this.player.sprites.idle.image;
@@ -415,13 +415,9 @@ startButton.addEventListener("click", function () {
   }
 
   const game = new Game(canvas.width, canvas.height);
-  //let lastTime = 0
 
   // main game loop
   function animate() {
-    // const deltaTime = timeStamp - lastTime
-    // console.log(deltaTime)
-    // lastTime = timeStamp
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 

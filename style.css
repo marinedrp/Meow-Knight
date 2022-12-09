@@ -21,7 +21,7 @@ header{
         to bottom,
         rgba(0, 0, 0, 0.5),
         rgba(0, 0, 0, 0.9)
-    ),url(./assets/background/website/bricks.jpg);
+    ),url(./assets/website/bricks.jpg);
     
     
 }
@@ -47,7 +47,7 @@ section{
         rgba(0, 0, 0, 0.5),
         rgba(0, 0, 0, 0.9)
     ),
-    url(./assets/background/website/wood-image.jpg);
+    url(./assets/website/wood-image.jpg);
 }
 
 .instructions-wrapper{
@@ -71,12 +71,12 @@ section{
 .portrait{
     height: 550px;
     width: 350px;
-    background-image: url(./assets/background/website/portrait.png);
+    background-image: url(./assets/website/portrait.png);
     background-size:cover;
     background-repeat: no-repeat;
     background-position: center;
 
-    border-image: url(./assets/background/website/frame.png) 30 fill / 30px / 37px;
+    border-image: url(./assets/website/frame.png) 30 fill / 30px / 37px;
     /*border-image-slice: calc(50 / 184 * 100%) calc(80 / 284 * 100%) fill;
     border-image-width: 30px 48px;*/
 
@@ -90,7 +90,7 @@ section{
     width: 750px;
     margin-left: 100px;
     padding: 35px;
-    background-image: url(./assets/background/website/scroll.png);
+    background-image: url(./assets/website/scroll.png);
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -150,12 +150,11 @@ section{
     color: #ff9886;
 }
 
-.music-div{
+#music-div{
     margin-top: 60px;
     display: flex;
     align-items: center;
     justify-content:center;
-
 }
 
 #music-button{
@@ -187,6 +186,7 @@ section{
 
 .section-2{
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     background-image: linear-gradient(
@@ -194,7 +194,7 @@ section{
         rgba(0, 0, 0, 0.9),
         rgba(0, 0, 0, 0.5)
     ),
-    url(./assets/background/website/wood-image.jpg);
+    url(./assets/website/wood-image.jpg);
 }
 
 /*Game*/
