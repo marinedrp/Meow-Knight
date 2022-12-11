@@ -4,10 +4,10 @@
 * [Description](#description)
 * [Technologies](#technologies)
     - [Introduction](#introduction)
-    - [HowToPlay](#how-to-play)
+    - [How To Play](#how-to-play)
 * [Features](#features)
 * [Demo](#demo)
-* [NextSteps](#next-steps)
+* [Next Steps](#next-steps)
 
 
 ## Description
@@ -15,17 +15,18 @@
 ![screenshot1](./screenshots/screenshot1.png)
 
 ### Introduction
-Meow-Knight's Tale is an Action RPG-like game where the user has to play a cat-knight in a medieval setting.
+Meow-Knight's Tale is a simple Action RPG game where the user has to play a cat-knight in a medieval setting.
 The purpose of the game is to go to level 3 and interact with the Red Tower, after defeating as many enemies as possible.
+
 
 ### How To Play
 
 ![screenshot2](./screenshots/screenshot2.png)
 
-* Arrow Up to Jump.
-* Arrow Left and Arrow Right to move.
-* A to Attack.
-* Space Bar to interact with characters and objects.
+* **Arrow Up** to **Jump**.
+* **Arrow Left** and **Arrow Right** to **move**.
+* **A** to **Attack**.
+* **Space Bar** to interact with characters and objects.
 
 ## Technologies
 The game was created using:
@@ -56,3 +57,4 @@ Link for Deployed Game : https://marinedrp.github.io/Meow-Knight/
 - Improve the FPS of the game.
 - Change the movement of the bats.
 - Readd the following sound effects: footsteps, sfx and enemies'sounds.
+- Improve the dialogue system.
