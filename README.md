@@ -15,7 +15,7 @@
 ![screenshot1](./screenshots/screenshot1.png)
 
 ### Introduction
-Meow-Knight's Tale is a simple Action RPG game where the user has to play a cat-knight in a medieval setting.
+Meow-Knight's Tale is a simple 2D Action RPG where the user has to play a cat-knight in a medieval setting.
 The purpose of the game is to go to level 3 and interact with the Red Tower, after defeating as many enemies as possible.
 
 
