@@ -57,5 +57,6 @@ Link for Deployed Game : https://marinedrp.github.io/Meow-Knight/
 - Improve the FPS of the game.
 - Change the movement of the bats.
 - Add particles after enemy deletion.
+- Create transitions.
 - Readd the following sound effects: footsteps, sfx and enemies'sounds.
 - Improve the dialogue system.
