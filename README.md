@@ -2,9 +2,9 @@
 
 ## Table of contents
 * [Description](#description)
-* [Technologies](#technologies)
     - [Introduction](#introduction)
     - [How To Play](#how-to-play)
+* [Technologies](#technologies)
 * [Features](#features)
 * [Demo](#demo)
 * [Next Steps](#next-steps)
@@ -56,5 +56,6 @@ Link for Deployed Game : https://marinedrp.github.io/Meow-Knight/
 ## Next Steps
 - Improve the FPS of the game.
 - Change the movement of the bats.
+- Add particles after enemy deletion.
 - Readd the following sound effects: footsteps, sfx and enemies'sounds.
 - Improve the dialogue system.
