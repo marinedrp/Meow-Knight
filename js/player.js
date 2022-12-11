@@ -167,8 +167,6 @@ export class Player {
         this.game.lives--
         this.game.score--
         enemy.deletion = true
-        //playerHitSound.play()
-        //enemy.playHitSound()
       } 
       // if the player is colliding with the enemies and attacking
       else if (enemy.position.x < this.position.x + this.width &&
@@ -176,7 +174,6 @@ export class Player {
         enemy.position.y < this.position.y + this.height &&
         enemy.position.y + enemy.height > this.position.y && this.game.keys.attack.pressed){
           enemy.deletion = true
-          //enemy.playHitSound()
           this.game.score += enemy.scoreBonus
         }
     });
