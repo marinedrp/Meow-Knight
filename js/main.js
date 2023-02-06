@@ -36,6 +36,11 @@ const layer8_lvl3 = document.getElementById("layer8-lvl3");
 const startButton = document.getElementById("start-game")
 const musicButton = document.getElementById('music-button')
 const splashSong = document.getElementById('splash-song')
+const github = document.getElementById('github')
+const linkedIn = document.getElementById('linkedIn')
+
+linkedIn.hidden = true;
+github.hidden = true;
 
 
 musicButton.addEventListener("click", () => {
@@ -61,6 +66,8 @@ const evilVictoryButton = document.getElementById('evilVictory-button');
 startButton.addEventListener("click", function () {
   const canvas = document.getElementById("canvas1");
   const ctx = canvas.getContext("2d");
+  linkedIn.hidden = false;
+  github.hidden = false;
 
   canvas.width = 1350;
   canvas.height = 880;

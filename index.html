@@ -1,22 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <link rel="icon" href="https://res.cloudinary.com/dm6a8aocc/image/upload/v1675601622/9204560_665-removebg-preview_jtohvw.png" />
+    <link rel="icon"
+        href="https://res.cloudinary.com/dm6a8aocc/image/upload/v1675601622/9204560_665-removebg-preview_jtohvw.png" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Meow-Knight's Tale" />
     <title>Meow-Knight's Tale</title>
     <link rel="stylesheet" href="style.css">
     <style>
-    @import url('https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap');
-    @import url('https://fonts.googleapis.com/css2?family=Lora&display=swap');
-    @import url('https://fonts.googleapis.com/css2?family=Calligraffitti&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Lora&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Calligraffitti&display=swap');
     </style>
-    
-    
-    
+
+
+
 </head>
+
 <body>
     <header>
         <h1>Meow-Knight's Tale</h1>
@@ -24,49 +27,61 @@
 
 
     <section class="section-1">
-        
+
         <div class="instructions-wrapper">
             <div class="presentation-wrapper">
                 <div class="portrait">
                 </div>
-                
+
                 <div class="scroll">
                     <div class="text">
-                    <h2>Instructions</h2>
-                    <article>
-                        <p>Ah a visitor! Stay as long as you wish and I will tell you a story... <br> <br> Once upon a time, in a world were humans and cats lived in peace, there was a valorous warrior named Meow-Knight. One day, Ruby, one of the greatest magicians of the realm, discovered that a guild of druids was using the magic of the Red Tower to summon creatures. As a hero, Meow-Knight was called to put an end to their evil plans.</p> <br>
-                        Press: 
-                        <ul>
-                            <li><b>Arrow Up</b> to <b>jump</b></li>
-                            <li><b>Arrow Left</b> and <b>Arrow Right</b> to <b>move</b></li>
-                            <li><b>A</b> to <b>attack</b></li>
-                            <li><b>Space Bar</b> to interact with characters and objects</li>
-                        </ul>
-                    </article>
-                </div>
+                        <h2>Instructions</h2>
+                        <article>
+                            <p>Ah a visitor! Stay as long as you wish and I will tell you a story... <br> <br> Once upon
+                                a time, in a world were humans and cats lived in peace, there was a valorous warrior
+                                named Meow-Knight. One day, Ruby, one of the greatest magicians of the realm, discovered
+                                that a guild of druids was using the magic of the Red Tower to summon creatures. As a
+                                hero, Meow-Knight was called to put an end to their evil plans.</p> <br>
+                            Press:
+                            <ul>
+                                <li><b>Arrow Up</b> to <b>jump</b></li>
+                                <li><b>Arrow Left</b> and <b>Arrow Right</b> to <b>move</b></li>
+                                <li><b>A</b> to <b>attack</b></li>
+                                <li><b>Space Bar</b> to interact with characters and objects</li>
+                            </ul>
+                        </article>
+                    </div>
                     <div class="start-game">
-                    <a href="#game" id="start-game">Start the game</a>
-                </div>
+                        <a href="#game" id="start-game">Start the game</a>
+                    </div>
                 </div>
             </div>
-    
+
             <div id="music-div">
                 <a href="#" id="music-button">Play Music</a>
             </div>
         </div>
 
-            
+
     </section>
-    
+
     <section class="section-2" id="game">
-        <canvas id="canvas1"></canvas>
+        <div class="game-div">
+            <canvas id="canvas1"></canvas>
+            <div class="social-div">
+                <a id="github" href="https: //github.com/marinedrp">
+                    <img  src="./assets/website/github-logo.png" /></a>
+                <a id="linkedIn" href="https://www.linkedin.com/in/marine-drp/">
+                    <img src="./assets/website/linkedin.png" /></a>
+            </div>
+        </div>
         <div id="container"></div>
         <button id="restart-button" hidden="true">Restart</button>
         <button id="goodVictory-button" hidden="true">Destroy the tower</button>
         <button id="evilVictory-button" hidden="true">Absorb the power</button>
     </section>
 
-    
+
     <!--Website music-->
     <audio src="./assets/sounds/website/splash-song.mp3" id="splash-song"></audio>
 
@@ -85,7 +100,7 @@
     <!--GameOver assets-->
     <img src="./assets/interface/gameover-screen.jpg" id="game-over" class="assets">
     <audio src="./assets/sounds/game-over/game-over.mp3" id="game-over-sound"></audio>
-    
+
     <!--Victory-->
     <img src="./assets/interface/victory-screen.png" id="victory" class="assets">
     <audio src="./assets/sounds/victory/victory.mp3" id="victory-sound"></audio>
@@ -93,12 +108,12 @@
     <!--Good Victory assets-->
     <img src="./assets/interface/good-victory.jpg" id="good-victory" class="assets">
     <audio src="./assets/sounds/victory/goodVictory.mp3" id="goodVictory-sound"></audio>
-    
+
     <!--Evil Victory assets-->
     <img src="./assets/interface/evil-victory.jpg" id="evil-victory" class="assets">
     <audio src="./assets/sounds/victory/evilVictory.mp3" id="evilVictory-sound"></audio>
-    
-    
+
+
     <!--Level1-->
     <img src="./assets/background/level1/layer01.png" id="layer1-lvl1" class="layers">
     <img src="./assets/background/level1/layer02.png" id="layer2-lvl1" class="layers">
@@ -111,7 +126,7 @@
     <img src="./assets/spritesheets/npcs/ruby.png" id="ruby" class="assets">
     <img src="./assets/spritesheets/npcs/portal.png" id="portal" class="assets">
     <audio src="./assets/sounds/level1/music-lvl1.mp3" id="music-lvl1" preload="none"></audio>
-    
+
     <!--Level2-->
     <img src="./assets/background/level2/layer01.png" id="layer1-lvl2" class="layers">
     <img src="./assets/background/level2/layer02.png" id="layer2-lvl2" class="layers">
@@ -125,7 +140,7 @@
     <img src="./assets/spritesheets/enemies/dark-particle.png" id="dark-particles" class="assets">
     <img src="./assets/spritesheets/enemies/mushroom.png" id="mushroom" class="assets">
     <audio src="./assets/sounds/level2/music-lvl2.mp3" id="music-lvl2" preload="none"></audio>
-    
+
     <!--Level3-->
     <img src="./assets/background/level3/layer01.png" id="layer1-lvl3" class="layers">
     <img src="./assets/background/level3/layer02.png" id="layer2-lvl3" class="layers">
@@ -144,4 +159,5 @@
     <script src="./js/main.js" type="module"></script>
 
 </body>
+
 </html>

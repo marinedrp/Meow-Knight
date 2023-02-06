@@ -115,18 +115,18 @@ h1{
     }
     
     .text article{
-        font-size: 1.85vh;
+        font-size: 1.8vh;
     }
     
     .text li{
         margin-left: 20px;
     }
 
-    /* .text br{
+    .text br{
         content: "";
-        margin-top: 1vh;
+        margin-top: 1.8vh;
         display: block;
-    } */
+    }
 
     .start-game{
         display: flex;
@@ -134,7 +134,7 @@ h1{
     }
 
     .start-game a{
-        font-size: 1.8vw;
+        font-size: 1.6vw;
         font-weight: bold;
         text-decoration: none;
         color: #9c0808;
@@ -161,8 +161,40 @@ h1{
 } 
 
 /*Game*/
+.game-div{
+    width: 80%;
+    height: 80%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.social-div{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    height: 90%;
+    width: 10%;
+}
+
+.social-div a{
+    filter: sepia(100%);
+}
+
+.social-div a:hover{
+    filter: brightness(10);
+}
+
+.social-div img{
+    width: 90px;
+    height: 90px;
+}
+
 #canvas1{
-    height: 70%;
+    height: 90%;
+    width: 85%;
 }
 
 #container{
@@ -213,12 +245,13 @@ h1{
     position: absolute;
     transform: translateY(300%);
     left: 60%;
-}
+} 
 
 
 }
 
-@media screen and (min-width: 768px) and (max-width: 1023px) {
+/* Medium devices */
+@media screen and (min-width: 481px) and (max-width: 1023px) {
     
     .section-1{
         height: 93vh;
@@ -257,7 +290,7 @@ h1{
     
     .portrait{
         height: 80%;
-        width: 35%;
+        width: 32%;
         background-image: url(./assets/website/portrait.png);
         background-size:cover;
         background-repeat: no-repeat;
@@ -271,10 +304,10 @@ h1{
         justify-content: space-between;
         height: 100%;
         width: 60%;
-        padding-top: 17%;
+        padding-top: 19%;
         padding-left: 8%;
         padding-right: 9%;
-        padding-bottom: 20%;
+        padding-bottom: 21%;
         background-image: url(./assets/website/scroll2.png);
         background-size: 100% 100%;
         background-repeat: no-repeat;
@@ -301,6 +334,10 @@ h1{
     }
 
     .start-game{
+        visibility: hidden;
+    }
+
+    /* .start-game{
         display: flex;
         justify-content: flex-end;
     }
@@ -315,14 +352,138 @@ h1{
       
     .start-game a:hover {
         color: #c52f2f;
-    }
+    } */
 
     .section-2{
         display: none;
     }
+}
+
+/* Small devices */
+@media screen and (max-width: 480px) {
+    
+    .section-1{
+        height: 93vh;
+        display: flex;
+        justify-content: center;
+        align-items: top;
+        background-image: linear-gradient(
+            to bottom,
+            rgba(0, 0, 0, 0.5),
+            rgba(0, 0, 0, 0.9)
+        ),
+        url(./assets/website/wood-image.jpg);
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+    
+    .instructions-wrapper{
+        width: 95vw;
+        height: 185vh;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-content: center;
+    }
+    
+    .presentation-wrapper{
+        width: 90vw;
+        height: 165vh;
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
+    
+    .portrait{
+        height: 50vh;
+        width: 75%;
+        background-image: url(./assets/website/portrait.png);
+        background-size:cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        border-image: url(./assets/website/frame.png) 30 fill / 20px / 25px;
+    }
+    
+    .scroll{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 75vh;
+        width: 100%;
+        padding-top: 28%;
+        padding-left: 15%;
+        padding-right: 15%;
+        padding-bottom: 32%;
+        background-image: url(./assets/website/scroll2.png);
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+
+    .text h2{
+        font-size: 2.5vh;
+        margin-bottom: 5px;
+    }
+
+    .text br{
+        content: "";
+        margin-top: 1vh;
+        display: block;
+    }
+    
+    .text article{
+        font-size: 1.8vh;
+    }
+    
+    .text li{
+        margin-left: 15px;
+    }
+
+    .start-game{
+        visibility: hidden;
+    }
+
+    /* .start-game{
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .start-game a{
+        font-size: 1.9vh;
+        font-weight: bold;
+        text-decoration: none;
+        color: #9c0808;
+        
+    }
+      
+    .start-game a:hover {
+        color: #c52f2f;
+    } */
+
+    .section-2{
+        height: 93vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-image: linear-gradient(
+            to bottom,
+            rgba(0, 0, 0, 0.9),
+            rgba(0, 0, 0, 0.5)
+        ),
+        url(./assets/website/wood-image.jpg);
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
 
 
 }
+
+
+
 
 #music-div{
     display: flex;
