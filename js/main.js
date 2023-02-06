@@ -4,7 +4,6 @@ import { Player } from "./player.js";
 import { Npc } from "./npc.js";
 import { RunningEnemy, Particles } from './enemies.js';
 
-
 //level1
 const layer1_lvl1 = document.getElementById("layer1-lvl1");
 const layer2_lvl1 = document.getElementById("layer2-lvl1");
@@ -39,9 +38,6 @@ const splashSong = document.getElementById('splash-song')
 const github = document.getElementById('github')
 const linkedIn = document.getElementById('linkedIn')
 
-linkedIn.hidden = true;
-github.hidden = true;
-
 
 musicButton.addEventListener("click", () => {
   if (musicButton.innerHTML === "Play Music") {
@@ -66,8 +62,6 @@ const evilVictoryButton = document.getElementById('evilVictory-button');
 startButton.addEventListener("click", function () {
   const canvas = document.getElementById("canvas1");
   const ctx = canvas.getContext("2d");
-  linkedIn.hidden = false;
-  github.hidden = false;
 
   canvas.width = 1350;
   canvas.height = 880;
