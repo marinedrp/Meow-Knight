@@ -2,8 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="icon" href="https://res.cloudinary.com/dm6a8aocc/image/upload/v1675601622/9204560_665-removebg-preview_jtohvw.png" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Meow-Knight's Tale" />
     <title>Meow-Knight's Tale</title>
     <link rel="stylesheet" href="style.css">
     <style>
@@ -20,6 +22,7 @@
         <h1>Meow-Knight's Tale</h1>
     </header>
 
+
     <section class="section-1">
         
         <div class="instructions-wrapper">
@@ -28,18 +31,22 @@
                 </div>
                 
                 <div class="scroll">
+                    <div class="text">
                     <h2>Instructions</h2>
                     <article>
-                        <p>Ah a visitor! Stay as long as you wish and I will tell you a story... <br> <br> Once upon a time, in a world were humans and cats lived in peace, there was a valorous warrior named Meow-Knight. One day, Ruby, one of the greatest magicians of the realm, discovered that a guild of druids was using the magic of the Red Tower to summon creatures. As a hero, Meow-Knight was called to put an end at their evil plans.</p> <br>
+                        <p>Ah a visitor! Stay as long as you wish and I will tell you a story... <br> <br> Once upon a time, in a world were humans and cats lived in peace, there was a valorous warrior named Meow-Knight. One day, Ruby, one of the greatest magicians of the realm, discovered that a guild of druids was using the magic of the Red Tower to summon creatures. As a hero, Meow-Knight was called to put an end to their evil plans.</p> <br>
                         Press: 
                         <ul>
                             <li><b>Arrow Up</b> to <b>jump</b></li>
-                            <li><b>Arrow Left</b> and <b>Arrow Right</b> to <b>move</b><br></li>
+                            <li><b>Arrow Left</b> and <b>Arrow Right</b> to <b>move</b></li>
                             <li><b>A</b> to <b>attack</b></li>
                             <li><b>Space Bar</b> to interact with characters and objects</li>
                         </ul>
                     </article>
+                </div>
+                    <div class="start-game">
                     <a href="#game" id="start-game">Start the game</a>
+                </div>
                 </div>
             </div>
     
@@ -53,7 +60,7 @@
     
     <section class="section-2" id="game">
         <canvas id="canvas1"></canvas>
-        <div id="container"><!--Dialogues--></div>
+        <div id="container"></div>
         <button id="restart-button" hidden="true">Restart</button>
         <button id="goodVictory-button" hidden="true">Destroy the tower</button>
         <button id="evilVictory-button" hidden="true">Absorb the power</button>

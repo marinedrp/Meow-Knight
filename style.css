@@ -33,150 +33,121 @@ h1{
     font-family: 'Calligraffitti';
 }
 
-
-section{
-    height: 100vh;
+.assets{
+    display: none;
 }
 
-.section-1{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-image: linear-gradient(
-        to bottom,
-        rgba(0, 0, 0, 0.5),
-        rgba(0, 0, 0, 0.9)
-    ),
-    url(./assets/website/wood-image.jpg);
-}
-
-.instructions-wrapper{
-    display: flex;
-    flex-direction: column;
-    justify-items: center;
-    align-items: center;
-    width: 65vw;
-    height: 75vh;
-}
-
-.presentation-wrapper{
-    display: flex;
-    justify-content: center;
+.layers{
+    display: none;
 }
 
 
 
-.portrait{
-    height: 550px;
-    width: 350px;
-    background-image: url(./assets/website/portrait.png);
-    background-size:cover;
-    background-repeat: no-repeat;
-    background-position: center;
+@media screen and (min-width: 1024px) {
 
-    border-image: url(./assets/website/frame.png) 30 fill / 30px / 37px;
-
-}
-
-.scroll{
-    display: flex;
-    flex-direction: column;
-    height: 580px;
-    width: 750px;
-    margin-left: 100px;
-    padding: 35px;
-    background-image: url(./assets/website/scroll.png);
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-
-}
-
-.scroll h2{
-    margin-top: 40px;
-    margin-left: 40px;
-    font-size: 40px;
-}
-
-.scroll article{
-    margin-top: 20px;
-    margin-left: 40px;
-    font-size: 20px;
-}
-
-.scroll li{
-    margin-left: 20px;
-}
-
-.scroll a{
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-    flex-wrap: nowrap;
-    padding: 10px;
-    margin-top: 30px;
-    margin-left: 420px;
-    margin-right: 40px;
-    font-size: 25px;
-    text-decoration: none;
+    .section-1{
+        height: 90vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-image: linear-gradient(
+            to bottom,
+            rgba(0, 0, 0, 0.5),
+            rgba(0, 0, 0, 0.9)
+        ),
+        url(./assets/website/wood-image.jpg);
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
     
-}
+    .instructions-wrapper{
+        width: 80vw;
+        height: 80vh;
+        /* border: 3px solid green; */
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-content: center;
+    }
+    
+    .presentation-wrapper{
+        width: 95%;
+        height: 65vh;
+        /* border: 3px solid red; */
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
 
-.scroll a:link {
-    font-weight: bold;
-    color: #9c0808;
-    border: 3px solid #9c0808;
-    border-style: ridge;
-}
-  
-.scroll a:visited {
-    color: #9c0808;
-}
-  
-.scroll a:hover {
-    background: #ff000021;
-}
-  
-.scroll a:active {
-    background: #9c0808;
-    color: #ff9886;
-}
+    .portrait{
+        height: 85%;
+        width: 23%;
+        background-image: url(./assets/website/portrait.png);
+        background-size:cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        border-image: url(./assets/website/frame.png) 30 fill / 30px / 37px;
+    }
+    
+    .scroll{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 65vh;
+        width: 62%;
+        padding-top: 10vh;
+        padding-left: 6vw;
+        padding-right: 6vw;
+        padding-bottom: 10vh;
+        background-image: url(./assets/website/scroll.png);
+        background-size:95% 90%;
+        background-repeat: no-repeat;
+        background-position: center;
+    
+    }
+    
+    .text h2{
+        font-size: 2.5vw;
+        margin-bottom: 10px;
+    }
+    
+    .text article{
+        font-size: 1.85vh;
+    }
+    
+    .text li{
+        margin-left: 20px;
+    }
 
-#music-div{
-    margin-top: 60px;
-    display: flex;
-    align-items: center;
-    justify-content:center;
-}
+    /* .text br{
+        content: "";
+        margin-top: 1vh;
+        display: block;
+    } */
 
-#music-button{
-    margin: 30px;
-    padding: 10px;
-    font-size: 25px;
-    text-decoration: none;
-}
+    .start-game{
+        display: flex;
+        justify-content: flex-end;
+    }
 
-#music-button:link{
-    font-weight: bold;
-    color: #cc875f;
-    border: 3px solid #cc875f;
-    border-style: ridge;
-}
+    .start-game a{
+        font-size: 1.8vw;
+        font-weight: bold;
+        text-decoration: none;
+        color: #9c0808;
+        
+    }
+      
+    .start-game a:hover {
+        color: #c52f2f;
+    }
 
-#music-button:visited {
-    color: #cc875f;
-}
-  
-#music-button:hover {
-    background: #9c3e083a;
-}
-  
-#music-button:active {
-    background: #cc875f;
-    color: #9c3e08;
-}
-
+    
 .section-2{
+    height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -187,17 +158,9 @@ section{
         rgba(0, 0, 0, 0.5)
     ),
     url(./assets/website/wood-image.jpg);
-}
+} 
 
 /*Game*/
-.assets{
-    display: none;
-}
-
-.layers{
-    display: none;
-}
-
 #canvas1{
     height: 70%;
 }
@@ -252,3 +215,143 @@ section{
     left: 60%;
 }
 
+
+}
+
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+    
+    .section-1{
+        height: 93vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-image: linear-gradient(
+            to bottom,
+            rgba(0, 0, 0, 0.5),
+            rgba(0, 0, 0, 0.9)
+        ),
+        url(./assets/website/wood-image.jpg);
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+    
+    .instructions-wrapper{
+        width: 90vw;
+        height: 82vh;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-content: center;
+    }
+    
+    .presentation-wrapper{
+        width: 100%;
+        height: 75vh;
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
+    
+    .portrait{
+        height: 80%;
+        width: 35%;
+        background-image: url(./assets/website/portrait.png);
+        background-size:cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        border-image: url(./assets/website/frame.png) 30 fill / 18px / 25px;
+    }
+    
+    .scroll{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 100%;
+        width: 60%;
+        padding-top: 17%;
+        padding-left: 8%;
+        padding-right: 9%;
+        padding-bottom: 20%;
+        background-image: url(./assets/website/scroll2.png);
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+
+    .text h2{
+        font-size: 2.5vh;
+        margin-bottom: 5px;
+    }
+
+    .text br{
+        content: "";
+        margin-top: 1vh;
+        display: block;
+    }
+    
+    .text article{
+        font-size: 1.8vh;
+    }
+    
+    .text li{
+        margin-left: 15px;
+    }
+
+    .start-game{
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .start-game a{
+        font-size: 1.9vh;
+        font-weight: bold;
+        text-decoration: none;
+        color: #9c0808;
+        
+    }
+      
+    .start-game a:hover {
+        color: #c52f2f;
+    }
+
+    .section-2{
+        display: none;
+    }
+
+
+}
+
+#music-div{
+    display: flex;
+    align-items: center;
+    justify-content:center;
+}
+
+#music-button{
+    padding: 10px;
+    font-size: 25px;
+    text-decoration: none;
+}
+
+#music-button:link{
+    font-weight: bold;
+    color: #cc875f;
+    border: 3px solid #cc875f;
+    border-style: ridge;
+}
+
+#music-button:visited {
+    color: #cc875f;
+}
+  
+#music-button:hover {
+    background: #9c3e083a;
+}
+  
+#music-button:active {
+    background: #cc875f;
+    color: #9c3e08;
+}
