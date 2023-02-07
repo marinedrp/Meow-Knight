@@ -117,6 +117,7 @@ export class UserInterface {
     }
     drawEvilVictory(ctx){
         this.victorySound.pause()
+        this.victorySound.currentTime = 0;
         ctx.drawImage(this.evilVictoryImage, this.x, this.y, this.game.width, this.game.height);
         ctx.fillStyle = 'rgba(0, 0, 0, 0.500)'
         ctx.fillRect(this.x, this.y, this.game.width, this.game.height)
@@ -132,6 +133,7 @@ export class UserInterface {
     }
     drawGoodVictory(ctx){
         this.victorySound.pause()
+        this.victorySound.currentTime = 0;
         ctx.drawImage(this.goodVictoryImage, this.x, this.y, this.game.width, this.game.height);
         ctx.fillStyle = 'rgba(0, 0, 0, 0.500)'
         ctx.fillRect(this.x, this.y, this.game.width, this.game.height)
@@ -228,6 +230,7 @@ export class UserInterface {
     }
     stopMusic(){
         this.game.music.pause()
+        this.game.music.currentTime = 0;
     }
     playSwordSound(){
         this.sounds.player.sword.playbackRate = 1.37
@@ -242,14 +245,19 @@ export class UserInterface {
     }
     stopPlayerSounds(){
         this.sounds.player.sword.pause()
+        this.sounds.player.sword.currentTime = 0;
         this.sounds.player.jump.pause()
+        this.sounds.player.jump.currentTime = 0;
         this.sounds.player.hit.pause()
+        this.sounds.player.hit.currentTime = 0;
     }
     stopWinningMusic(){
         if (this.game.goodVictory){
             this.goodVictorySound.pause()
+            this.goodVictorySound.currentTime = 0;
         } else if (this.game.evilVictory){
             this.evilVictorySound.pause()
+            this.evilVictorySound.currentTime = 0;
         }
     }
 

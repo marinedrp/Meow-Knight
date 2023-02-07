@@ -74,8 +74,6 @@ export class FlyingEnemy extends Enemy {
           this.position.x -= this.velocity.x
           if (this.position.x + this.width < 0) this.deletion = true;
           this.angle += this.va;
-          console.log("THIS IS THE VA ===", this.va)
-          console.log("THIS IS THE ANGLE ===", this.angle)
           this.position.y += Math.sin(this.angle)
 
       }

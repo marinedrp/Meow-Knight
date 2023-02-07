@@ -124,15 +124,16 @@ export class Player {
     }
   }
   useEnergy(){
+    console.log("This is my energy ==== ", this.game.energy)
     // reduces the energy while the player is pressing A
-    if (this.game.keys.attack.pressed && this.game.energy <= 100 && this.game.energy > 0){
-      this.game.energy--
+      if (this.game.keys.attack.pressed && this.game.energy > 0){
+        this.game.energy--
+      }
+    // Increases the energy while the player is not attacking
+      else if (!this.game.keys.attack.pressed && this.game.energy < 100){
+        this.game.energy = Math.min(100, this.game.energy + 0.5)
+      }
     }
-    // increases the energy while the player is not attacking
-    else if (!this.game.keys.attack.pressed && this.game.energy >= 0 && this.game.energy < 100){
-      this.game.energy++
-    }
-  }
   checkWitchCollision(){
     if (this.game.level === 1){
       return this.witchCollision = this.position.x + this.width >= this.game.npcs[1].position.x && this.position.x <= this.game.npcs[1].position.x + this.game.npcs[1].width

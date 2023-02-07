@@ -278,16 +278,22 @@ startButton.addEventListener("click", function () {
               this.player.currentSprite = this.player.sprites.run.left;
               this.player.currentCropWidth = 16;
               this.player.width = 100;
+              this.userInterface.sounds.player.sword.pause()
+              this.userInterface.sounds.player.sword.currentTime = 0;
               // if A and the right key are pressed but the player has no energy
             } else if (this.keys.right.pressed){
               this.player.currentSprite = this.player.sprites.run.right;
               this.player.currentCropWidth = 16;
               this.player.width = 100;
+              this.userInterface.sounds.player.sword.pause()
+              this.userInterface.sounds.player.sword.currentTime = 0;
               // if only A is pressed but the player has no energy
             } else {
               this.player.currentSprite = this.player.sprites.idle.image;
               this.player.currentCropWidth = 16;
               this.player.width = 100;
+              this.userInterface.sounds.player.sword.pause()
+              this.userInterface.sounds.player.sword.currentTime = 0;
             }
             break;
           case " ":
@@ -410,11 +416,6 @@ startButton.addEventListener("click", function () {
     game.addEnemies()
     game.checkIfGameOver()
 
-    // console.log("THIS IS THE SPACE BAR ===", game.keys.space.pressed)
-    console.log("THIS IS THE WITCH TEXT ===", game.userInterface.randomWitchText)
-    // console.log("THIS IS THE CLOSE DIALOGUE ===", game.userInterface.closeDialogue)
-
-
     if (!game.gameOver && !game.victory) {
       restartButton.hidden = true;
       goodVictoryButton.hidden = true;
@@ -441,6 +442,7 @@ startButton.addEventListener("click", function () {
   restartButton.addEventListener("click", function () {
     // resetting the parameters
     game.userInterface.gameOverSound.pause()
+    game.userInterface.gameOverSound.currentTime = 0;
     game.userInterface.stopWinningMusic()
     game.level = 1;
     game.lives = 3;
