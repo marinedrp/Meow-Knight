@@ -26,13 +26,6 @@ header {
 
 }
 
-h1 {
-    font-weight: 500;
-    font-size: 35px;
-    color: white;
-    font-family: 'Calligraffitti';
-}
-
 .assets {
     display: none;
 }
@@ -44,6 +37,13 @@ h1 {
 
 
 @media screen and (min-width: 1024px) {
+
+    h1 {
+        font-weight: 500;
+        font-size: 35px;
+        color: white;
+        font-family: 'Calligraffitti';
+    }
 
     .section-1 {
         height: 90vh;
@@ -95,7 +95,7 @@ h1 {
         flex-direction: column;
         justify-content: space-between;
         height: 65vh;
-        width: 62%;
+        width: 60%;
         padding-top: 10vh;
         padding-left: 6vw;
         padding-right: 6vw;
@@ -143,7 +143,6 @@ h1 {
         color: #c52f2f;
     }
 
-
     .section-2 {
         height: 90vh;
         display: flex;
@@ -156,13 +155,10 @@ h1 {
             url(./assets/website/wood-image.jpg);
     }
 
-
-
-
     /*Game*/
     .game-div {
-        width: 1350px;
-        height: 725px;
+        width: 70%;
+        height: 75%;
         display: flex;
         flex-direction: row;
         align-items: center;
@@ -230,7 +226,7 @@ h1 {
 
     footer {
         padding: 30px;
-        font-size: 20px;
+        font-size: 18px;
         color: white;
         display: flex;
         text-align: center;
@@ -244,10 +240,6 @@ h1 {
         height: 10vh;
     }
 
-    footer p {
-        margin-right: 20px;
-    }
-
     footer a {
         filter: sepia(100%);
     }
@@ -257,11 +249,10 @@ h1 {
     }
 
     footer img {
-        margin-top: 10px;
-        margin-left: 10px;
-        margin-right: 10px;
-        width: 2rem;
-        height: 2rem;
+        margin-left: 15px;
+        padding: 1px;
+        width: 32px;
+        height: 32px;
     }
 
 }
@@ -269,8 +260,15 @@ h1 {
 /* Medium devices */
 @media screen and (min-width: 481px) and (max-width: 1023px) {
 
+    h1 {
+        font-weight: 500;
+        font-size: 35px;
+        color: white;
+        font-family: 'Calligraffitti';
+    }
+
     .section-1 {
-        height: 81vh;
+        height: 83vh;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -299,17 +297,18 @@ h1 {
         display: flex;
         align-items: center;
         flex-wrap: wrap;
-        justify-content: space-around;
+        justify-content: space-between;
     }
 
     .portrait {
+        margin-left: 3%;
         height: 80%;
-        width: 32%;
+        width: 35%;
         background-image: url(./assets/website/portrait.png);
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center;
-        border-image: url(./assets/website/frame.png) 30 fill / 18px / 25px;
+        border-image: url(./assets/website/frame.png) 30 fill / 22px / 26px;
     }
 
     .scroll {
@@ -356,6 +355,7 @@ h1 {
     }
 
     footer {
+        height: 10vh;
         padding: 20px;
         font-size: 18px;
         color: white;
@@ -369,10 +369,6 @@ h1 {
                 rgba(0, 0, 0, 0.9)), url(./assets/website/bricks.jpg);
     }
 
-    footer p {
-        margin-right: 20px;
-    }
-
     footer a {
         filter: sepia(100%);
     }
@@ -382,17 +378,22 @@ h1 {
     }
 
     footer img {
-        margin-top: 10px;
-        margin-left: 10px;
-        margin-right: 10px;
-        width: 2rem;
-        height: 2rem;
+        width: 1.5rem;
+        height: 1.5rem;
     }
+
 
 }
 
 /* Small devices */
 @media screen and (max-width: 480px) {
+
+    h1 {
+        font-weight: 500;
+        font-size: 8vw;
+        color: white;
+        font-family: 'Calligraffitti';
+    }
 
     .section-1 {
         height: 93vh;
@@ -409,6 +410,7 @@ h1 {
     }
 
     .instructions-wrapper {
+        /* border: 2px solid green; */
         width: 95vw;
         height: 185vh;
         display: flex;
@@ -419,16 +421,19 @@ h1 {
     }
 
     .presentation-wrapper {
+        /* border: 2px solid cyan; */
         width: 90vw;
         height: 165vh;
         display: flex;
+        flex-direction: column;
         align-items: center;
         flex-wrap: wrap;
-        justify-content: space-around;
+        justify-content: space-between;
     }
 
     .portrait {
-        height: 50vh;
+        margin-top: 20%;
+        height: 55vh;
         width: 75%;
         background-image: url(./assets/website/portrait.png);
         background-size: cover;
@@ -492,7 +497,7 @@ h1 {
 
     footer {
         padding: 10px;
-        font-size: 14px;
+        font-size: 0.8em;
         color: white;
         display: flex;
         text-align: center;
@@ -507,7 +512,11 @@ h1 {
     }
 
     footer p {
-        margin-right: 10px;
+        margin-right: 12px;
+    } 
+
+    .logo{
+        margin-bottom: 4px;
     }
 
     footer a {
@@ -519,12 +528,14 @@ h1 {
     }
 
     footer img {
-        margin-top: 10px;
-        margin-left: 5px;
-        margin-right: 5px;
-        width: 1.5rem;
-        height: 1.5rem;
+        width: 1.3rem;
+        height: 1.3rem;
     }
+
+    #canvas1 {
+        display: none;
+    }
+
 
 
 }
