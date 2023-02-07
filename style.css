@@ -1,4 +1,6 @@
-*, ::before, ::after {
+*,
+::before,
+::after {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -6,38 +8,36 @@
 }
 
 /*Main page*/
-html{
+html {
     scroll-behavior: smooth;
 }
 
-header{
+header {
     display: flex;
     justify-content: center;
     padding: 20px;
     position: relative;
     left: 50%;
     transform: translateX(-50%);
-    background-image: linear-gradient(
-        to bottom,
-        rgba(0, 0, 0, 0.5),
-        rgba(0, 0, 0, 0.9)
-    ),url(./assets/website/bricks.jpg);
-    
-    
+    background-image: linear-gradient(to bottom,
+            rgba(0, 0, 0, 0.5),
+            rgba(0, 0, 0, 0.9)), url(./assets/website/bricks.jpg);
+
+
 }
 
-h1{
+h1 {
     font-weight: 500;
     font-size: 35px;
     color: white;
     font-family: 'Calligraffitti';
 }
 
-.assets{
+.assets {
     display: none;
 }
 
-.layers{
+.layers {
     display: none;
 }
 
@@ -45,23 +45,21 @@ h1{
 
 @media screen and (min-width: 1024px) {
 
-    .section-1{
+    .section-1 {
         height: 90vh;
         display: flex;
         justify-content: center;
         align-items: center;
-        background-image: linear-gradient(
-            to bottom,
-            rgba(0, 0, 0, 0.5),
-            rgba(0, 0, 0, 0.9)
-        ),
-        url(./assets/website/wood-image.jpg);
+        background-image: linear-gradient(to bottom,
+                rgba(0, 0, 0, 0.5),
+                rgba(0, 0, 0, 0.9)),
+            url(./assets/website/wood-image.jpg);
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center;
     }
-    
-    .instructions-wrapper{
+
+    .instructions-wrapper {
         width: 80vw;
         height: 80vh;
         /* border: 3px solid green; */
@@ -71,8 +69,8 @@ h1{
         justify-content: center;
         align-content: center;
     }
-    
-    .presentation-wrapper{
+
+    .presentation-wrapper {
         width: 95%;
         height: 65vh;
         /* border: 3px solid red; */
@@ -82,17 +80,17 @@ h1{
         justify-content: space-around;
     }
 
-    .portrait{
+    .portrait {
         height: 85%;
         width: 23%;
         background-image: url(./assets/website/portrait.png);
-        background-size:cover;
+        background-size: cover;
         background-repeat: no-repeat;
         background-position: center;
         border-image: url(./assets/website/frame.png) 30 fill / 30px / 37px;
     }
-    
-    .scroll{
+
+    .scroll {
         display: flex;
         flex-direction: column;
         justify-content: space-between;
@@ -103,189 +101,189 @@ h1{
         padding-right: 6vw;
         padding-bottom: 10vh;
         background-image: url(./assets/website/scroll.png);
-        background-size:95% 90%;
+        background-size: 95% 90%;
         background-repeat: no-repeat;
         background-position: center;
-    
+
     }
-    
-    .text h2{
+
+    .text h2 {
         font-size: 2.5vw;
         margin-bottom: 10px;
     }
-    
-    .text article{
+
+    .text article {
         font-size: 1.8vh;
     }
-    
-    .text li{
+
+    .text li {
         margin-left: 20px;
     }
 
-    .text br{
+    .text br {
         content: "";
         margin-top: 1.8vh;
         display: block;
     }
 
-    .start-game{
+    .start-game {
         display: flex;
         justify-content: flex-end;
     }
 
-    .start-game a{
+    .start-game a {
         font-size: 1.6vw;
         font-weight: bold;
         text-decoration: none;
         color: #9c0808;
-        
+
     }
-      
+
     .start-game a:hover {
         color: #c52f2f;
     }
 
-    
-.section-2{
-    height: 90vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-image: linear-gradient(
-        to bottom,
-        rgba(0, 0, 0, 0.9),
-        rgba(0, 0, 0, 0.5)
-    ),
-    url(./assets/website/wood-image.jpg);
-} 
 
-/*Game*/
-.game-div{
-    width: 80%;
-    height: 80%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-around;
-}
+    .section-2 {
+        height: 90vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-image: linear-gradient(to bottom,
+                rgba(0, 0, 0, 0.9),
+                rgba(0, 0, 0, 0.5)),
+            url(./assets/website/wood-image.jpg);
+    }
 
-#canvas1{
-    height: 100%;
-    width: 85%;
-}
 
-#container{
-    width: 50vw;
-    height: 25vh;
-    position: absolute;
-    transform: translateY(70%);
-    background-color: rgba(0, 0, 0, 0.700);
-    padding: 30px;
-    font-family: 'Lora';
-    color: rgb(230, 230, 230);
-    font-size: 23px;
-    text-align: left;
-    opacity: 0;
-}
 
-#container.revealed{
-    opacity: 1;
-}
 
-#goodVictory-button, #evilVictory-button, #restart-button{
-    background-color: rgba(0, 0, 0, 0.700);
-    padding: 10px;
-    font-family: 'Lora';
-    color: #cc875f;
-    font-size: 25px;
-    font-weight: bold;
-    border: 3px solid #cc875f;
-    border-style: ridge;
-}
+    /*Game*/
+    .game-div {
+        width: 80%;
+        height: 80%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-around;
+    }
 
-#goodVictory-button:hover, #evilVictory-button:hover, #restart-button:hover{
-    background: #9c3e083a;
-}
+    #canvas1 {
+        height: 100%;
+        width: 85%;
+    }
 
-#restart-button{
-    position: absolute;
-    transform: translateY(300%);
-}
+    #container {
+        width: 50vw;
+        height: 25vh;
+        position: absolute;
+        transform: translateY(70%);
+        background-color: rgba(0, 0, 0, 0.700);
+        padding: 30px;
+        font-family: 'Lora';
+        color: rgb(230, 230, 230);
+        font-size: 23px;
+        text-align: left;
+        opacity: 0;
+    }
 
-#goodVictory-button{
-    position: absolute;
-    transform: translateY(300%);
-    right: 60%;
-}
+    #container.revealed {
+        opacity: 1;
+    }
 
-#evilVictory-button{
-    position: absolute;
-    transform: translateY(300%);
-    left: 60%;
-} 
+    #goodVictory-button,
+    #evilVictory-button,
+    #restart-button {
+        background-color: rgba(0, 0, 0, 0.700);
+        padding: 10px;
+        font-family: 'Lora';
+        color: #cc875f;
+        font-size: 25px;
+        font-weight: bold;
+        border: 3px solid #cc875f;
+        border-style: ridge;
+    }
 
-footer{
-    padding: 30px;
-    font-size: 20px;
-    color: white;
-    display: flex;
-    text-align: center;
-    justify-content: center;
-    align-items: center;
-    flex-direction: row;
-    background-image: linear-gradient(
-        to bottom,
-        rgba(0, 0, 0, 0.5),
-        rgba(0, 0, 0, 0.9)
-    ),url(./assets/website/bricks.jpg);
-    
-    height: 10vh;
-}
+    #goodVictory-button:hover,
+    #evilVictory-button:hover,
+    #restart-button:hover {
+        background: #9c3e083a;
+    }
 
-footer p{
-    margin-right: 20px;
-}
+    #restart-button {
+        position: absolute;
+        transform: translateY(300%);
+    }
 
-footer a{
-    filter: sepia(100%);
-}
+    #goodVictory-button {
+        position: absolute;
+        transform: translateY(300%);
+        right: 60%;
+    }
 
-footer a:hover{
-    filter: brightness(10);
-}
+    #evilVictory-button {
+        position: absolute;
+        transform: translateY(300%);
+        left: 60%;
+    }
 
-footer img{
-    margin-top: 10px;
-    margin-left: 10px;
-    margin-right: 10px;
-    width: 2rem;
-    height: 2rem;
-} 
+    footer {
+        padding: 30px;
+        font-size: 20px;
+        color: white;
+        display: flex;
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+        flex-direction: row;
+        background-image: linear-gradient(to bottom,
+                rgba(0, 0, 0, 0.5),
+                rgba(0, 0, 0, 0.9)), url(./assets/website/bricks.jpg);
 
+        height: 10vh;
+    }
+
+    footer p {
+        margin-right: 20px;
+    }
+
+    footer a {
+        filter: sepia(100%);
+    }
+
+    footer a:hover {
+        filter: brightness(10);
+    }
+
+    footer img {
+        margin-top: 10px;
+        margin-left: 10px;
+        margin-right: 10px;
+        width: 2rem;
+        height: 2rem;
+    }
 
 }
 
 /* Medium devices */
 @media screen and (min-width: 481px) and (max-width: 1023px) {
-    
-    .section-1{
-        height: 82vh;
+
+    .section-1 {
+        height: 81vh;
         display: flex;
         justify-content: center;
         align-items: center;
-        background-image: linear-gradient(
-            to bottom,
-            rgba(0, 0, 0, 0.5),
-            rgba(0, 0, 0, 0.9)
-        ),
-        url(./assets/website/wood-image.jpg);
+        background-image: linear-gradient(to bottom,
+                rgba(0, 0, 0, 0.5),
+                rgba(0, 0, 0, 0.9)),
+            url(./assets/website/wood-image.jpg);
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center;
     }
-    
-    .instructions-wrapper{
+
+    .instructions-wrapper {
         width: 92vw;
         height: 82vh;
         display: flex;
@@ -294,8 +292,8 @@ footer img{
         justify-content: center;
         align-content: center;
     }
-    
-    .presentation-wrapper{
+
+    .presentation-wrapper {
         width: 100%;
         height: 68vh;
         display: flex;
@@ -303,18 +301,18 @@ footer img{
         flex-wrap: wrap;
         justify-content: space-around;
     }
-    
-    .portrait{
+
+    .portrait {
         height: 80%;
         width: 32%;
         background-image: url(./assets/website/portrait.png);
-        background-size:cover;
+        background-size: cover;
         background-repeat: no-repeat;
         background-position: center;
         border-image: url(./assets/website/frame.png) 30 fill / 18px / 25px;
     }
-    
-    .scroll{
+
+    .scroll {
         display: flex;
         flex-direction: column;
         justify-content: space-between;
@@ -330,94 +328,87 @@ footer img{
         background-position: center;
     }
 
-    .text h2{
+    .text h2 {
         font-size: 2.5vh;
         margin-bottom: 5px;
     }
 
-    .text br{
+    .text br {
         content: "";
         margin-top: 1vh;
         display: block;
     }
-    
-    .text article{
+
+    .text article {
         font-size: 1.7vh;
     }
-    
-    .text li{
+
+    .text li {
         margin-left: 15px;
     }
 
-    .start-game{
+    .start-game {
         visibility: hidden;
     }
 
-    .section-2{
+    .section-2 {
         display: none;
     }
 
-    
-footer{
-    padding: 30px;
-    font-size: 18px;
-    color: white;
-    display: flex;
-    text-align: center;
-    justify-content: center;
-    align-items: center;
-    flex-direction: row;
-    background-image: linear-gradient(
-        to bottom,
-        rgba(0, 0, 0, 0.5),
-        rgba(0, 0, 0, 0.9)
-    ),url(./assets/website/bricks.jpg);
-    
-    height: 10vh;
-}
+    footer {
+        padding: 20px;
+        font-size: 18px;
+        color: white;
+        display: flex;
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+        flex-direction: row;
+        background-image: linear-gradient(to bottom,
+                rgba(0, 0, 0, 0.5),
+                rgba(0, 0, 0, 0.9)), url(./assets/website/bricks.jpg);
+    }
 
-footer p{
-    margin-right: 20px;
-}
+    footer p {
+        margin-right: 20px;
+    }
 
-footer a{
-    filter: sepia(100%);
-}
+    footer a {
+        filter: sepia(100%);
+    }
 
-footer a:hover{
-    filter: brightness(10);
-}
+    footer a:hover {
+        filter: brightness(10);
+    }
 
-footer img{
-    margin-top: 10px;
-    margin-left: 10px;
-    margin-right: 10px;
-    width: 2rem;
-    height: 2rem;
-} 
+    footer img {
+        margin-top: 10px;
+        margin-left: 10px;
+        margin-right: 10px;
+        width: 2rem;
+        height: 2rem;
+    }
 
 }
 
 /* Small devices */
 @media screen and (max-width: 480px) {
-    
-    .section-1{
+
+    .section-1 {
         height: 93vh;
         display: flex;
         justify-content: center;
         align-items: top;
-        background-image: linear-gradient(
-            to bottom,
-            rgba(0, 0, 0, 0.5),
-            rgba(0, 0, 0, 0.9)
-        ),
-        url(./assets/website/wood-image.jpg);
+        background-image: linear-gradient(to bottom,
+                rgba(0, 0, 0, 0.5),
+                rgba(0, 0, 0, 0.9)),
+            url(./assets/website/wood-image.jpg);
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center;
     }
-    
-    .instructions-wrapper{
+
+    .instructions-wrapper {
         width: 95vw;
         height: 185vh;
         display: flex;
@@ -426,8 +417,8 @@ footer img{
         justify-content: center;
         align-content: center;
     }
-    
-    .presentation-wrapper{
+
+    .presentation-wrapper {
         width: 90vw;
         height: 165vh;
         display: flex;
@@ -435,18 +426,18 @@ footer img{
         flex-wrap: wrap;
         justify-content: space-around;
     }
-    
-    .portrait{
+
+    .portrait {
         height: 50vh;
         width: 75%;
         background-image: url(./assets/website/portrait.png);
-        background-size:cover;
+        background-size: cover;
         background-repeat: no-repeat;
         background-position: center;
         border-image: url(./assets/website/frame.png) 30 fill / 20px / 25px;
     }
-    
-    .scroll{
+
+    .scroll {
         display: flex;
         flex-direction: column;
         justify-content: space-between;
@@ -462,135 +453,123 @@ footer img{
         background-position: center;
     }
 
-    .text h2{
+    .text h2 {
         font-size: 2.5vh;
         margin-bottom: 5px;
     }
 
-    .text br{
+    .text br {
         content: "";
         margin-top: 1vh;
         display: block;
     }
-    
-    .text article{
+
+    .text article {
         font-size: 1.8vh;
     }
-    
-    .text li{
+
+    .text li {
         margin-left: 15px;
     }
 
-    .start-game{
+    .start-game {
         visibility: hidden;
     }
 
-    /* .start-game{
-        display: flex;
-        justify-content: flex-end;
-    }
-
-    .start-game a{
-        font-size: 1.9vh;
-        font-weight: bold;
-        text-decoration: none;
-        color: #9c0808;
-        
-    }
-      
-    .start-game a:hover {
-        color: #c52f2f;
-    } */
-
-    .section-2{
+    .section-2 {
         height: 93vh;
         display: flex;
         justify-content: center;
         align-items: center;
-        background-image: linear-gradient(
-            to bottom,
-            rgba(0, 0, 0, 0.9),
-            rgba(0, 0, 0, 0.5)
-        ),
-        url(./assets/website/wood-image.jpg);
+        background-image: linear-gradient(to bottom,
+                rgba(0, 0, 0, 0.9),
+                rgba(0, 0, 0, 0.5)),
+            url(./assets/website/wood-image.jpg);
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center;
     }
 
-    
-footer{
-    padding: 10px;
-    font-size: 14px;
-    color: white;
+    footer {
+        padding: 10px;
+        font-size: 14px;
+        color: white;
+        display: flex;
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+        flex-direction: row;
+        background-image: linear-gradient(to bottom,
+                rgba(0, 0, 0, 0.5),
+                rgba(0, 0, 0, 0.9)), url(./assets/website/bricks.jpg);
+
+        height: 10vh;
+    }
+
+    footer p {
+        margin-right: 10px;
+    }
+
+    footer a {
+        filter: sepia(100%);
+    }
+
+    footer a:hover {
+        filter: brightness(10);
+    }
+
+    footer img {
+        margin-top: 10px;
+        margin-left: 5px;
+        margin-right: 5px;
+        width: 1.5rem;
+        height: 1.5rem;
+    }
+
+
+}
+
+
+#music-div {
     display: flex;
-    text-align: center;
-    justify-content: center;
     align-items: center;
-    flex-direction: row;
+    justify-content: center;
+}
+
+
+
+.button{
+    color: rgba(56, 27, 8, 0.884);
+    text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.514);
+    border: none;
+    padding: 12px;
+    font-size: 22px;
+    font-weight: bold;
+    text-decoration: none;
+    box-shadow: inset 0px 0px 0px 1px rgba(0,0,0,0.2),
+                inset 0px -5px 0px 0px rgba(0,0,0,0.3),
+                inset 0px 2px 0px 0px rgba(44, 9, 0, 0.288);
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.button:active {
+    box-shadow: inset 0px 0px 0px 1px rgba(0,0,0,0.2),
+                inset 0px -2px 0px 0px rgba(0,0,0,0.3),
+                inset 0px 2px 0px 0px rgba(44, 9, 0, 0.288);
+                top: 3px;
+                
+}
+
+.wood{
     background-image: linear-gradient(
         to bottom,
-        rgba(0, 0, 0, 0.5),
-        rgba(0, 0, 0, 0.9)
-    ),url(./assets/website/bricks.jpg);
-    
-    height: 10vh;
-}
-
-footer p{
-    margin-right: 10px;
-}
-
-footer a{
-    filter: sepia(100%);
-}
-
-footer a:hover{
-    filter: brightness(10);
-}
-
-footer img{
-    margin-top: 10px;
-    margin-left: 5px;
-    margin-right: 5px;
-    width: 1.5rem;
-    height: 1.5rem;
-} 
-
-
+        rgba(37, 20, 1, 0.3),
+        rgba(37, 20, 1, 0.8)
+    ),url(https://img.freepik.com/free-photo/texture-background_1404-99.jpg?w=740&t=st=1675770363~exp=1675770963~hmac=d182e7331d7e8fd2b6a462cf3b0ebb7a35a86c7a56a6723b2a4a73f183e6e253);
 }
 
 
-
-
-#music-div{
-    display: flex;
-    align-items: center;
-    justify-content:center;
-}
-
-#music-button{
-    padding: 10px;
-    font-size: 25px;
-    text-decoration: none;
-}
-
-#music-button:link{
-    font-weight: bold;
-    color: #cc875f;
-    border: 3px solid #cc875f;
-    border-style: ridge;
-}
-
-#music-button:visited {
-    color: #cc875f;
-}
-  
-#music-button:hover {
-    background: #9c3e083a;
-}
-  
-#music-button:active {
-    background: #cc875f;
-    color: #9c3e08;
-}
