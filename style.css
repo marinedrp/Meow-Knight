@@ -170,7 +170,7 @@ header {
         height: 600px;
     }
 
-    #container {
+    .container {
         border-radius: 5px;
         width: 800px;
         height: 220px;
@@ -185,7 +185,12 @@ header {
         opacity: 0;
     }
 
-    #container.revealed {
+    .container span{
+        font-family: 'Lora';
+        color:#f0c77a;
+    }
+
+    .container.revealed {
         opacity: 1;
     }
 

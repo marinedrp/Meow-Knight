@@ -20,14 +20,15 @@ export class UserInterface {
         this.evilVictoryImage = document.getElementById('evil-victory')
         this.evilVictorySound = document.getElementById('evilVictory-sound')
         // dialogues
-        this.container = document.getElementById('container')
+        this.witchContainer = document.getElementById('witch-container')
+        this.rubyContainer = document.getElementById('ruby-container')
         this.dialogues = {
             witch: {
                 text1: "You there, Meow-Knight. I'm relieved to see you. Ruby has an important mission for you. Please be quick, she is waiting for you.",
                 text2: ["Now is not the time for a bath.", "Oh it's you.", "Just because I can talk doesn't mean I don't like getting scratched behind the ears.", "Enthusiasm? On a week day? My word.", "Your request is noted and ignored.", "This world is host by goblins and flying mushrooms and you're surprised by me?", "Don't touch me I'm super important.", "A waste of my talents!", "Need any help?", "I would suggest that you get moving and decide on a plan.", "Everything is in decline in this world. So is my mood.", "Have I missed it? Have I missed the battle?", "Did you talk to Ruby?", "What's wrong with you? You seem... Happy.", "Meow.", "Well, well, well, if it isn't my dear friend, Meow-Knight!", "You are talking again. You will stop."]
             } ,
             ruby: {
-                text1: "Please, Meow-Knight, lend me your hand. There was once a noble order of druids who lived in the nearby forest. They still live there, but they now use the magic of the Red Tower to perform their rituals. As a result, vile creatures have now crept up in our lands. I cannot join you, but I know you are fully capable to handle those fiends. Please take this portal, destroy this tower and try to take down as many of them as possible. Good luck hero.",
+                text1: "Please, Meow-Knight, lend me your hand. There was once a noble order of druids who lived in the nearby forest. They still live there, but they now use the magic of the Red Tower to perform their rituals. As a result, vile creatures have now crept up in our lands. Take this portal, destroy this tower and try to take down as many of them as possible. Good luck hero.",
                 text2: ["I'm happy to say I'll be able to reward you handsomely for your troubles.", "You best get going, there's no time to waste. We're counting on you.", "Please succeed Meow-Knight, we believe in you.", "I know you'll succeed, but do be careful.", "For justice and honor!", "I'm looking forward to your return, Meow-Knight. Good luck.", "Now hurry, Meow-Knight, there's no time to waste."]
             } 
         } 
@@ -147,15 +148,24 @@ export class UserInterface {
     drawDialogues(){
         // display the first text box
         if (this.game.keys.space.pressed && !this.closeDialogue && !this.endDialogue && (this.game.player.checkWitchCollision() || this.game.player.checkRubyCollision()) && this.game.level === 1){
-            // this.container.innerHTML = "Clawdia, the Witch </br> </br>"
-            this.container.classList.add("revealed")
-            this.typeText()
+            if (this.game.player.checkWitchCollision()){
+                this.witchContainer.classList.add("revealed")
+                this.typeText()
+            } else if (this.game.player.checkRubyCollision()) {
+                this.rubyContainer.classList.add("revealed")
+                this.typeText()
+            }
         // cleaning the text box after the first dialogue and resetting the parameters
         // } 
         } else if (this.closeDialogue && (this.counterWitch >= 1 || this.counterRuby >= 1) && (this.game.player.checkWitchCollision() || this.game.player.checkRubyCollision())) {
                 this.index = 0;
-                this.container.classList.remove("revealed")
-                this.container.innerHTML = ""
+                if (this.game.player.checkWitchCollision()){
+                    this.witchContainer.classList.remove("revealed")
+                    this.witchContainer.innerHTML = "<span>Mystique, the Enchantress</span> </br></br>"
+                } else if (this.game.player.checkRubyCollision()) {
+                    this.rubyContainer.classList.remove("revealed")
+                    this.rubyContainer.innerHTML = "<span>Ruby, the Scarlet Sorcerer</span> </br></br>"
+                }
                 this.game.keys.space.pressed = false
                 this.endDialogue = false;
                 this.closeDialogue = false
@@ -163,7 +173,6 @@ export class UserInterface {
                     this.counterWitch++
                 } else if (this.counterRuby === 1){
                     this.counterRuby++
-                    
                 }
             }
     }
@@ -171,11 +180,10 @@ export class UserInterface {
         // dialogues with the witch
         // if the player hasn't talked to her, it will display the first string of the array (quest)
         if (this.game.player.checkWitchCollision() && this.counterWitch === 0){
-            // this.container.innerHTML = "Clawdia, the Witch </br> </br>"
-            this.container.innerHTML += this.dialogues.witch.text1[this.index];
+            this.witchContainer.innerHTML += this.dialogues.witch.text1[this.index];
             this.index++;
             if (this.index >= this.dialogues.witch.text1.length) {
-              this.container.innerHTML = this.dialogues.witch.text1;
+                // this.container.innerHTML = this.dialogues.witch.text1;
               this.counterWitch++
               this.endDialogue = true
               this.randomWitchText = this.dialogues.witch.text2[Math.floor(Math.random() * this.dialogues.witch.text2.length)]
@@ -183,10 +191,10 @@ export class UserInterface {
         // if the player has already talked to her, it will display a random string of the second array
         } 
         else if (this.game.player.checkWitchCollision() && this.counterWitch === 2){
-            this.container.innerHTML += this.randomWitchText[this.index];
+            this.witchContainer.innerHTML += this.randomWitchText[this.index];
             this.index++;
             if (this.index >= this.randomWitchText.length) {
-              this.container.innerHTML = this.randomWitchText;
+            //   this.container.innerHTML = this.randomWitchText;
               this.index = this.randomWitchText.length
               this.endDialogue = true
               this.randomWitchText = this.dialogues.witch.text2[Math.floor(Math.random() * this.dialogues.witch.text2.length)]
@@ -194,20 +202,20 @@ export class UserInterface {
         // dialogues with Ruby
         // if the player hasn't talked to her, it will display the first string of the array (quest)
         } else if (this.game.player.checkRubyCollision() && this.counterRuby === 0){
-            this.container.innerHTML += this.dialogues.ruby.text1[this.index];
+            this.rubyContainer.innerHTML += this.dialogues.ruby.text1[this.index];
             this.index++;
             if (this.index >= this.dialogues.ruby.text1.length) {
-              this.container.innerHTML = this.dialogues.ruby.text1;
+            //   this.container.innerHTML = this.dialogues.ruby.text1;
               this.counterRuby++
               this.endDialogue = true
               this.randomRubyText = this.dialogues.ruby.text2[Math.floor(Math.random() * this.dialogues.ruby.text2.length)]
             } 
-            // if the player has already talked to her, it will display a random string of the array except the one at index 0 
+            // if the player has already talked to her, it will display a random string of the second array 
         } else if (this.game.player.checkRubyCollision() && this.counterRuby === 2){
-                this.container.innerHTML += this.randomRubyText[this.index];
+                this.rubyContainer.innerHTML += this.randomRubyText[this.index];
                 this.index++;
                 if (this.index >= this.randomRubyText.length) {
-                    this.container.innerHTML = this.randomRubyText;
+                    // this.container.innerHTML = this.randomRubyText;
                     this.index = this.randomRubyText.length
                     this.endDialogue = true
                     this.randomRubyText = this.dialogues.ruby.text2[Math.floor(Math.random() * this.dialogues.ruby.text2.length)]
