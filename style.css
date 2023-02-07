@@ -161,8 +161,8 @@ h1 {
 
     /*Game*/
     .game-div {
-        width: 80%;
-        height: 80%;
+        width: 1350px;
+        height: 725px;
         display: flex;
         flex-direction: row;
         align-items: center;
