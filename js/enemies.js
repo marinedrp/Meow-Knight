@@ -48,6 +48,39 @@ constructor(game, {image, cropWidth, cropHeight, width, height, positionY, speed
     }
 }
 
+export class FlyingEnemy extends Enemy {
+  constructor(game, {image, cropWidth, cropHeight, width, height, speedX, maxFrames, scoreBonus}){
+      super();
+      this.game = game;
+      this.cropWidth = cropWidth;
+      this.cropHeight = cropHeight;
+      this.width = width
+      this.height = height
+      this.position = {
+          x: this.game.width,
+          y: Math.random() * this.game.height * 0.5
+      } 
+      this.image = image
+      this.velocity = {
+          x: speedX,
+          y: 0
+      }
+      this.maxFrames = maxFrames;
+      this.scoreBonus = scoreBonus
+      this.angle = 0;
+      this.va = Math.random() * 0.005 + 0.01;
+      }
+      movement(){
+          this.position.x -= this.velocity.x
+          if (this.position.x + this.width < 0) this.deletion = true;
+          this.angle += this.va;
+          console.log("THIS IS THE VA ===", this.va)
+          console.log("THIS IS THE ANGLE ===", this.angle)
+          this.position.y += Math.sin(this.angle)
+
+      }
+  }
+
 export class Particles extends Enemy {
   constructor(game, {image, speedY}){
     super();

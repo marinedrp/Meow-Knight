@@ -2,7 +2,7 @@ import { Background } from "./background.js";
 import { UserInterface } from "./interface.js";
 import { Player } from "./player.js";
 import { Npc } from "./npc.js";
-import { RunningEnemy, Particles } from './enemies.js';
+import { RunningEnemy, Particles, FlyingEnemy } from './enemies.js';
 
 const levels = [1, 2, 3];
 const layerCounts = [7, 8, 8];
@@ -74,7 +74,7 @@ startButton.addEventListener("click", function () {
         maxFrames: 11
       } 
       this.ruby = {
-        x: 7700,
+        x: 3700,
         y: 440,
         image: document.getElementById("ruby"),
         cropWidth: 64,
@@ -84,7 +84,7 @@ startButton.addEventListener("click", function () {
         maxFrames: 8
       } 
       this.portal = {
-        x: 8000,
+        x: 4000,
         y: 500,
         image: document.getElementById('portal'),
         cropWidth: 64,
@@ -100,7 +100,7 @@ startButton.addEventListener("click", function () {
         width: 180,
         height: 180,
         positionY: 880 - 180 - 130,
-        speedX: Math.floor(Math.random() * 3) + 2,
+        speedX: 3,
         maxFrames: 7,
         scoreBonus: 1
       }
@@ -111,7 +111,7 @@ startButton.addEventListener("click", function () {
         width: 125,
         height: 190,
         positionY: 880 - 180 - 130,
-        speedX: Math.floor(Math.random() * 4) + 2,
+        speedX: 5,
         maxFrames: 5,
         scoreBonus: 2
       }
@@ -126,7 +126,7 @@ startButton.addEventListener("click", function () {
         width: 180,
         height: 204,
         positionY: 880 - 180 - 130,
-        speedX: Math.floor(Math.random() * 4) + 2,
+        speedX: 5,
         maxFrames: 3,
         scoreBonus: 3
       }
@@ -140,8 +140,7 @@ startButton.addEventListener("click", function () {
         cropHeight: 32,
         width: 168,
         height: 128,
-        positionY: 500,
-        speedX: Math.floor(Math.random() * 4) + 2,
+        speedX: 4,
         maxFrames: 7,
         scoreBonus: 4
       };
@@ -293,6 +292,9 @@ startButton.addEventListener("click", function () {
             break;
           case " ":
             this.keys.space.pressed = true
+            if (this.userInterface.endDialogue === true && this.keys.space.pressed){
+              this.userInterface.closeDialogue = true;
+            }
             if (this.level >= 1 && this.player.checkPortalCollision() && !this.nextLevel){
               this.nextLevel = true
             }
@@ -345,6 +347,7 @@ startButton.addEventListener("click", function () {
             this.player.width = 100;
             break;
           case " ":
+            // this.keys.space.pressed = false
             this.nextLevel = false
             break;
         }
@@ -356,7 +359,7 @@ startButton.addEventListener("click", function () {
         if (this.player.velocity.x >= 0 && Math.random() < 0.008){
           this.enemies.push(new RunningEnemy(this, this.goblin))
           this.particles.push(new Particles(this, this.darkParticles))
-        } else if (this.player.velocity.x >= 0 && Math.random() < 0.005){
+        } else if (this.player.velocity.x > 0 && Math.random() < 0.005){
           this.enemies.push(new RunningEnemy(this, this.mushroom))
         }
       }
@@ -366,8 +369,8 @@ startButton.addEventListener("click", function () {
         } 
         else if (this.player.velocity.x >= 0 && Math.random() < 0.01){
           this.enemies.push(new RunningEnemy(this, this.skeleton))
-        } else if (this.player.velocity.x >= 0 && Math.random() < 0.004){
-          this.enemies.push(new RunningEnemy(this, this.bat))
+        } else if (this.player.velocity.x >= 0 && Math.random() < 0.008){
+          this.enemies.push(new FlyingEnemy(this, this.bat))
         }
       }
 
@@ -406,6 +409,10 @@ startButton.addEventListener("click", function () {
     game.attachEventListeners();
     game.addEnemies()
     game.checkIfGameOver()
+
+    // console.log("THIS IS THE SPACE BAR ===", game.keys.space.pressed)
+    console.log("THIS IS THE WITCH TEXT ===", game.userInterface.randomWitchText)
+    // console.log("THIS IS THE CLOSE DIALOGUE ===", game.userInterface.closeDialogue)
 
 
     if (!game.gameOver && !game.victory) {

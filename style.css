@@ -166,20 +166,21 @@ header {
     }
 
     #canvas1 {
-        height: 100%;
-        width: 85%;
+        width: 1000px;
+        height: 600px;
     }
 
     #container {
-        width: 50vw;
-        height: 25vh;
+        border-radius: 5px;
+        width: 800px;
+        height: 220px;
         position: absolute;
         transform: translateY(70%);
         background-color: rgba(0, 0, 0, 0.700);
-        padding: 30px;
+        padding: 25px;
         font-family: 'Lora';
         color: rgb(230, 230, 230);
-        font-size: 23px;
+        font-size: 18px;
         text-align: left;
         opacity: 0;
     }
