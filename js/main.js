@@ -4,40 +4,20 @@ import { Player } from "./player.js";
 import { Npc } from "./npc.js";
 import { RunningEnemy, Particles } from './enemies.js';
 
-//level1
-const layer1_lvl1 = document.getElementById("layer1-lvl1");
-const layer2_lvl1 = document.getElementById("layer2-lvl1");
-const layer3_lvl1 = document.getElementById("layer3-lvl1");
-const layer4_lvl1 = document.getElementById("layer4-lvl1");
-const layer5_lvl1 = document.getElementById("layer5-lvl1");
-const layer6_lvl1 = document.getElementById("layer6-lvl1");
-const layer7_lvl1 = document.getElementById("layer7-lvl1");
-//level2
-const layer1_lvl2 = document.getElementById("layer1-lvl2");
-const layer2_lvl2 = document.getElementById("layer2-lvl2");
-const layer3_lvl2 = document.getElementById("layer3-lvl2");
-const layer4_lvl2 = document.getElementById("layer4-lvl2");
-const layer5_lvl2 = document.getElementById("layer5-lvl2");
-const layer6_lvl2 = document.getElementById("layer6-lvl2");
-const layer7_lvl2 = document.getElementById("layer7-lvl2");
-const layer8_lvl2 = document.getElementById("layer8-lvl2");
-//level3
-const layer1_lvl3 = document.getElementById("layer1-lvl3");
-const layer2_lvl3 = document.getElementById("layer2-lvl3");
-const layer3_lvl3 = document.getElementById("layer3-lvl3");
-const layer4_lvl3 = document.getElementById("layer4-lvl3");
-const layer5_lvl3 = document.getElementById("layer5-lvl3");
-const layer6_lvl3 = document.getElementById("layer6-lvl3");
-const layer7_lvl3 = document.getElementById("layer7-lvl3");
-const layer8_lvl3 = document.getElementById("layer8-lvl3");
+const levels = [1, 2, 3];
+const layerCounts = [7, 8, 8];
+
+const layerImages = levels.map((lvl, i) => {
+  const count = layerCounts[i];
+  return [...Array(count)].map((_, j) => {
+    return document.getElementById(`layer${j + 1}-lvl${lvl}`);
+  });
+});
 
 //Start the game and music on the website
 const startButton = document.getElementById("start-game")
 const musicButton = document.getElementById('music-button')
 const splashSong = document.getElementById('splash-song')
-const github = document.getElementById('github')
-const linkedIn = document.getElementById('linkedIn')
-
 
 musicButton.addEventListener("click", () => {
   if (musicButton.innerHTML === "Play Music") {
@@ -51,12 +31,10 @@ musicButton.addEventListener("click", () => {
 }); 
 
 
-
 //Restart button and victory buttons
 const restartButton = document.getElementById("restart-button");
 const goodVictoryButton = document.getElementById('goodVictory-button');
 const evilVictoryButton = document.getElementById('evilVictory-button');
-
 
 
 startButton.addEventListener("click", function () {
@@ -197,7 +175,7 @@ startButton.addEventListener("click", function () {
     loadLevel(level){
       switch(level){
         case 1:
-          this.background = new Background(this, layer1_lvl1, layer1_lvl1, layer2_lvl1, layer3_lvl1, layer4_lvl1, layer5_lvl1, layer6_lvl1, layer7_lvl1);
+          this.background = new Background(this, layerImages[0]);
           this.npcs = [
           new Npc(this, this.portal),
           new Npc(this, this.witch),
@@ -206,14 +184,14 @@ startButton.addEventListener("click", function () {
         this.music = this.userInterface.sounds.level1.music;
           break;
         case 2:
-          this.background = new Background(this, layer1_lvl2, layer2_lvl2, layer3_lvl2, layer4_lvl2, layer5_lvl2, layer6_lvl2, layer7_lvl2, layer8_lvl2)
+          this.background = new Background(this, layerImages[1])
           this.npcs.splice(1, 2)
           this.player.position.x = 100
           this.npcs[0].position.x = 8000;
           this.music = this.userInterface.sounds.level2.music;
           break;
         case 3:
-          this.background = new Background(this, layer1_lvl3, layer2_lvl3, layer3_lvl3, layer4_lvl3, layer5_lvl3, layer6_lvl3, layer7_lvl3, layer8_lvl3);
+          this.background = new Background(this, layerImages[2]);
           this.player.position.x = 100
           this.enemies.splice(0, this.enemies.length)
           this.particles.splice(0, this.particles.length)
