@@ -439,8 +439,8 @@ header {
 
     .portrait {
         margin-top: 20%;
-        height: 55vh;
-        width: 75%;
+        height: 50vh;
+        width: 70%;
         background-image: url(./assets/website/portrait.png);
         background-size: cover;
         background-repeat: no-repeat;

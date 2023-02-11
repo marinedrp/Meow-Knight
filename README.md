@@ -15,8 +15,8 @@
 ![screenshot1](./screenshots/screenshot1.png)
 
 ### Introduction
-Meow-Knight's Tale is a simple 2D Action RPG where the user has to play a cat-knight in a medieval setting.
-The purpose of the game is to go to level 3 and interact with the Red Tower, after defeating as many enemies as possible.
+Meow-Knight's Tale is a simple 2D side-scrolling RPG where the user has to play a cat-knight in a medieval setting.
+The main objective of the game is to go to level 3 and interact with the Red Tower, after defeating as many enemies as possible.
 
 
 ### How To Play
@@ -41,7 +41,7 @@ The game was created using:
 ![screenshot3](./screenshots/screenshot3.png)
 
 * Parallax scrolling effect
-* Sprite Animations
+* Sprite animations
 * Ability to open dialogues
 * Live score tracking and bonus score points
 * Energy bar
@@ -54,9 +54,6 @@ The game was created using:
 Link for Deployed Game : https://marinedrp.github.io/Meow-Knight/
 
 ## Next Steps
-- Improve the FPS of the game.
-- Change the movement of the bats.
 - Add particles after enemy deletion.
 - Create transitions.
-- Readd the following sound effects: footsteps, sfx and enemies' sounds.
-- Improve the dialogue system.
+- Add more sound effects.
