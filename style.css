@@ -8,9 +8,6 @@
 }
 
 /*Main page*/
-html {
-    scroll-behavior: smooth;
-}
 
 header {
     display: flex;
@@ -37,6 +34,10 @@ header {
 
 /*Large devices*/
 @media screen and (min-width: 1024px) {
+
+    html {
+        scroll-behavior: smooth;
+    }
 
     h1 {
         font-weight: 500;
@@ -124,6 +125,10 @@ header {
         content: "";
         margin-top: 1.8vh;
         display: block;
+    }
+
+    .show-mobiles{
+        display: none;
     }
 
     .start-game {
@@ -323,9 +328,9 @@ header {
         justify-content: space-between;
         height: 95%;
         width: 60%;
-        padding-top: 15%;
-        padding-left: 8%;
-        padding-right: 9%;
+        padding-top: 16%;
+        padding-left: 9%;
+        padding-right: 10%;
         padding-bottom: 21%;
         background-image: url(./assets/website/scroll2.png);
         background-size: 100% 100%;
@@ -334,22 +339,26 @@ header {
     }
 
     .text h2 {
-        font-size: 2.5vh;
+        font-size: 2.4vh;
         margin-bottom: 5px;
     }
 
     .text br {
         content: "";
-        margin-top: 1vh;
+        margin-top: 1.3vh;
         display: block;
     }
 
     .text article {
-        font-size: 1.7vh;
+        font-size: 1.9vh;
     }
 
     .text li {
         margin-left: 15px;
+    }
+
+    .hide-mobiles{
+        display: none;
     }
 
     .start-game {
@@ -393,6 +402,7 @@ header {
 
 /* Small devices */
 @media screen and (max-width: 480px) {
+
 
     h1 {
         font-weight: 500;
@@ -454,7 +464,7 @@ header {
         justify-content: space-between;
         height: 75vh;
         width: 100%;
-        padding-top: 28%;
+        padding-top: 32%;
         padding-left: 15%;
         padding-right: 15%;
         padding-bottom: 32%;
@@ -465,7 +475,7 @@ header {
     }
 
     .text h2 {
-        font-size: 2.5vh;
+        font-size: 2.7vh;
         margin-bottom: 5px;
     }
 
@@ -476,11 +486,15 @@ header {
     }
 
     .text article {
-        font-size: 1.8vh;
+        font-size: 2vh;
     }
 
     .text li {
         margin-left: 15px;
+    }
+
+    .hide-mobiles{
+        display: none;
     }
 
     .start-game {
